@@ -10,24 +10,25 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true"  id="contenedor-padre" class="ion-padding">
   
-  <h2 size="large" id="titulo">CAMBIAR CONTRASEÑA</h2>
     
-    <ion-card id="cambiar">
+  <ion-card id="cambiar">
 
-      {{cedula}}
+      <h2 class="ache1">Contraseña:</h2>
 
-    <ion-item>
-      <ion-input label="Nueva contraseña" label-placement="floating" type="text" pattern="[A-Za-z0-9]{2,20}" fill="solid" [(ngModel)]="contra1"></ion-input>
-    </ion-item>
+      <ion-item id="item1">
+        <ion-input type="text" placeholder="minimo 8 caracteres" [counter]="true" maxlength="100" [(ngModel)]="contra1"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-input label="Confirma tu nueva contraseña" label-placement="floating" fill="solid" pattern="[A-Za-z0-9]{2,20}"  type="text" [(ngModel)]="contra2"></ion-input>
-    </ion-item>
+      <h2 class="ache2">Confirmar contraseña:</h2>
+
+      <ion-item id="item2">
+        <ion-input placeholder="minimo 8 caracteres" type="text" [counter]="true" maxlength="100" [(ngModel)]="contra2"></ion-input>
+      </ion-item>
 
   </ion-card>
 
-  <ion-button type="submit" class="ion-padding" expand="full" (click)="verificarContrasena()" >Actualizar</ion-button>
+      <ion-button class="btn-actualizar" type="submit" expand="full" (click)="verificarContrasena()" >Actualizar</ion-button>
 
 </ion-content>

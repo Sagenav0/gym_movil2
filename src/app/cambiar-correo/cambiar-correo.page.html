@@ -13,15 +13,17 @@
 <ion-content [fullscreen]="true" id="contenedor-padre" class="ion-padding">
   
     <ion-card id="cambiar">
+
       <h2 class="ache1">Correo:</h2>
+
       <ion-item id="item1">
-        
-        <ion-input  type="email" autocomplete="email" pattern="[A-Za-z-_0-9]+@[A-Za-z]\.[a-z]{2,40}"  [(ngModel)]="correo"></ion-input>
+        <ion-input  type="email" autocomplete="email" pattern="[A-Za-z-_0-9]+@[A-Za-z]\.[a-z]{2,40}" errorText="correo invalido" minlength="6"  [(ngModel)]="correo"></ion-input>
       </ion-item>
+
       <h2 class="ache2">Confirmar Correo:</h2>
+
       <ion-item id="item2">
-        
-        <ion-input type="email" autocomplete="email"  pattern="[A-Za-z-_0-9]+@[A-Za-z]\.[a-z]{2,40}" [(ngModel)]="correo2"></ion-input>
+        <ion-input type="email" autocomplete="email"  pattern="[A-Za-z-_0-9]+@[A-Za-z]\.[a-z]{2,40}" errorText="correo invalido" minlength="6" [(ngModel)]="correo2"></ion-input>
       </ion-item>
 
     </ion-card>

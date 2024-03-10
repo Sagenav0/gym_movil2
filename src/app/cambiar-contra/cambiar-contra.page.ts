@@ -24,25 +24,32 @@ export class CambiarContraPage implements OnInit {
   }
 
   verificarContrasena() {
-    if (this.contra1 == this.contra2){
+    if (this.contra1 == this.contra2) {
+      if (this.contra1.length > 7 && this.contra2.length > 7) {
+        // El código dentro de este bloque se ejecutará solo si ambas contraseñas tienen una longitud mayor a 8 caracteres
+        const dat = {
+          contra1: this.contra1,
+          cedula: this.cedula
+        };
 
-      const dat = {
-        contra1: this.contra1,
-        cedula: this.cedula
-      };
+        this.conexion.cambiarContra(dat).subscribe(
+          data => {
+            this.presentToast('La contraseña se cambio con exito');
+            this.closeModal();
+            this.router.navigate(['/editar-usuario']);
 
-      this.conexion.cambiarContra(dat).subscribe(
-        data => {
-          this.presentToast('La contraseña se cambio con exito');
-          this.closeModal();
-          this.router.navigate(['/editar-usuario']);
+          },
+          error => {
+            this.presentToast('Error al cambiar la contraseña');
+            this.closeModal();
+          }
+        );
+      } else {
+        // El código a ejecutar si una o ambas contraseñas no cumplen con la longitud mínima
+        this.presentToast('Las contraseñas tienen que tener mas de 8 caracteres');
+        this.closeModal();
+      }
 
-        },
-        error => {
-          this.presentToast('Error al cambiar la contraseña');
-          this.closeModal();
-        }
-      );
     } else {
       this.presentToast('Las contraseñas no coinciden');
       this.closeModal();
