@@ -36,6 +36,10 @@ ion-menu-button {
     height: 50px;
   }
 
+  .ion-valid.sc-ion-input-md-h{
+    color: var(--ion-color-primary);
+  }
+
 ion-icon{
     width: 40px;
     height: 40px;
@@ -47,7 +51,9 @@ ion-icon{
     height: 60px;
     color: var(--ion-color-primary-contrast);
 }
-ion-title{ text-align: center;}
+ion-title{ 
+  font-size: 16px;
+  text-align: center;}
 .btncerrar{
     position: relative;
     width: 150px;
@@ -70,9 +76,7 @@ ion-title{ text-align: center;}
     border: none; 
     
   }
-  ion-list{
-    border-bottom: 0px;
-  }
+ 
 
   #titulomenu{
     font-size: 24px;
@@ -80,3 +84,8 @@ ion-title{ text-align: center;}
     left: -80px;
     color: var(--ion-color-primary-tint);
   }
+ 
+  .ion-valid.sc-ion-input-md-h{
+    --highlight-color: var(--ion-color-primary-shade);
+  }
+ 
