@@ -13,7 +13,7 @@ export class CambiarContraPage implements OnInit {
 
   contra1:string =''
   contra2:string=''
-  cedula:string='0202020202'
+  cedula:string='1003699989'
 
   constructor(private conexion: ConexionService,
               private toastController: ToastController,

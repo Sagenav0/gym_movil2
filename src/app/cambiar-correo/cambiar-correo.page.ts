@@ -14,7 +14,8 @@ export class CambiarCorreoPage implements OnInit {
 
   correo=""
   correo2=""
-  cedula="020202020222"
+  cedula="1003699989"
+  emailPattern = /^[A-Za-z_\-][A-Za-z_\-0-9]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
   constructor(private conexion: ConexionService,
               private toastController: ToastController,
@@ -38,6 +39,7 @@ export class CambiarCorreoPage implements OnInit {
 
   verificarCorreo() {
     if (this.correo == this.correo2){
+      if (this.emailPattern.test(this.correo)){
 
       const dat = {
         correo: this.correo,
@@ -56,6 +58,12 @@ export class CambiarCorreoPage implements OnInit {
           this.closeModal();
         }
       );
+      }else {
+        this.presentToast('Ingrese un correo valido');
+        this.closeModal();
+      }
+
+
     } else {
       this.presentToast('Los correos no coinciden');
       this.closeModal();

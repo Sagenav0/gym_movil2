@@ -14,9 +14,9 @@ export class ConexionService {
     return this._refresh$
   }
 
-  //url = "https://yeffer.000webhostapp.com/appyef" Dirección de backend de la NUBE
+  url = "https://yeffer.000webhostapp.com/appyef"// Dirección de backend de la NUBE
 
-  url = "http://127.0.0.1:80" // Dirección de backend LOCAL
+  //url = "http://127.0.0.1:80" // Dirección de backend LOCAL
 
   constructor(private http:HttpClient) { }
 
