@@ -11,9 +11,47 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">rutinas</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-title>RUTINAS</ion-title>
+
+  <ion-card id="rutinas">
+    <ion-card-header>
+      <ion-card-toolbar>
+        <ion-card-title>RUTINA </ion-card-title>
+      <ion-segment id="segmentosrutinas" mode="md" [(ngModel)]="segmento" value="R1" scrollable>
+        <ion-segment-button *ngFor="let item of segmento_lista; let i = index" [value]="item" (click)="segmento_selec(i)">
+          <ion-label>{{item}}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      </ion-card-toolbar>
+    </ion-card-header>
+
+    <ion-card-content [fullscreen]="true">
+      <p>Pitofrio</p>
+      <swiper-container 
+      #swiper 
+      (swiperafterinit)="swiperlisto()" 
+      (swiperslidechange)="swiper_slide($event)">
+
+        <swiper-slide *ngFor="let item of segmento_lista">
+          <ng-container *ngFor="let item of info">
+            <div *ngIf="item.nombre === segmento">
+              <ion-row>
+                <ion-col size="4">
+                  <div class="image-container">
+                    <img [src]="item.imagen">
+                  </div>
+                </ion-col>
+                <ion-col size="5">
+                  <p class="name">{{ item.series  }}</p>
+                  <p class="name">{{ item.repeticiones  }}</p>
+                </ion-col>
+              </ion-row>
+            </div>
+          </ng-container>
+        </swiper-slide>
+      </swiper-container>
+
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

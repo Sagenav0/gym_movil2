@@ -8,6 +8,8 @@ import { RutinasPageRoutingModule } from './rutinas-routing.module';
 
 import { RutinasPage } from './rutinas.page';
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +17,7 @@ import { RutinasPage } from './rutinas.page';
     IonicModule,
     RutinasPageRoutingModule
   ],
-  declarations: [RutinasPage]
+  declarations: [RutinasPage],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class RutinasPageModule {}
