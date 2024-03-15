@@ -10,10 +10,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      
-    </ion-toolbar>
-  </ion-header>
+<ion-content id="contenedor" [fullscreen]="true">
+  <ion-title>MAS SOBRE NOSOTROS</ion-title>
+  <ion-list *ngIf="listaDeDatos.length > 0">
+    <ion-item *ngFor="let item of listaDeDatos">
+      <ion-label>SOMOS:</ion-label>
+      <ion-label>{{item.nombre_gym}}</ion-label>
+      <ion-label>NUESTRO TELEFONO ES:</ion-label>
+      <ion-label>{{item.telefono_gym}}</ion-label>
+      <ion-label>NUESTRO CORREO ES:</ion-label>
+      <ion-label>{{item.correo_gym}}</ion-label>
+      <ion-label>ESTAMOS HUBICADOS EN:</ion-label>
+      <ion-label>{{item.barrio_gym}}</ion-label>
+      <ion-label>{{item.direccion_gym}}</ion-label>
+      <ion-label>{{item.hubicacion_gym}}</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-spinner *ngIf="listaDeDatos.length === 0"></ion-spinner>
 </ion-content>
+

@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { ReturnStatement } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, tap } from 'rxjs';
+import { Observable, Subject, tap,of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,8 @@ export class ConexionService {
 
   constructor(private http:HttpClient) { }
 
+ 
+
   consultaDatos():Observable<any>{
     return this.http
     .get(this.url+'/consultaDatos')
@@ -33,13 +37,7 @@ export class ConexionService {
     }))
   } 
 
-  /* cambiarContra(dat: any): Observable<any> {
-    return this.http.post<any>(this.url + '/cambiarContra', dat)
-      .pipe(tap(() => {
-        this.refresh$.next();
-      }));
-  } */
-  
+ 
 
   cambiarCorreo(dat:any):Observable<any>{
     return this.http
@@ -49,5 +47,10 @@ export class ConexionService {
     }))
   }
 
-
+  datosGym(): Observable<any[]> {
+    return this.http
+      .get<any[]>(this.url + '/consultaDatosgym');
+  }
 }
+
+
