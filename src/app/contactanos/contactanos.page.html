@@ -11,21 +11,24 @@
 </ion-header>
 
 <ion-content id="contenedor" [fullscreen]="true">
-  <ion-title>MAS SOBRE NOSOTROS</ion-title>
+  <ion-title class="tit">MAS SOBRE NOSOTROS</ion-title>
   <ion-list *ngIf="listaDeDatos.length > 0">
-    <ion-item *ngFor="let item of listaDeDatos">
-      <ion-label>SOMOS:</ion-label>
-      <ion-label>{{item.nombre_gym}}</ion-label>
-      <ion-label>NUESTRO TELEFONO ES:</ion-label>
-      <ion-label>{{item.telefono_gym}}</ion-label>
-      <ion-label>NUESTRO CORREO ES:</ion-label>
-      <ion-label>{{item.correo_gym}}</ion-label>
-      <ion-label>ESTAMOS HUBICADOS EN:</ion-label>
-      <ion-label>{{item.barrio_gym}}</ion-label>
-      <ion-label>{{item.direccion_gym}}</ion-label>
-      <ion-label>{{item.hubicacion_gym}}</ion-label>
-    </ion-item>
+    <div id="consulgym" *ngFor="let item of listaDeDatos">
+      <ion-label  class="centrado">SOMOS:</ion-label>
+      <ion-label  class="centrado">{{item.nombre_gym}}</ion-label>
+      <ion-label  class="centrado">NUESTRO TELEFONO ES:</ion-label>
+      <ion-label  class="centrado">{{item.telefono_gym}}</ion-label>
+      <ion-label  class="centrado">NUESTRO CORREO ES:</ion-label>
+      <ion-label  class="centrado">{{item.correo_gym}}</ion-label>
+      <ion-label  class="centrado">ESTAMOS HUBICADOS EN:</ion-label>
+      <ion-label  class="centrado">{{item.hubicacion_gym}}</ion-label>
+      <ion-label  class="centrado">BARRIO: :</ion-label>
+      <ion-label  class="centrado">{{item.barrio_gym}}</ion-label>
+      <ion-label  class="centrado">NUESTRA DIRECCION ES: :</ion-label>
+      <ion-label  class="centrado">{{item.direcion_gym}}</ion-label>
+      
+    </div>
   </ion-list>
-  <ion-spinner *ngIf="listaDeDatos.length === 0"></ion-spinner>
+  <ion-spinner id="spiner" *ngIf="listaDeDatos.length === 0"></ion-spinner>
 </ion-content>
 
