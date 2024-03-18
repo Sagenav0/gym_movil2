@@ -16,7 +16,7 @@ export class ConexionService {
 
   url = "https://yeffer.000webhostapp.com/appyef"// Dirección de backend de la NUBE
 
-  //url = "http://127.0.0.1:80" // Dirección de backend LOCAL
+   //url = "http://127.0.0.1:80" // Dirección de backend LOCAL
 
   constructor(private http:HttpClient) { }
 
@@ -33,11 +33,15 @@ export class ConexionService {
     }))
   } 
 
-  /* cambiarContra(dat: any): Observable<any> {
-    return this.http.post<any>(this.url + '/cambiarContra', dat)
-      .pipe(tap(() => {
-        this.refresh$.next();
-      }));
+  consultaCorreo(correo: string): Observable<any> {
+    return this.http.get(`${this.url}/consultaCorreo/${correo}`);
+  }
+
+
+  /* consultaCorreo(data:any):Observable<any>{
+    console.log(data)
+    return this.http
+    .get(this.url+'/consultaCorreo/'+data)
   } */
   
 
@@ -48,6 +52,11 @@ export class ConexionService {
         this.refresh$.next()
     }))
   }
+
+  medidas():Observable<any>{
+    return this.http
+    .get(this.url+"/medidas")
+  }
 
 
 }

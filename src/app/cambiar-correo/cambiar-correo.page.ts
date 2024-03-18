@@ -14,7 +14,7 @@ export class CambiarCorreoPage implements OnInit {
 
   correo=""
   correo2=""
-  cedula="1003699989"
+  usuario="yefer15@gmail.com"
   emailPattern = /^[A-Za-z_\-][A-Za-z_\-0-9]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
   constructor(private conexion: ConexionService,
@@ -38,26 +38,83 @@ export class CambiarCorreoPage implements OnInit {
   }
 
   verificarCorreo() {
-    if (this.correo == this.correo2){
+
+
+    if (this.correo === this.correo2) {
+      if (this.emailPattern.test(this.correo)) {
+        this.conexion.consultaCorreo(this.correo).subscribe(
+          response => {
+            if (response.message === 'Correo encontrado') {
+              this.presentToast('El correo ya existe, coloque otro');
+              this.closeModal();
+            } else {
+              const dat = {
+                correo: this.correo,
+                usuario: this.usuario
+              };
+              this.conexion.cambiarCorreo(dat).subscribe(
+                data => {
+                  this.presentToast('El correo se cambió con éxito');
+                  this.closeModal();
+                  this.router.navigate(['/editar-perfil']);
+                },
+                error => {
+                  this.presentToast('Error al cambiar el correo');
+                  this.closeModal();
+                }
+              );
+            }
+          },
+          error => {
+            console.log(error);
+            this.presentToast('Error al consultar el correo');
+            this.closeModal();
+          }
+        );
+      } else {
+        this.presentToast('Ingrese un correo válido');
+        this.closeModal();
+      }
+    } else {
+      this.presentToast('Los correos no coinciden');
+      this.closeModal();
+    }
+    
+
+    /* if (this.correo == this.correo2){
+
       if (this.emailPattern.test(this.correo)){
 
-      const dat = {
-        correo: this.correo,
-        cedula: this.cedula
-      };
-
-      this.conexion.cambiarCorreo(dat).subscribe(
-        data => {
-          this.presentToast('El correo se cambio con exito');
-          this.closeModal();
-          this.router.navigate(['/editar-perfil']);
-
-        },
-        error => {
-          this.presentToast('Error al cambiar el correo');
-          this.closeModal();
+        const data = {
+          correo: this.correo
         }
-      );
+        this.conexion.consultaCorreo(data).subscribe(
+          data => {
+              this.presentToast('El correo ya existe, coloque otro');
+              this.closeModal();
+              console.log(data)
+          },
+          error => {
+            const dat = {
+              correo: this.correo,
+              usuario: this.usuario
+            };
+      console.log(error)
+            this.conexion.cambiarCorreo(dat).subscribe(
+              data => {
+                this.presentToast('El correo se cambio con exito');
+                this.closeModal();
+                this.router.navigate(['/editar-perfil']);
+      
+              },
+              error => {
+                this.presentToast('Error al cambiar el correo');
+                this.closeModal();
+
+              })
+          }
+        )
+
       }else {
         this.presentToast('Ingrese un correo valido');
         this.closeModal();
@@ -69,4 +126,6 @@ export class CambiarCorreoPage implements OnInit {
       this.closeModal();
     }}
 
-}
+ */
+    
+}}

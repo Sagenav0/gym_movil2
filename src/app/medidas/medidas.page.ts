@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ConexionService } from 'src/app/services/conexion.service';
+
 
 @Component({
   selector: 'app-medidas',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MedidasPage implements OnInit {
 
-  constructor() { }
+  medidas: any[] = []
+
+
+  constructor(private conexion: ConexionService) { }
 
   ngOnInit() {
+    this.visualizaDatos();
   }
+
+  visualizaDatos(){
+    this.conexion.medidas().subscribe(
+      data => {
+        this. medidas = data
+      }
+    )
+  }
+
 
 }

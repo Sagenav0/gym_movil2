@@ -13,7 +13,7 @@ export class CambiarContraPage implements OnInit {
 
   contra1:string =''
   contra2:string=''
-  cedula:string='1003699989'
+  usuario:string='yeferprueba@gmail.com'
 
   constructor(private conexion: ConexionService,
               private toastController: ToastController,
@@ -29,14 +29,14 @@ export class CambiarContraPage implements OnInit {
         // El código dentro de este bloque se ejecutará solo si ambas contraseñas tienen una longitud mayor a 8 caracteres
         const dat = {
           contra1: this.contra1,
-          cedula: this.cedula
+          usuario: this.usuario
         };
 
         this.conexion.cambiarContra(dat).subscribe(
           data => {
             this.presentToast('La contraseña se cambio con exito');
             this.closeModal();
-            this.router.navigate(['/editar-usuario']);
+            this.router.navigate(['/editar-perfil']);
 
           },
           error => {
