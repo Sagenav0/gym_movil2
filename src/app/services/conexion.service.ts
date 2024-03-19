@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ReturnStatement } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +16,9 @@ export class ConexionService {
     return this._refresh$
   }
 
-  url = "https://yeffer.000webhostapp.com/appyef"// Dirección de backend de la NUBE
+  //url = "https://yeffer.000webhostapp.com/appyef"// Dirección de backend de la NUBE
 
-   //url = "http://127.0.0.1:80" // Dirección de backend LOCAL
+  url = "http://127.0.0.1:80" // Dirección de backend LOCAL
 
   constructor(private http:HttpClient) { }
 
@@ -56,7 +58,12 @@ export class ConexionService {
   medidas():Observable<any>{
     return this.http
     .get(this.url+"/medidas")
-  }
+  }
 
+
+  validarCredenciales(usuario: string, contrasena: string ): Observable<any> {
+    return this.http.get(`${this.url}/validarCredenciales/${usuario}/${contrasena}`);
+    }
+    
 
 }

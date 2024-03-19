@@ -66,7 +66,6 @@ export class CambiarCorreoPage implements OnInit {
             }
           },
           error => {
-            console.log(error);
             this.presentToast('Error al consultar el correo');
             this.closeModal();
           }
