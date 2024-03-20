@@ -1,4 +1,6 @@
-<ion-menu side="start" menuId="menuPrincipal" contentId="main-content">
+
+<ng-container *ngIf="mostrarMenu">
+  <ion-menu side="start" menuId="menuPrincipal"  contentId="main-content" swipeGesture="false">
   <ion-header>
     <ion-toolbar>
     </ion-toolbar>
@@ -7,7 +9,7 @@
 
     <ion-title  id="titulomenu" >MENU</ion-title>
 
-    <ion-list >
+    <ion-list > 
 
       <ion-item [routerLink]="['/home']"><ion-icon name="home" slot="start"></ion-icon>HOME</ion-item>
       <ion-item [routerLink]="['/avances']"><ion-icon name="analytics" slot="start"></ion-icon>AVANCES</ion-item>
@@ -25,6 +27,7 @@
   </ion-buttons>
 
 </ion-menu>
+</ng-container>
 
 <div class="ion-page" id="main-content">
 

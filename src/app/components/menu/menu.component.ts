@@ -7,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent  implements OnInit {
 
+  menuHabilitado: boolean = true;
   constructor() { }
 
   ngOnInit() {}
+
+  //para permitir visualizar el menu en las interfaces
+  mostrarMenu = true;
+  
 
 }

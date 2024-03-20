@@ -23,6 +23,21 @@ export class ConexionService {
   constructor(private http:HttpClient) { }
 
  
+  // validarCredenciales(usuario: string, password: string): Observable<any> {
+  //   return this.http.post<any>(this.url + '/validarCredenciales', { usuario, password })
+  //     .pipe(
+  //       catchError(error => {
+  //         // Manejar el error aquí, por ejemplo, mostrar un mensaje de error
+  //         console.error('Error al validar credenciales:', error);
+  //         return of({ error: 'Ha ocurrido un error al validar credenciales' });
+  //       })
+  //     );
+  // }
+
+  validarCredenciales(usuario: string, contrasena: string ): Observable<any> {
+    return this.http.get(`${this.url}/validarCredenciales/${usuario}/${contrasena}`);
+    }
+    
 
   consultaDatos():Observable<any>{
     return this.http
@@ -37,6 +52,11 @@ export class ConexionService {
     }))
   } 
 
+  
+  medidas():Observable<any>{
+    return this.http
+    .get(this.url+"/medidas")
+  }
  
 
   cambiarCorreo(dat:any):Observable<any>{
