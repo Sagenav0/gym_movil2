@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { ConexionService } from 'src/app/services/conexion.service';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 
 
@@ -14,13 +15,14 @@ export class CambiarCorreoPage implements OnInit {
 
   correo=""
   correo2=""
-  usuario="yefer15@gmail.com"
+  usuario = this.userService.getUser()
   emailPattern = /^[A-Za-z_\-][A-Za-z_\-0-9]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
   constructor(private conexion: ConexionService,
               private toastController: ToastController,
               private modalCtrl: ModalController,
-              private router: Router) { }
+              private router: Router,
+              private userService: UserService) { }
 
   ngOnInit() {
   }
@@ -38,7 +40,7 @@ export class CambiarCorreoPage implements OnInit {
   }
 
   verificarCorreo() {
-
+    const usuario = this.userService.getUser()
 
     if (this.correo === this.correo2) {
       if (this.emailPattern.test(this.correo)) {
@@ -50,7 +52,7 @@ export class CambiarCorreoPage implements OnInit {
             } else {
               const dat = {
                 correo: this.correo,
-                usuario: this.usuario
+                usuario: usuario
               };
               this.conexion.cambiarCorreo(dat).subscribe(
                 data => {

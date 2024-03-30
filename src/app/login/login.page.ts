@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ConexionService } from 'src/app/services/conexion.service';
+import { UserService } from '../user.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class LoginPage implements OnInit {
   constructor(private conexion: ConexionService,
               private toastController: ToastController,
               private modalCtrl: ModalController,
-              private router: Router) { }
+              private router: Router,
+              private userService: UserService) { }
 
   ngOnInit() {
   }
@@ -33,6 +35,7 @@ export class LoginPage implements OnInit {
       const response = await this.conexion.validarCredenciales(this.usuario, this.contrasena).toPromise();
       if (response.error === 'ok') {
         // Credenciales válidas, redirigir a la siguiente página
+        this.userService.setUser(this.usuario);
         this.router.navigate(['/home']);
       } else {
         // Credenciales inválidas, mostrar mensaje de error
