@@ -58,7 +58,7 @@ export class CambiarCorreoPage implements OnInit {
                 data => {
                   this.presentToast('El correo se cambió con éxito');
                   this.closeModal();
-                  this.router.navigate(['/editar-perfil']);
+                  this.router.navigate(['/login']);
                 },
                 error => {
                   this.presentToast('Error al cambiar el correo');
