@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ConexionService } from 'src/app/services/conexion.service';
+import { ConexionService } from '../services/conexion.service';
+import { UserService } from '../user.service';
 
 
 @Component({
@@ -8,23 +9,23 @@ import { ConexionService } from 'src/app/services/conexion.service';
   styleUrls: ['./medidas.page.scss'],
 })
 export class MedidasPage implements OnInit {
-
   medidas: any[] = []
+  cedula= this.userService.getUser()
 
-
-  constructor(private conexion: ConexionService) { }
-
-  ngOnInit() {
-    this.visualizaDatos();
+  constructor(private conexion: ConexionService,
+              private userService: UserService) {
+    
   }
-
-  visualizaDatos(){
+  ngOnInit(){
+    this.consultaMedidas();
+  }
+  
+  consultaMedidas(){
     this.conexion.medidas().subscribe(
       data => {
+        this.cedula=this.cedula
         this. medidas = data
-      }
-    )
-  }
-
-
+      }
+    )
+  }
 }
