@@ -16,9 +16,9 @@ export class ConexionService {
     return this._refresh$
   }
 
-  //url = "https://yeffer.000webhostapp.com/appyef"// Dirección de backend de la NUBE
+  url = "https://yeffer.000webhostapp.com/appyef"// Dirección de backend de la NUBE
 
-  url = "http://127.0.0.1:80" // Dirección de backend LOCAL
+  //url = "http://127.0.0.1:80" // Dirección de backend LOCAL
 
   constructor(private http:HttpClient) { }
 
@@ -63,7 +63,12 @@ export class ConexionService {
 
   validarCredenciales(usuario: string, contrasena: string ): Observable<any> {
     return this.http.get(`${this.url}/validarCredenciales/${usuario}/${contrasena}`);
-    }
+  }
+
+  datosGym(): Observable<any[]> {
+    return this.http
+      .get<any[]>(this.url + '/consultaDatosgym');
+  }
     
 
 }

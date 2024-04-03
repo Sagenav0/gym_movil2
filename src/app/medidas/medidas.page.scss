@@ -8,8 +8,9 @@
 
 
 .fondo {
-    background-color: #333533;
+    background-color: #333531;
     padding: 20px;
+    color: var( --ion-color-primary-shade);
 }
 
 #titulo {
@@ -42,13 +43,21 @@ img {
     
 }
 
-
+p{
+    height: 20px;
+    text-align: center;
+    justify-content: center;
+    
+}
 .boton-container {
     text-align: center;
     color: #333533;
     font-weight: bold;
     padding: 8px;
     border-radius: 10px;
+}
+ion-icon {
+    color: --ion-color-primary-shade;
 }
 
 div #peso-kg{
@@ -72,6 +81,7 @@ div #cadera{
 
 }
 div #bicep-izq{
+    
     bottom: 350px;
     left: 10px;
 
@@ -82,6 +92,7 @@ div #bicep-der{
 
 }
 div #antebrazo-izq{
+    
     bottom: 300px;
     left: -10px;
 
@@ -92,6 +103,7 @@ div #antebrazo-der{
 
 }
 div #muslo-izq{
+    
     bottom: 210px;
     left: 5px;
 
@@ -103,6 +115,7 @@ div #muslo-der{
 }
 
 div #pantorrilla-izq{
+    
     bottom: 100px;
     right: 1px;
         
@@ -186,6 +199,5 @@ div #pantorrilla-der{
         div #pantorrilla-der{
         bottom: 130px;
         left: 170px;
-        
         }
 }
