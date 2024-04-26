@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { ReturnStatement } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
@@ -16,9 +16,9 @@ export class ConexionService {
     return this._refresh$
   }
 
-  url = "https://yeffer.000webhostapp.com/appyef"// Dirección de backend de la NUBE
+  //url = "https://yeffer.000webhostapp.com/appyef"// Dirección de backend de la NUBE
 
-  //url = "http://127.0.0.1:80" // Dirección de backend LOCAL
+  url = "http://127.0.0.1:4001" // Dirección de backend LOCAL
 
   constructor(private http:HttpClient) { }
 
@@ -28,12 +28,18 @@ export class ConexionService {
   }
 
   cambiarContra(dat:any):Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+  
     return this.http
-    .post(this.url+"/cambiarContra", JSON.stringify(dat))
-    .pipe(tap(()=>{
-        this.refresh$.next()
-    }))
-  } 
+      .post(this.url + "/cambiarContra", JSON.stringify(dat), { headers: headers })
+      .pipe(
+        tap(() => {
+          this.refresh$.next();
+        })
+      );
+  }
 
   consultaCorreo(correo: string): Observable<any> {
     return this.http.get(`${this.url}/consultaCorreo/${correo}`);
@@ -47,12 +53,18 @@ export class ConexionService {
   } */
   
 
-  cambiarCorreo(dat:any):Observable<any>{
+  cambiarCorreo(dat: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+  
     return this.http
-    .post(this.url+"/cambiarCorreo", JSON.stringify(dat))
-    .pipe(tap(()=>{
-        this.refresh$.next()
-    }))
+      .post(this.url + "/cambiarCorreo", JSON.stringify(dat), { headers: headers })
+      .pipe(
+        tap(() => {
+          this.refresh$.next();
+        })
+      );
   }
 
   medidas():Observable<any>{

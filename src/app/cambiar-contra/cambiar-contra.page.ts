@@ -42,7 +42,7 @@ export class CambiarContraPage implements OnInit {
           data => {
             this.presentToast('La contraseña se cambio con exito');
             this.closeModal();
-            this.router.navigate(['/editar-perfil']);
+            this.router.navigate(['/login']);
 
           },
           error => {
