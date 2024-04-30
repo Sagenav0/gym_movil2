@@ -5,7 +5,11 @@ const config: CapacitorConfig = {
   appName: 'proyecto-movil',
   webDir: 'www',
   server: {
-    androidScheme: 'https'
+    androidScheme: 'http',
+    cleartext: true,
+  },
+  android:{
+    allowMixedContent:true,
   }
 };
 

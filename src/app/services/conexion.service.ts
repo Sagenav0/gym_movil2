@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders} from '@angular/common/http';
 import { ReturnStatement } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap,of } from 'rxjs';
@@ -16,9 +16,9 @@ export class ConexionService {
     return this._refresh$
   }
 
-  url = "https://yeffer.000webhostapp.com/appyef"// Dirección de backend de la NUBE
-
-  //url = "http://127.0.0.1:80" // Dirección de backend LOCAL
+   // url = "https://yeffer.000webhostapp.com/appyef"// Dirección de backend de la NUBE
+  // url = "http://127.0.0.1:4001"
+  url = "http://127.0.0.1:8100" // Dirección de backend LOCAL
 
   constructor(private http:HttpClient) { }
 
@@ -66,6 +66,12 @@ export class ConexionService {
         this.refresh$.next()
     }))
   }
+  obtenerMedidas(selectedMonth1: string, selectedMonth2: string): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const body = { month1: selectedMonth1, month2: selectedMonth2 };
+
+    return this.http.post<any>(`${this.url}/consultarAvances`, body, { headers });
+}
 
   datosGym(): Observable<any[]> {
     return this.http
