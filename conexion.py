@@ -10,7 +10,7 @@ config = {
     'host': 'localhost',
     'user': 'root',
     'password': '',
-    'database': 'gym_control'
+    'database': 'gym'
 }
 
 @app.route("/")
@@ -143,7 +143,32 @@ def consultarAvances():
     except Exception as e:
         return jsonify({"error": str(e)})
 
-    
+@app.route('/rutinas', methods=['get'])
+def elimina_cajero():
+    try:
+        connection = connect(**config)
+        cursor = connection.cursor()
+        cursor.execute(f"SELECT nombre_ejercicio,repeciones,series,img FROM ejercicios WHERE contador_ejercicio = contador_ejercicio")
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+@app.route('/medida', methods=['POST'])
+def modifica_cajero():
+    try:
+        data = request.get_json()
+        connection = connect(**config)
+        cursor = connection.cursor()
+        cursor.execute("SELECT medidas.peso_corporal,medidas.pecho,medidas.cintura,medidas.cadera,medidas.bicep_izquierdo,medidas.bicep_derecho,medidas.antebrazo_izquierdo,medidas.antebrazo_derecho,medidas.muslo_izquierdo,medidas.muslo_derecho,medidas.pantorrilla_izquierda,medidas.pantorrilla_derecha FROM medidas,registro_usuarios WHERE registro_usuarios.correo = correo")
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"error": str(e)})
     
     
 if __name__ == '__main__':

@@ -36,6 +36,7 @@
 }
 
 ion-toolbar{
+
     width: 100vw;
     height: 60px;
 }
@@ -65,17 +66,19 @@ ion-title{
   font-size: 16px;
   text-align: center;}
 .btncerrar{
-    position: relative;
-    width: 150px;
-    height: 35px;
-    border-radius: 5px;
-    padding: 0px;
-    margin: 0px;
-    text-align: center;
-    bottom: 60px;
-    left: 75px;
-    color: var(--ion-color-primary-shade);
-    background-color: var(--ion-color-primary-tint)
+  position: relative;
+  width: 48%;
+  height: 4%;
+  border-radius: 5px;
+  padding: 0px;
+    padding-left: 0px;
+  margin: 0px;
+  text-align: center;
+  bottom: 60px;
+  left: 25%;
+  color: var(--ion-color-primary-shade);
+  background-color: var(--ion-color-primary-tint);
+  padding-left: 3%;
   
   }
   .button-solid{
@@ -89,10 +92,11 @@ ion-title{
  
 
   #titulomenu{
-    font-size: 24px;
+    font-size: 29px;
     position: relative;
-    left: -80px;
+    left: -12%;
     color: var(--ion-color-primary-tint);
+    top: 8%;
   }
  
   .ion-valid.sc-ion-input-md-h{
