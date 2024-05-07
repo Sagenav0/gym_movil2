@@ -10,10 +10,27 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">rutinas</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content id="contenedor">
+  <ng-container *ngFor="let item of listaDeDatos; let index = index">
+      <ion-card *ngIf="currentIndex === index">
+          
+          <ion-card-header>
+              <ion-card-title id="titulo">{{ item.nombre_ejercicio }}</ion-card-title>
+              <ion-img [src]="item.img" id="img"></ion-img>
+          </ion-card-header>
+          <ion-card-content>
+              <p class="opciones">Series: {{ item.series }}</p>
+              <p class="opciones">Repeticiones: {{ item.repeciones }}</p>
+              <div id="boton">
+                <ion-button (click)="anteriorTarjeta()">
+                  <ion-icon name="arrow-back-outline"></ion-icon>
+                </ion-button>
+                <ion-button (click)="siguienteTarjeta()">
+                  <ion-icon name="arrow-forward-outline"></ion-icon>
+                </ion-button>
+              </div>
+              
+          </ion-card-content>
+      </ion-card>
+  </ng-container>
 </ion-content>

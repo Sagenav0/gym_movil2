@@ -2,13 +2,13 @@
 
   <div class="formContainer">
     <ion-card class="cardContainer">
-      <ion-card-header style="padding-top: 20px;">
+      <ion-card-header >
         <ion-card-title id="titleLogin">INICIA SESION</ion-card-title>
       </ion-card-header>
-      <ion-card-content style="padding-bottom: 20px;">
+      <ion-card-content >
         <form (ngSubmit)="login()">
           <ion-item class="inputItem">
-            <ion-label class="fontLabel" position="floating">Correo:</ion-label>
+            <ion-label class="fontLabel" position="floating">Nombre:</ion-label>
             <ion-input type="text" [(ngModel)]="usuario" name="usuario" required></ion-input>
           </ion-item>
           <ion-item class="inputItem">

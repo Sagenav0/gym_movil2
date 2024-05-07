@@ -1,30 +1,49 @@
-<ion-menu side="start" menuId="menuPrincipal" contentId="main-content">
+<ng-container >
+  <ion-menu side="start" menuId="menuPrincipal"  contentId="main-content" swipeGesture="false">
   <ion-header>
     <ion-toolbar>
+      <ion-title  id="titulomenu" >MENU</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
 
-    <ion-title  id="titulomenu" >MENU</ion-title>
+    
 
-    <ion-list >
+    <ion-list > 
+      <ion-menu-toggle>
+        <ion-item [routerLink]="['/contactanos']"><ion-icon name="home" slot="start"></ion-icon>HOME</ion-item>
+      </ion-menu-toggle>
 
-      <ion-item [routerLink]="['/home']"><ion-icon name="home" slot="start"></ion-icon>HOME</ion-item>
-      <ion-item [routerLink]="['/avances']"><ion-icon name="analytics" slot="start"></ion-icon>AVANCES</ion-item>
-      <ion-item [routerLink]="['/medidas']"><ion-icon name="scale" slot="start"></ion-icon>MEDIDAS</ion-item>
-      <ion-item [routerLink]="['/personalizados']"><ion-icon name="barbell" slot="start"></ion-icon>PERSONALIZADO</ion-item>
-      <ion-item [routerLink]="['/rutinas']"><ion-icon name="barbell" slot="start"></ion-icon>RUTINAS</ion-item>
-      <ion-item [routerLink]="['/contactanos']"><ion-icon name="hand-left" slot="start"></ion-icon>CONTACTANOS</ion-item>
+      <ion-menu-toggle>
+        <ion-item [routerLink]="['/avances']"><ion-icon name="analytics" slot="start"></ion-icon>AVANCES</ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle>
+        <ion-item [routerLink]="['/medidas']"><ion-icon name="scale" slot="start"></ion-icon>MEDIDAS</ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle>
+        <ion-item [routerLink]="['/personalizados']"><ion-icon name="barbell" slot="start"></ion-icon>PERSONALIZADO</ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle>
+        <ion-item [routerLink]="['/rutinas']"><ion-icon name="barbell" slot="start"></ion-icon>RUTINAS</ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle>
+        <ion-item [routerLink]="['/contactanos']"><ion-icon name="hand-left" slot="start"></ion-icon>CONTACTANOS</ion-item>
+      </ion-menu-toggle>
       
     </ion-list>
     
   </ion-content>
 
   <ion-buttons class="btncerrar">
-    <ion-button [routerLink]="['/login']" > Cerrar Sessión </ion-button>
+    <ion-button [routerLink]="['/login']"> Cerrar Sessión </ion-button>
   </ion-buttons>
 
 </ion-menu>
+</ng-container>
 
 <div class="ion-page" id="main-content">
 

@@ -81,6 +81,9 @@ export class ConexionService {
     return this.http
       .get<any[]>(this.url + '/consultaDatosgym');
   }
-    
+  Rutina(): Observable<any[]> {
+    return this.http
+      .get<any[]>(this.url + '/rutinas');
+  }
 
 }

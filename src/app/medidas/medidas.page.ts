@@ -10,10 +10,9 @@ import { UserService } from '../user.service';
 })
 export class MedidasPage implements OnInit {
   medidas: any[] = []
-  cedula= this.userService.getUser()
+  cedula="1616"
 
-  constructor(private conexion: ConexionService,
-              private userService: UserService) {
+  constructor(private conexion: ConexionService) {
     
   }
   ngOnInit(){

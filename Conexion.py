@@ -9,7 +9,7 @@ config = {
     'host': 'localhost',
     'user': 'root',
     'password': '',
-    'database': 'gym_control2'
+    'database': 'gym'
 }
 
 @app.route("/")
@@ -99,7 +99,46 @@ def cambiarContra():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
-    
+@app.route('/consultaDatosgym', methods=['GET'])
+def consultaDatosgym():
+    try:
+        connection = connect(**config)
+        cursor = connection.cursor()
+        cursor.execute("SELECT id_contacto, nombre_gym, telefono_gym, correo_gym, direccion_gym, barrio_gym, hubicacion_gym from contacto_gym  WHERE id_contacto = 1")
+        column_names = [column[0] for column in cursor.description]
+        datos = cursor.fetchall()
+        cursor.close()
+        connection.close()
+        return jsonify([dict(zip(column_names, dato)) for dato in datos])
+    except Exception as e:
+        return jsonify({"error": str(e)})    
+ 
+# @app.route('/rutinas', methods=['get'])
+# def elimina_cajero():
+#     try:
+#         connection = connect(**config)
+#         cursor = connection.cursor()
+#         cursor.execute(f"SELECT nombre_ejercicio,repeciones,series,img FROM ejercicios WHERE contador_ejercicio = contador_ejercicio")
+#         connection.commit()
+#         cursor.close()
+#         connection.close()
+#         return jsonify({"success": True})
+#     except Exception as e:
+#         return jsonify({"error": str(e)})
+
+# @app.route('/medida', methods=['POST'])
+# def modifica_cajero():
+#     try:
+#         data = request.get_json()
+#         connection = connect(**config)
+#         cursor = connection.cursor()
+#         cursor.execute("SELECT medidas.peso_corporal,medidas.pecho,medidas.cintura,medidas.cadera,medidas.bicep_izquierdo,medidas.bicep_derecho,medidas.antebrazo_izquierdo,medidas.antebrazo_derecho,medidas.muslo_izquierdo,medidas.muslo_derecho,medidas.pantorrilla_izquierda,medidas.pantorrilla_derecha FROM medidas,registro_usuarios WHERE registro_usuarios.correo = correo")
+#         connection.commit()
+#         cursor.close()
+#         connection.close()
+#         return jsonify({"success": True})
+#     except Exception as e:
+#         return jsonify({"error": str(e)})     
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=4001)
