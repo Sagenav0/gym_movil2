@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
 import { ConexionService } from '../services/conexion.service'; // Reemplaza 'tu-ruta-del-servicio' por la ruta correcta
-
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,16 +12,15 @@ import { ConexionService } from '../services/conexion.service'; // Reemplaza 'tu
 export class LoginPage implements OnInit {
   usuario: string = '';
   contrasena: string = '';
-  menuHabilitado: boolean = false;
 
   constructor(private conexion: ConexionService,
               private toastController: ToastController,
               private modalCtrl: ModalController,
-              private router: Router) { }
+              private router: Router,
+              private userService: UserService) { }
 
   ngOnInit() {
   }
-  mostrarMenu = false;
   
   async login() {
     if (!this.usuario || !this.contrasena) {
@@ -34,6 +33,7 @@ export class LoginPage implements OnInit {
       const response = await this.conexion.validarCredenciales(this.usuario, this.contrasena).toPromise();
       if (response.error === 'ok') {
         // Credenciales válidas, redirigir a la siguiente página
+        this.userService.setUser(this.usuario);
         this.router.navigate(['/home']);
       } else {
         // Credenciales inválidas, mostrar mensaje de error

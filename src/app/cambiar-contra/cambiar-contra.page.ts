@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ConexionService } from 'src/app/services/conexion.service';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
+
 
 @Component({
   selector: 'app-cambiar-contra',
@@ -13,30 +15,34 @@ export class CambiarContraPage implements OnInit {
 
   contra1:string =''
   contra2:string=''
-  cedula:string='1003699989'
+  usuario = this.userService.getUser()
 
   constructor(private conexion: ConexionService,
               private toastController: ToastController,
               private modalCtrl: ModalController,
-              private router: Router) { }
+              private router: Router,
+              private userService: UserService) { }
 
   ngOnInit() {
   }
 
   verificarContrasena() {
+
+    const usuario = this.userService.getUser()
+
     if (this.contra1 == this.contra2) {
       if (this.contra1.length > 7 && this.contra2.length > 7) {
         // El código dentro de este bloque se ejecutará solo si ambas contraseñas tienen una longitud mayor a 8 caracteres
         const dat = {
           contra1: this.contra1,
-          cedula: this.cedula
+          usuario: usuario
         };
 
         this.conexion.cambiarContra(dat).subscribe(
           data => {
             this.presentToast('La contraseña se cambio con exito');
             this.closeModal();
-            this.router.navigate(['/editar-usuario']);
+            this.router.navigate(['/login']);
 
           },
           error => {

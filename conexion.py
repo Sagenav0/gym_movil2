@@ -23,7 +23,7 @@ def ValidarCredenciales(usuario, contrasena):
     try:
         connection = connect(**config)
         cursor = connection.cursor()
-        cursor.execute(f"SELECT nombre FROM registro_usuarios WHERE correo = '{usuario}' AND contrasena = '{contrasena}' AND estado = 'activo'")
+        cursor.execute(f"SELECT nombre,telefono,cedula FROM registro_usuarios WHERE correo = '{usuario}' AND contrasena = '{contrasena}' AND estado = 'activo'")
         datos = cursor.fetchall()
         
         if(datos):
@@ -100,9 +100,21 @@ def cambiarContra():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
+@app.route('/consultaEditar/<usuario>', methods=['GET'])
+def consultaEditar(usuario):
+    try:
+        connection = connect(**config)
+        cursor = connection.cursor()
+        cursor.execute(f"SELECT nombre,telefono,cedula FROM registro_usuarios WHERE correo = '{usuario}' AND estado = 'activo'")
+        column_names = [column[0] for column in cursor.description]
+        datos = cursor.fetchall()
+        cursor.close()
+        connection.close()
+        return jsonify([dict(zip(column_names, dato)) for dato in datos])
+    except Exception as e:
+        return jsonify({"error": str(e)})   
     
 @app.route('/consultaDatosgym', methods=['GET'])
-
 def consultaDatosgym():
     try:
         connection = connect(**config)
@@ -114,62 +126,8 @@ def consultaDatosgym():
         connection.close()
         return jsonify([dict(zip(column_names, dato)) for dato in datos])
     except Exception as e:
-        return jsonify({"error": str(e)})
-    
-@app.route('/consultarAvances', methods= ['POST'])
-def consultarAvances():
-    try:
-        selected_month1 = request.json.get('month1')
-        selected_month2 = request.json.get('month2')
-
-        selected_month1_str = datetime.strptime(selected_month1, '%Y-%m-%d').strftime('%Y-%m-%d')
-        selected_month2_str = datetime.strptime(selected_month2, '%Y-%m-%d').strftime('%Y-%m-%d')
-
-        print(selected_month1)
-        print(selected_month2)
-
-        if selected_month1 is None or selected_month2 is None:
-            return jsonify({"error": "Los meses no pueden ser nulos"}), 400
-
-        connection = connect(**config)
-        cursor = connection.cursor()
-        cursor.execute(f"SELECT * FROM medidas WHERE mes_registro IN ('{selected_month1_str}', '{selected_month2_str}')")
-        datos = cursor.fetchall()
-
-        print(datos)
-
-        return jsonify({'medidas': datos})
-
-    except Exception as e:
-        return jsonify({"error": str(e)})
-
-@app.route('/rutinas', methods=['get'])
-def elimina_cajero():
-    try:
-        connection = connect(**config)
-        cursor = connection.cursor()
-        cursor.execute(f"SELECT nombre_ejercicio,repeciones,series,img FROM ejercicios WHERE contador_ejercicio = contador_ejercicio")
-        connection.commit()
-        cursor.close()
-        connection.close()
-        return jsonify({"success": True})
-    except Exception as e:
-        return jsonify({"error": str(e)})
-
-@app.route('/medida', methods=['POST'])
-def modifica_cajero():
-    try:
-        data = request.get_json()
-        connection = connect(**config)
-        cursor = connection.cursor()
-        cursor.execute("SELECT medidas.peso_corporal,medidas.pecho,medidas.cintura,medidas.cadera,medidas.bicep_izquierdo,medidas.bicep_derecho,medidas.antebrazo_izquierdo,medidas.antebrazo_derecho,medidas.muslo_izquierdo,medidas.muslo_derecho,medidas.pantorrilla_izquierda,medidas.pantorrilla_derecha FROM medidas,registro_usuarios WHERE registro_usuarios.correo = correo")
-        connection.commit()
-        cursor.close()
-        connection.close()
-        return jsonify({"success": True})
-    except Exception as e:
-        return jsonify({"error": str(e)})
-    
+        return jsonify({"error": str(e)})    
+ 
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=8100)

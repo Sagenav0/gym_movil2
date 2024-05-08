@@ -38,18 +38,28 @@ export class ConexionService {
     return this.http.get(`${this.url}/validarCredenciales/${usuario}/${contrasena}`);
     }
     
-
+    consultaCorreo(correo: string): Observable<any> {
+      return this.http.get(`${this.url}/consultaCorreo/${correo}`);
+    }
+  
+  
   consultaDatos():Observable<any>{
     return this.http
     .get(this.url+'/consultaDatos')
   }
 
   cambiarContra(dat:any):Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+  
     return this.http
-    .post(this.url+"/cambiarContra", JSON.stringify(dat))
-    .pipe(tap(()=>{
-        this.refresh$.next()
-    }))
+      .post(this.url + "/cambiarContra", JSON.stringify(dat), { headers: headers })
+      .pipe(
+        tap(() => {
+          this.refresh$.next();
+        })
+      );
   } 
 
   
@@ -59,19 +69,20 @@ export class ConexionService {
   }
  
 
-  cambiarCorreo(dat:any):Observable<any>{
+  cambiarCorreo(dat: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+  
     return this.http
-    .post(this.url+"/cambiarCorreo", JSON.stringify(dat))
-    .pipe(tap(()=>{
-        this.refresh$.next()
-    }))
+      .post(this.url + "/cambiarCorreo", JSON.stringify(dat), { headers: headers })
+      .pipe(
+        tap(() => {
+          this.refresh$.next();
+        })
+      );
   }
-  obtenerMedidas(selectedMonth1: string, selectedMonth2: string): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    const body = { month1: selectedMonth1, month2: selectedMonth2 };
 
-    return this.http.post<any>(`${this.url}/consultarAvances`, body, { headers });
-}
 
   datosGym(): Observable<any[]> {
     return this.http
@@ -81,6 +92,11 @@ export class ConexionService {
     return this.http
       .get<any[]>(this.url + '/rutinas');
   }
+  
+  Datosedit(usuario:string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}/consultaEditar/${usuario}`);
+  }
+    
 }
 
 

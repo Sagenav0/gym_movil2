@@ -7,14 +7,19 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">editar_perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" *ngIf="Datoseditar.length > 0" >
+  <ng-container *ngFor="let item of Datoseditar">
+ <label >Nombre:</label>
+ <label > {{item.nombre}}</label>
+  <label >Telefono:</label>
+   <label>  {{item.telefono}}</label> 
+    <input type="tel" [(ngModel)]="telefono" placeholder="nuevo telefono" name="telefono" id="telefono">
+  <label> {{usuario}}</label>
 
   <ion-button [routerLink]="['/cambiar-correo']">correo</ion-button>
+  <p>Contraseña:</p>
   <ion-button [routerLink]="['/cambiar-contra']">contraseña</ion-button>
-
+  <ion-button type="sutmit" (click)="update_telefono()" >guardar cambios</ion-button>
+</ng-container>
+<ion-spinner id="spiner" *ngIf="Datoseditar.length < 1"></ion-spinner>
 </ion-content>

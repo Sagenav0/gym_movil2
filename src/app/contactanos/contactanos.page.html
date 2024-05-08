@@ -14,15 +14,14 @@
   <ion-title class="tit">MAS SOBRE NOSOTROS</ion-title>
   <ion-list *ngIf="listaDeDatos.length > 0">
     <div id="consulgym" *ngFor="let item of listaDeDatos">
-      <ion-label  class="centrado">SOMOS:</ion-label>
+      <ion-label  class="centrado">Nombre Del Gym:</ion-label>
       <ion-label  class="centrado">{{item.nombre_gym}}</ion-label>
-      <ion-label  class="centrado">NUESTRO TELEFONO ES:</ion-label>
+     
       <ion-label  class="centrado">{{item.telefono_gym}}</ion-label>
-      <ion-label  class="centrado">NUESTRO CORREO ES:</ion-label>
+  
       <ion-label  class="centrado">{{item.correo_gym}}</ion-label>
       <ion-label  class="centrado">ESTAMOS HUBICADOS EN:</ion-label>
-      <ion-label  class="centrado">{{item.hubicacion_gym}}</ion-label>
-      <ion-label  class="centrado">BARRIO: :</ion-label>
+     
       <ion-label  class="centrado">{{item.barrio_gym}}</ion-label>
       <ion-label  class="centrado">NUESTRA DIRECCION ES: :</ion-label>
       <ion-label  class="centrado">{{item.direcion_gym}}</ion-label>
