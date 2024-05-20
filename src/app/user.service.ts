@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
   private usuario: string = "";
-
+  private cedula: string = "";
   constructor() { }
 
   setUser(usuario: string) {
@@ -15,5 +15,12 @@ export class UserService {
 
   getUser(): string {
     return this.usuario;
+  }
+  setCedula(cedula: string) {
+    this.cedula = cedula;
+  }
+
+  getCedula(): string {
+    return this.cedula;
   }
 }

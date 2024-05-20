@@ -17,7 +17,7 @@ export class RutinasPage implements OnInit {
   }
 
   obtenerRutinas() {
-    this.conexionService.Rutina().subscribe(
+    this.conexionService.Rutinas().subscribe(
       (datos: any[]) => {
         this.listaDeDatos = datos;
       },
@@ -27,25 +27,24 @@ export class RutinasPage implements OnInit {
     );
   }
 
-  // Función para cambiar a la siguiente tarjeta
-  siguienteTarjeta() {
-    if (this.currentIndex < this.listaDeDatos.length - 1) {
-      this.currentIndex++;
-    } else {
-      // Si llegamos al final, volvemos al inicio
-      this.currentIndex = 0;
-    }
+ // Función para cambiar a la siguiente tarjeta
+siguienteTarjeta() {
+  if (this.currentIndex < this.listaDeDatos.length - 1) {
+    this.currentIndex++;
+  } else {
+    // Si llegamos al final, volvemos al inicio
+    this.currentIndex = 0;
   }
+}
 
-  anteriorTarjeta() {
-    if (this.currentIndex > this.listaDeDatos.length + 1) {
-      this.currentIndex++;
-    } else {
-      // Si llegamos al final, volvemos al inicio
-      this.currentIndex = 0;
-    }
+anteriorTarjeta() {
+  if (this.currentIndex > this.listaDeDatos.length + 1) {
+    this.currentIndex++;
+  } else {
+    // Si llegamos al final, volvemos al inicio
+    this.currentIndex = 0;
   }
+}
 
 };
-
 

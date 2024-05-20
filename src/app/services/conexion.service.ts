@@ -17,8 +17,9 @@ export class ConexionService {
   }
 
    // url = "https://yeffer.000webhostapp.com/appyef"// Dirección de backend de la NUBE
-  // url = "http://127.0.0.1:4001"
-  url = "http://127.0.0.1:8100" // Dirección de backend LOCAL
+   // url = "http://127.0.0.1:4001" servidor
+   //url = "http://192.168.120.124:8101" // Dirección de backend para usar como servidor 
+   url = "http://127.0.0.1:8101"
 
   constructor(private http:HttpClient) { }
 
@@ -96,7 +97,32 @@ export class ConexionService {
   Datosedit(usuario:string): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}/consultaEditar/${usuario}`);
   }
+
+  cambiarTelefono(dat: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+  
+    return this.http
+      .post(this.url + "/cambiarTelefono", JSON.stringify(dat), { headers: headers })
+      .pipe(
+        tap(() => {
+          this.refresh$.next();
+        })
+      );
+  }
+  obtenerMedidas(selectedMonth1: string, selectedMonth2: string,identificador:string): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const body = { month1: selectedMonth1, month2: selectedMonth2,identificador:identificador  };
     
+    return this.http.post<any>(`${this.url}/consultarAvances`, body, { headers });
+}
+Medidas(identificador:any):Observable<any>{
+  return this.http.get(`${this.url}/medidas/${identificador}`);
+}
+Rutinas():Observable<any>{
+  return this.http.get(`${this.url}/rutinas`);
+}
 }
 
 

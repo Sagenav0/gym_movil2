@@ -12,24 +12,32 @@
 
 <ion-content id="contenedor">
   <ng-container *ngFor="let item of listaDeDatos; let index = index">
-      <ion-card *ngIf="currentIndex === index">
+      <ion-card *ngIf="currentIndex === index" id="cardejercicios">
           
           <ion-card-header>
-              <ion-card-title id="titulo">{{ item.nombre_ejercicio }}</ion-card-title>
-              <ion-img [src]="item.img" id="img"></ion-img>
+              <ion-card-title id="titulo">{{ item[0]}}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-              <p class="opciones">Series: {{ item.series }}</p>
-              <p class="opciones">Repeticiones: {{ item.repeciones }}</p>
-              <div id="boton">
-                <ion-button (click)="anteriorTarjeta()">
+            <div id="itemimagen">
+              <img [src]="item[3]" alt="#">
+            </div>
+            <ion-item>
+              <p class="opciones">Series:</p>
+              <p class="opciones">Repeticiones:</p>
+              <p class="opciones"> {{ item[2]}}</p>
+              <p class="opciones"> {{ item[1]}}</p>
+            </ion-item>
+              
+              <ion-buttons id="botones">
+                <ion-button (click)="anteriorTarjeta()" id="botonatras">
                   <ion-icon name="arrow-back-outline"></ion-icon>
                 </ion-button>
-                <ion-button (click)="siguienteTarjeta()">
-                  <ion-icon name="arrow-forward-outline"></ion-icon>
+
+                <ion-button (click)="siguienteTarjeta()" id="botonsiguiente">
+                   <ion-icon name="arrow-forward-outline"></ion-icon>
                 </ion-button>
-              </div>
-              
+              </ion-buttons>
+
           </ion-card-content>
       </ion-card>
   </ng-container>

@@ -9,13 +9,13 @@
 
 <ion-content [fullscreen]="true" *ngIf="Datoseditar.length > 0" >
   <ng-container *ngFor="let item of Datoseditar">
- <label >Nombre:</label>
- <label > {{item.nombre}}</label>
-  <label >Telefono:</label>
-   <label>  {{item.telefono}}</label> 
-    <input type="tel" [(ngModel)]="telefono" placeholder="nuevo telefono" name="telefono" id="telefono">
-  <label> {{usuario}}</label>
-
+ <p>Nombre:</p>
+ <p> {{item.nombre}}</p>
+  <p>Telefono:</p>
+   <p>  {{item.telefono}}</p> 
+    <input type="tel" [(ngModel)]="telefononuevo" placeholder="nuevo telefono" name="telefono" id="telefono">
+  <p>{{usuario}}</p>
+  
   <ion-button [routerLink]="['/cambiar-correo']">correo</ion-button>
   <p>Contraseña:</p>
   <ion-button [routerLink]="['/cambiar-contra']">contraseña</ion-button>

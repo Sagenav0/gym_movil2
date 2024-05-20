@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, session
 from datetime import datetime
 from mysql.connector import connect
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 CORS(app)
@@ -29,7 +29,7 @@ def ValidarCredenciales(usuario, contrasena):
         if(datos):
             cursor.close()
             connection.close()
-            return jsonify({"error":"ok"})
+            return jsonify({"error":"ok", "datos": datos})
         else:
             cursor.close()
             connection.close()
@@ -100,6 +100,22 @@ def cambiarContra():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
+@app.route('/cambiarTelefono', methods=['POST'])
+def cambiarTelefono():
+    try:
+        data = request.get_json()
+        telefono = data.get('telefono')
+        cedula = data.get('cedula')
+        connection = connect(**config)
+        cursor = connection.cursor()
+        cursor.execute("UPDATE registro_usuarios SET telefono = %s WHERE cedula = %s", (telefono, cedula))
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return jsonify({"error": "ok"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
 @app.route('/consultaEditar/<usuario>', methods=['GET'])
 def consultaEditar(usuario):
     try:
@@ -127,7 +143,77 @@ def consultaDatosgym():
         return jsonify([dict(zip(column_names, dato)) for dato in datos])
     except Exception as e:
         return jsonify({"error": str(e)})    
+    
+@app.route('/consultarAvances', methods= ['POST'])
+@cross_origin()  # Habilita CORS para esta ruta
+def consultarAvances():
+    try:
+        selected_month1 = request.json.get('month1')
+        selected_month2 = request.json.get('month2')
+        identificador = request.json.get('identificador')
+        selected_month1_str = datetime.strptime(selected_month1, '%Y-%m-%d').strftime('%Y-%m-%d')
+        selected_month2_str = datetime.strptime(selected_month2, '%Y-%m-%d').strftime('%Y-%m-%d')
+
+    
+        print(identificador)
+        print(selected_month1)
+        print(selected_month2)
+
+        if selected_month1 is None or selected_month2 is None:
+            return jsonify({"error": "Los meses no pueden ser nulos"}), 400
+
+        connection = connect(**config)
+        cursor = connection.cursor()
+        cursor.execute(f"SELECT peso_corporal, bicep_derecho, bicep_izquierdo, pecho, antebrazo_derecho, antebrazo_izquierdo, cintura, cadera, muslo_derecho, muslo_izquierdo, pantorrilla_derecha, pantorrilla_izquierda FROM medidas WHERE (MONTH(mes_registro) = MONTH('{selected_month1_str}') OR MONTH(mes_registro) = MONTH('{selected_month2_str}')) AND cedula = '{identificador}'")
+        datos = cursor.fetchall()
+
+        print(datos)
+
+        return jsonify({'medidas': datos})
+
+    except Exception as e:
+        return jsonify({"error": str(e)})
  
+@app.route('/medidas/<identificador>', methods=['GET'])
+def medidas(identificador):
+    try:
+        connection = connect(**config)
+        cursor = connection.cursor()
+        sql=f"SELECT peso_corporal,pecho,cintura,cadera,bicep_izquierdo,bicep_derecho,antebrazo_izquierdo,antebrazo_derecho,muslo_izquierdo,muslo_derecho,pantorrilla_izquierda,pantorrilla_derecha FROM medidas WHERE cedula = '{identificador}';"
+        cursor.execute(sql)
+        datos = cursor.fetchall()
+        
+        if(datos):
+            cursor.close()
+            connection.close()
+            return jsonify(datos)
+        else:
+            cursor.close()
+            connection.close()
+            return jsonify({"error":"notFound"})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+    
+
+@app.route('/rutinas', methods=['GET'])
+def rutinas():
+    try:
+        connection = connect(**config)
+        cursor = connection.cursor()
+        sql=f"SELECT nombre_ejercicio,repeciones,series,img FROM ejercicios WHERE contador_ejercicio = contador_ejercicio"
+        cursor.execute(sql)
+        datos = cursor.fetchall()
+        
+        if(datos):
+            cursor.close()
+            connection.close()
+            return jsonify(datos)
+        else:
+            cursor.close()
+            connection.close()
+            return jsonify({"error":"notFound"})
+    except Exception as e:
+        return jsonify({"error": str(e)})
     
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=8100)
+    app.run(host='0.0.0.0', debug=True, port=8101)

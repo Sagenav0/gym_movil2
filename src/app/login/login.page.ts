@@ -12,7 +12,7 @@ import { UserService } from '../user.service';
 export class LoginPage implements OnInit {
   usuario: string = '';
   contrasena: string = '';
-
+  cedula: string = '';
   constructor(private conexion: ConexionService,
               private toastController: ToastController,
               private modalCtrl: ModalController,
@@ -34,7 +34,9 @@ export class LoginPage implements OnInit {
       if (response.error === 'ok') {
         // Credenciales válidas, redirigir a la siguiente página
         this.userService.setUser(this.usuario);
-        this.router.navigate(['/home']);
+        this.userService.setCedula(response.datos[0][2]);
+        console.log(this.cedula)
+        this.router.navigate(['/rutinas']);
       } else {
         // Credenciales inválidas, mostrar mensaje de error
         this.presentToastInvalid();
