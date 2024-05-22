@@ -16,6 +16,7 @@ export class EditarPerfilPage implements OnInit {
   cedula = this.userService.getCedula();
   telefono = "";
   telefononuevo= "";
+  imagenuser = File;
   constructor(
     private conexionService: ConexionService,
     private userService: UserService, private toastController: ToastController,
@@ -80,17 +81,18 @@ export class EditarPerfilPage implements OnInit {
     
           // funcion para activar el input de archivo cuando el ícono es usado
   imagen_usuario_selecion() {
-    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    const fileInput = document.getElementById('imagen_de_perfil') as HTMLInputElement;
     fileInput.click();
   }
 
   // funcion para manejar el archivo seleccionado
-  imagen_del_perfil(event: Event) {
+  imagen_del_usuario_perfil(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
       console.log('Archivo seleccionado:', file);
       // por ahoso solo lo imprimo para verificar
+      this.imagenuser = file;
     }
   }  
      
