@@ -33,9 +33,11 @@
 *{
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: 700;
+ 
 }
-body.swal2-height-auto {
-  height:100%
+ion-alert {
+  --background-color: var(--ion-color-primary-tint);
+  --color: var(--ion-color-primary-shade);
 }
 
 ion-toolbar{
@@ -114,4 +116,7 @@ ion-title{
   .ion-valid.sc-ion-input-md-h{
     --highlight-color: var(--ion-color-primary-shade);
   }
- 
+  body.my-custom-swal-class {
+    height: 0px !important;
+    height: 100vh !important; /* Ajusta la altura según sea necesario */
+  }

@@ -10,11 +10,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content id="contenedor">
+
+<ion-content id="contenedor" *ngIf="!esDomingo()">
   <ng-container *ngFor="let item of listaDeDatos; let index = index">
       <ion-card *ngIf="currentIndex === index" id="cardejercicios">
           
           <ion-card-header>
+            <p *ngIf="!esDomingo()">Rutina del  {{ formattedFecha }}</p>
               <ion-card-title id="titulo">{{ item[0]}}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
@@ -42,3 +44,4 @@
       </ion-card>
   </ng-container>
 </ion-content>
+
