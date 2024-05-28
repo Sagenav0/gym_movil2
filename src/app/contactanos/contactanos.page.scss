@@ -35,10 +35,11 @@ ion-label{
 }
 .tit{
    position: absolute;
-    margin-top: 15%;
-    margin-left: 18%;
+    top: 13%;
+    left: 23%;
     font-size: 24px;
     color: var(--ion-color-primary-tint);
+    z-index: 5;
 }
 #spiner{
     position: absolute;

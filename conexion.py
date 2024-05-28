@@ -7,10 +7,10 @@ app = Flask(__name__)
 CORS(app)
 
 config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '',
-    'database': 'gym'
+    'host': '85.31.231.136',
+    'user': 'controlgym',
+    'password': 'ControlGym',
+    'database': 'gym_control'
 }
 
 @app.route("/")
@@ -216,4 +216,4 @@ def rutinas():
         return jsonify({"error": str(e)})
     
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=8101)
+    app.run(host='0.0.0.0', debug=True, port=9501)

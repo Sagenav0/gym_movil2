@@ -3,7 +3,6 @@ import { ConexionService } from 'src/app/services/conexion.service';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
-import Swal from 'sweetalert2';
 
 
 @Component({
@@ -76,16 +75,5 @@ export class CambiarContraPage implements OnInit {
     toast.present();
   }    
 
-  prueba(){
-  
-    Swal.fire({
-      title: "Cambio de contraseña",
-      text: "realizado con exito",
-      icon: "success",
-      customClass: {
-        container: 'my-custom-swal-class'
-      }
-    });
-  }
   
 }
