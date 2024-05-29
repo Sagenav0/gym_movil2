@@ -9,17 +9,21 @@
 
 <ion-content [fullscreen]="true" *ngIf="Datoseditar.length > 0" >
   <ng-container *ngFor="let item of Datoseditar">
- <p>Nombre:</p>
- <p> {{item.nombre}}</p>
-  <p>Telefono:</p>
-   <p>  {{item.telefono}}</p> 
-    <input type="tel" [(ngModel)]="telefononuevo" placeholder="nuevo telefono" name="telefono" id="telefono">
-  <p>{{usuario}}</p>
-  
-  <ion-button [routerLink]="['/cambiar-correo']">correo</ion-button>
-  <p>Contraseña:</p>
-  <ion-button [routerLink]="['/cambiar-contra']">contraseña</ion-button>
-  <ion-button type="sutmit" (click)="update_telefono()" >guardar cambios</ion-button>
+    <ion-icon name="cloud-upload" (click)="imagen_usuario_selecion()" style="font-size: 32px; cursor: pointer;"></ion-icon>
+
+    <!-- Input de archivo oculto -->
+    <input type="file" id="fileInput" (change)="imagen_del_perfil($event)" >
+    <p>Nombre:</p>
+    <p> {{item.nombre}}</p>
+      <p>Telefono:</p>
+      <p>  {{item.telefono}}</p> 
+        <input type="tel" [(ngModel)]="telefononuevo" placeholder="nuevo telefono" name="telefono" id="telefono">
+      <p>{{usuario}}</p>
+      
+      <ion-button [routerLink]="['/cambiar-correo']">correo</ion-button>
+      <p>Contraseña:</p>
+      <ion-button [routerLink]="['/cambiar-contra']">contraseña</ion-button>
+      <ion-button type="sutmit" (click)="update_telefono()" >guardar cambios</ion-button>
 </ng-container>
 <ion-spinner id="spiner" *ngIf="Datoseditar.length < 1"></ion-spinner>
 </ion-content>
