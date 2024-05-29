@@ -78,19 +78,19 @@ export class EditarPerfilPage implements OnInit {
       }
      }
     
-          // Método para activar el input de archivo cuando el ícono es clicado
+          // funcion para activar el input de archivo cuando el ícono es usado
   imagen_usuario_selecion() {
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
     fileInput.click();
   }
 
-  // Método para manejar el archivo seleccionado
+  // funcion para manejar el archivo seleccionado
   imagen_del_perfil(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
       console.log('Archivo seleccionado:', file);
-      // Aquí puedes manejar el archivo seleccionado, por ejemplo, cargarlo a un servidor
+      // por ahoso solo lo imprimo para verificar
     }
   }  
      

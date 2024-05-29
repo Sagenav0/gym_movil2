@@ -11,7 +11,7 @@
   <ng-container *ngFor="let item of Datoseditar">
     <ion-icon name="cloud-upload" (click)="imagen_usuario_selecion()" style="font-size: 32px; cursor: pointer;"></ion-icon>
 
-    <!-- Input de archivo oculto -->
+    <!-- Input de archivo oculto por su display-->
     <input type="file" id="fileInput" (change)="imagen_del_perfil($event)" >
     <p>Nombre:</p>
     <p> {{item.nombre}}</p>
