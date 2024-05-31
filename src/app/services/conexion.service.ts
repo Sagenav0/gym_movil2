@@ -16,10 +16,10 @@ export class ConexionService {
     return this._refresh$
   }
 
-   // url = "https://yeffer.000webhostapp.com/appyef"// Dirección de backend de la NUBE
-    url = "http://127.0.0.1:9501" // servidor
-   //url = "http://192.168.131.124:8101" // Dirección de backend para usar como servidor 
-   //url = "http://85.31.231.136:9501"
+    // url = "https://yeffer.000webhostapp.com/appyef"// Dirección de backend de la NUBE
+    //url = "http://127.0.0.1:9501" // servidor
+    //url = "http://192.168.131.124:8101" // Dirección de backend para usar como servidor 
+    url = "http://85.31.231.136:9501"
 
   constructor(private http:HttpClient) { }
 

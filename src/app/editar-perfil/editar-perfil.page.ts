@@ -3,7 +3,7 @@ import { ConexionService } from '../services/conexion.service';
 import { UserService } from '../user.service';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-editar-perfil',
@@ -12,32 +12,36 @@ import { Router } from '@angular/router';
 })
 export class EditarPerfilPage implements OnInit {
   Datoseditar: any[] = [];
-  usuario = this.userService.getUser()
+  usuario = this.userService.getUser();
   cedula = this.userService.getCedula();
   telefono = "";
-  telefononuevo= "";
-  imagenuser = File;
+  telefononuevo = "";
+  imagenuser: File | null = null;
+  imageUrl: string | ArrayBuffer | null = null;
+
   constructor(
     private conexionService: ConexionService,
-    private userService: UserService, private toastController: ToastController,
-    private modalCtrl: ModalController, private router: Router
+    private userService: UserService,
+    private toastController: ToastController,
+    private modalCtrl: ModalController,
+    private router: Router,
+    private cdr: ChangeDetectorRef // Inyectar ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     this.consultaEdit();
+    this.imageUrl = this.userService.getImageUrl();
   }
+
+
   consultaEdit() {
-   
     this.conexionService.Datosedit(this.usuario).subscribe(
       (datos: any[]) => {
-        console.log(this.cedula)
-        this.Datoseditar = datos
-        this.telefono = datos[0].telefono
-        
+        this.Datoseditar = datos;
+        this.telefono = datos[0].telefono;
       },
       (error) => {
         console.error('Error al obtener los datos:', error);
-        // Aquí podemos agregar codigo para manejar el errores o mostrar un mensaje al usuario
       }
     );
   }
@@ -45,7 +49,7 @@ export class EditarPerfilPage implements OnInit {
   async closeModal() {
     this.modalCtrl.dismiss(null, 'closed');
   }
-    
+
   async presentToast(msg: string) {
     const toast = await this.toastController.create({
       message: msg,
@@ -54,48 +58,46 @@ export class EditarPerfilPage implements OnInit {
     toast.present();
   }
 
+  update_telefono() {
+    if (this.telefono === this.telefononuevo) {
+      this.presentToast('No se puede usar el teléfono actual. Por favor ingrese uno nuevo');
+    } else {
+      const dat = {
+        telefono: this.telefononuevo,
+        cedula: this.cedula
+      };
+      this.conexionService.cambiarTelefono(dat).subscribe(
+        data => {
+          this.presentToast('El teléfono se cambió con éxito');
+          this.closeModal();
+          this.router.navigate(['/editar-perfil']);
+        },
+        error => {
+          this.presentToast('Error al cambiar el teléfono');
+          this.closeModal();
+        }
+      );
+    }
+  }
 
-  update_telefono(){
-   
-     if(this.telefono === this.telefononuevo){
-      this.presentToast('no se puede usar el telefono actual por favor ingrese uno nuevo')
-
-     }else{
-        const dat = {
-          telefono: this.telefononuevo,
-          cedula: this.cedula
-        };
-        this.conexionService.cambiarTelefono(dat).subscribe(
-          data => {
-            this.presentToast('El telefono se cambió con éxito');
-            this.closeModal();
-            this.router.navigate(['/editar-perfil']);
-          },
-          error => {
-            this.presentToast('Error al cambiar el telefono');
-            this.closeModal();
-          }
-        );
-      }
-     }
-    
-          // funcion para activar el input de archivo cuando el ícono es usado
   imagen_usuario_selecion() {
     const fileInput = document.getElementById('imagen_de_perfil') as HTMLInputElement;
     fileInput.click();
   }
 
-  // funcion para manejar el archivo seleccionado
   imagen_del_usuario_perfil(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-      console.log('Archivo seleccionado:', file);
-      // por ahoso solo lo imprimo para verificar
       this.imagenuser = file;
+      this.userService.setImagenUser(file);
+      this.imageUrl = this.userService.getImageUrl(); // Actualizar imageUrl
+      
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageUrl = reader.result;
+      };
+      reader.readAsDataURL(file);
     }
-  }  
-     
-
-
+  }
 }
