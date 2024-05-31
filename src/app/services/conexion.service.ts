@@ -17,9 +17,9 @@ export class ConexionService {
   }
 
    // url = "https://yeffer.000webhostapp.com/appyef"// Dirección de backend de la NUBE
-   // url = "http://127.0.0.1:4001" servidor
+    url = "http://127.0.0.1:9501" // servidor
    //url = "http://192.168.131.124:8101" // Dirección de backend para usar como servidor 
-   url = "http://85.31.231.136:9501"
+   //url = "http://85.31.231.136:9501"
 
   constructor(private http:HttpClient) { }
 
@@ -84,11 +84,21 @@ export class ConexionService {
       );
   }
 
+  EnviarCorreo(correo: string): Observable<any> {
+    return this.http.post<any>(`${this.url}/enviarCorreo/${correo}`,null);
+  }
+
+  verificarCodigo(codigo:any, usuario:string): Observable<any> {
+    return this.http.get(`${this.url}/verificarCodigo/${codigo}/${usuario}`);
+  }
+
+
 
   datosGym(): Observable<any[]> {
     return this.http
       .get<any[]>(this.url + '/consultaDatosgym');
   }
+
   Rutina(): Observable<any[]> {
     return this.http
       .get<any[]>(this.url + '/rutinas');
@@ -116,13 +126,13 @@ export class ConexionService {
     const body = { month1: selectedMonth1, month2: selectedMonth2,identificador:identificador  };
     
     return this.http.post<any>(`${this.url}/consultarAvances`, body, { headers });
-}
-Medidas(identificador:any):Observable<any>{
-  return this.http.get(`${this.url}/medidas/${identificador}`);
-}
-Rutinas():Observable<any>{
-  return this.http.get(`${this.url}/rutinas`);
-}
+  }
+  Medidas(identificador:any):Observable<any>{
+    return this.http.get(`${this.url}/medidas/${identificador}`);
+  }
+  Rutinas():Observable<any>{
+    return this.http.get(`${this.url}/rutinas`);
+  }
 }
 
 

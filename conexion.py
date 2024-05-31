@@ -2,6 +2,11 @@ from flask import Flask, jsonify, request, session
 from datetime import datetime
 from mysql.connector import connect
 from flask_cors import CORS, cross_origin
+import random
+from email.message import EmailMessage
+import smtplib
+import ssl
+
 
 app = Flask(__name__)
 CORS(app)
@@ -214,6 +219,75 @@ def rutinas():
             return jsonify({"error":"notFound"})
     except Exception as e:
         return jsonify({"error": str(e)})
+    
+
+@app.route('/enviarCorreo/<correo>', methods=['POST'])
+def enviarCorreo(correo):
+    if request.method == 'POST':
+       
+        codigo_aleatorio = ''.join([str(random.randint(0, 9)) for _ in range(6)])
+        
+        asunto = 'Codigo de verificacion'
+
+       
+        cuerpo = f'Tu codigo es: {codigo_aleatorio}'
+
+        email_emisor = 'cdvanegas830@misena.edu.co' 
+        email_contrasena = 'vanegas2003'
+
+        em = EmailMessage()
+        em['From'] = email_emisor
+        em['To'] = correo
+        em['Subject'] = asunto
+        em.set_content(cuerpo)
+
+        
+        contexto = ssl.create_default_context()
+
+        try:
+         
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=contexto) as smtp:
+                smtp.login(email_emisor, email_contrasena)
+                smtp.sendmail(email_emisor, correo, em.as_string())
+                
+                connection = connect(**config)
+                cursor = connection.cursor()
+                cursor.execute(f"UPDATE registro_usuarios SET codigo = '{codigo_aleatorio}' WHERE correo = '{correo}'")
+                connection.commit()
+                cursor.close()
+                
+                return jsonify({"message": "Correo enviado correctamente"})
+
+                
+        except Exception as e:
+            
+            return jsonify({"error": str(e)})
+
+        return mensaje
+    else:
+        return "Método no permitido"
+
+@app.route("/verificarCodigo/<codigo>/<usuario>", methods=['get'])
+def verificarCodigo(codigo, usuario):
+    try:
+        connection = connect(**config)
+        cursor = connection.cursor()
+        cursor.execute(f"SELECT codigo FROM registro_usuarios WHERE codigo = '{codigo}' AND correo = '{usuario}'")
+        datos = cursor.fetchall()
+        
+        if(datos):
+            cursor.close()
+            connection.close()
+            return jsonify({"message":"codigo coincide"})
+        else:
+            cursor.close()
+            connection.close()
+            return jsonify({"message":"codigo no coincide"})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+
+
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=9501)

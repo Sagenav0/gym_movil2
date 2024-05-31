@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>olvidaste tu contrasena</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Digite el correo de la cuenta</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-input type="email" [(ngModel)]="correo"></ion-input>
+    </ion-card-content>
+
+
+    <ion-button fill="clear" [routerLink]="['/login']" >Regresar</ion-button>
+    <ion-button fill="clear"  (click)="Recuperar_contrasena()" type="submit">Siguiente</ion-button>
+    
+  </ion-card>
+</ion-content>

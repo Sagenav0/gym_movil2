@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>verificar_codigo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Digite el codigo que le llego</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-input type="text" [(ngModel)]="codigo"></ion-input>
+    </ion-card-content>
+
+
+    <ion-button fill="clear" [routerLink]="['/login']" >Regresar</ion-button>
+    <ion-button fill="clear"  (click)="Verificar_codigo()" type="submit">Verificar</ion-button>
+    
+  </ion-card>
+</ion-content>

@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Cambiar contraseña</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"  id="contenedor-padre" class="ion-padding">
+  
+    
+  <ion-card id="cambiar">
+
+      <h2 id="ache1">Nueva Contraseña:</h2>
+
+      <ion-item id="item1">
+        <ion-input type="text" placeholder="minimo 8 caracteres" name="contrasena1" id="contrasena1" [(ngModel)]="contra1"></ion-input>
+      </ion-item>
+
+      <h2 id="ache2">Confirmar contraseña:</h2>
+
+      <ion-item id="item2">
+        <ion-input type="text" placeholder="minimo 8 caracteres" name="contrasena2" id="contrasena2" [(ngModel)]="contra2"></ion-input>
+      </ion-item>
+
+  </ion-card>
+
+      <ion-button class="btn-actualizar" type="submit" expand="full" (click)="verificarContrasena()" >Actualizar</ion-button>
+
+</ion-content>

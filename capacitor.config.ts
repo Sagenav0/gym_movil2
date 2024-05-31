@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'dg.digitalforge.starter',
   appName: 'proyecto-movil',
   webDir: 'www',
   server: {
