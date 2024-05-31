@@ -1,6 +1,36 @@
 ion-content{
+    
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: space-around;
+    height: 100%;
+    text-align: center; // Opcional: para centrar el texto
+      
+    // Opcional: Puedes anidar estilos específicos para los elementos internos si es necesario
+    p {
+      margin: 0.5em 0;
+    }
+    
+    input[type="tel"] {
+      margin: 1em 0;
+    }
+      
+    ion-button {
+      margin: 0.5em 0;
+    }
+          
+}
+
+input[type="file"] {
+  display: none; // Oculta el input real
+}
+
+.imagen_del_perfil{
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: var(--ion-color-primary);
+  color: white;
+  border-radius: 4px;
 }
