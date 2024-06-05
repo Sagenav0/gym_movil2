@@ -59,4 +59,4 @@ export class RutinasPage implements OnInit {
   esDomingo(): boolean {
     return this.formattedFecha.toLowerCase() === 'domingo';
   }
-} 
+}

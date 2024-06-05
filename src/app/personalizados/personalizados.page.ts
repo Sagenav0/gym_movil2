@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
   selector: 'app-personalizados',
   templateUrl: './personalizados.page.html',
   styleUrls: ['./personalizados.page.scss'],
+  providers: [DatePipe]
 })
 export class PersonalizadosPage implements OnInit {
   listaDeDatos: any[] = [];
@@ -58,5 +59,4 @@ export class PersonalizadosPage implements OnInit {
   esDomingo(): boolean {
     return this.formattedFecha.toLowerCase() === 'domingo';
   }
-
 }

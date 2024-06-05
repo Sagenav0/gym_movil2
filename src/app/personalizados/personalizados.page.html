@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="menuPrincipal" ></ion-menu-button>
     </ion-buttons>
-    <ion-title>PERSONALIZADAS</ion-title>
+    <ion-title>RUTINAS</ion-title>
     <ion-icon slot="end" id="iconperfil" name="person-circle-sharp" [routerLink]="
     ['/editar-perfil']
     "></ion-icon>
@@ -15,25 +15,18 @@
   <ng-container *ngFor="let item of listaDeDatos; let index = index">
       <ion-card *ngIf="currentIndex === index" id="cardejercicios">
           
-          <ion-card-header id="título_tarjeta">
-            <p *ngIf="!esDomingo()" class="titulo" >Rutina del  {{ formattedFecha }}</p>
-            <ion-card-title class="titulo">{{ item[0]}}</ion-card-title>
+          <ion-card-header>
+            <p *ngIf="!esDomingo()" id="fecha">Rutina del  {{ formattedFecha }} </p>
+            <ion-card-title id="titulo">{{ item[0]}}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <div id="itemimagen">
-              <img [src]="item[3]" alt="#">
+              <img [src]="item[6]" alt="#" id="imagen">
             </div>
+              <p class="opciones">Series: {{ item[3]}}</p>
+              <p class="opciones">Repeticiones: {{ item[4]}}</p>
 
-            <ion-item id="item_series_y_repeticiones_1">
-              <p class="opciones_1">Series:</p>
-              <p class="opciones_1">Repeticiones:</p>
-            </ion-item>
-
-            <ion-item id="item_series_y_repeticiones_2">
-              <p class="opciones_2"> {{ item[2]}}</p>
-              <p class="opciones_2"> {{ item[1]}}</p>
-            </ion-item>
-
+              
               <ion-buttons id="botones">
                 <ion-button (click)="anteriorTarjeta()" id="botonatras">
                   <ion-icon name="arrow-back-outline"></ion-icon>

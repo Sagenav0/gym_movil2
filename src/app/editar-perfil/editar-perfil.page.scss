@@ -1,8 +1,11 @@
+
 ion-content{
+
     
     display: flex;
     flex-direction: column;
     justify-content: center;
+    place-items: center;
     align-items: center;
     height: 100%;
     text-align: center; // Opcional: para centrar el texto

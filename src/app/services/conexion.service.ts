@@ -17,7 +17,7 @@ export class ConexionService {
   }
 
     // url = "https://yeffer.000webhostapp.com/appyef"// Dirección de backend de la NUBE
-    //url = "http://127.0.0.1:9501" // servidor
+    // url = "http://127.0.0.1:9501" // servidor
     //url = "http://192.168.131.124:8101" // Dirección de backend para usar como servidor 
     url = "http://85.31.231.136:9501"
 
@@ -106,6 +106,12 @@ export class ConexionService {
   
   Datosedit(usuario:string): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}/consultaEditar/${usuario}`);
+  }
+  guardarimagenusuario(imagenuser:File): Observable<any[]> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const imagenperfil = { imagenuser };
+  
+    return this.http.post<any>(`${this.url}/imagen_de_perfil_usuario`, imagenperfil, { headers });
   }
 
   cambiarTelefono(dat: any): Observable<any> {

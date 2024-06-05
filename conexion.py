@@ -11,11 +11,17 @@ import ssl
 app = Flask(__name__)
 CORS(app)
 
+# config = {
+#     'host': '85.31.231.136',
+#     'user': 'controlgym',
+#     'password': 'ControlGym',
+#     'database': 'gym_control'
+# }
 config = {
-    'host': '85.31.231.136',
-    'user': 'controlgym',
-    'password': 'ControlGym',
-    'database': 'gym_control'
+    'host': 'localhost',
+    'user': 'root',
+    'password': '',
+    'database': 'prueba'
 }
 
 @app.route("/")
@@ -147,7 +153,21 @@ def consultaDatosgym():
         connection.close()
         return jsonify([dict(zip(column_names, dato)) for dato in datos])
     except Exception as e:
-        return jsonify({"error": str(e)})    
+        return jsonify({"error": str(e)}) 
+    
+@app.route('/imagen_de_perfil_usuario',methods=['POST'])
+def actualizar_imagen_de_perfil_usuario():
+    try:
+        imagenuser = request.json.get('imagenuser')
+        if (imagenuser):
+                connection = connect(**config)
+                cursor = connection.cursor()
+                cursor.execute(f"INSERT INTO registro_usuarios  = '{codigo_aleatorio}' WHERE correo = '{correo}'")
+                connection.commit()
+                cursor.close()
+        
+        
+             
     
 @app.route('/consultarAvances', methods= ['POST'])
 @cross_origin()  # Habilita CORS para esta ruta
@@ -205,7 +225,8 @@ def rutinas():
     try:
         connection = connect(**config)
         cursor = connection.cursor()
-        sql=f"SELECT nombre_ejercicio,repeciones,series,img FROM ejercicios WHERE contador_ejercicio = contador_ejercicio"
+        sql=f"SELECT r.cedula, r.id_membresia, e.nombre_ejercicio, e.series, e.repeciones, e.tipo, e.img FROM ejercicios e, registro_usuarios r INNER JOIN membresias m ON r.id_membresia = m.id_membresia WHERE r.id_membresia = '5' AND r.estado = 'activo';"
+        # sql=f"SELECT nombre_ejercicio,repeciones,series,img FROM ejercicios WHERE contador_ejercicio = contador_ejercicio"
         cursor.execute(sql)
         datos = cursor.fetchall()
         

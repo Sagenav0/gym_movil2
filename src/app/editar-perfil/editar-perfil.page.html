@@ -10,8 +10,8 @@
 <ion-content [fullscreen]="true" *ngIf="Datoseditar.length > 0">
   <ng-container *ngFor="let item of Datoseditar">
     <form>
-      <ion-icon name="cloud-upload" (click)="imagen_usuario_selecion()" style="font-size: 32px; cursor: pointer;"></ion-icon>
-
+      <ion-icon name="image-outline" (click)="imagen_usuario_selecion()" style="font-size: 32px; cursor: pointer;"></ion-icon>
+      
       <!-- Input de archivo oculto -->
       <input type="file" id="imagen_de_perfil" name="imagen_de_perfil" (change)="imagen_del_usuario_perfil($event)" style="display: none;">
     </form>
