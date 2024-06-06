@@ -108,10 +108,7 @@ export class ConexionService {
     return this.http.get<any[]>(`${this.url}/consultaEditar/${usuario}`);
   }
   guardarimagenusuario(imagenuser:File): Observable<any[]> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    const imagenperfil = { imagenuser };
-  
-    return this.http.post<any>(`${this.url}/imagen_de_perfil_usuario`, imagenperfil, { headers });
+    return this.http.post<any>(`${this.url}/imagen_de_perfil_usuario`,imagenuser);
   }
 
   cambiarTelefono(dat: any): Observable<any> {
@@ -135,6 +132,9 @@ export class ConexionService {
   }
   Medidas(identificador:any):Observable<any>{
     return this.http.get(`${this.url}/medidas/${identificador}`);
+  }
+  Personalizados():Observable<any>{
+    return this.http.get(`${this.url}/personalizados`);
   }
   Rutinas():Observable<any>{
     return this.http.get(`${this.url}/rutinas`);

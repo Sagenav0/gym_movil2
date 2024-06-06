@@ -22,11 +22,11 @@ export class PersonalizadosPage implements OnInit {
   }
 
   ngOnInit() {
-    this.obtenerRutinas();
+    this.obtenerPersonalizados();
   }
 
-  obtenerRutinas() {
-    this.conexionService.Rutinas().subscribe(
+  obtenerPersonalizados() {
+    this.conexionService.Personalizados().subscribe(
       (datos: any[]) => {
         this.listaDeDatos = datos;
       },

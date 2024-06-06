@@ -155,7 +155,7 @@ def consultaDatosgym():
     except Exception as e:
         return jsonify({"error": str(e)}) 
     
-@app.route('/imagen_de_perfil_usuario',methods=['POST'])
+@app.route('/imagen_de_perfil_usuario/<imagenuser>',methods=['POST'])
 def actualizar_imagen_de_perfil_usuario():
     try:
         imagenuser = request.json.get('imagenuser')
@@ -165,6 +165,8 @@ def actualizar_imagen_de_perfil_usuario():
                 cursor.execute(f"INSERT INTO registro_usuarios  = '{codigo_aleatorio}' WHERE correo = '{correo}'")
                 connection.commit()
                 cursor.close()
+    except Exception as e:
+        return jsonify({"error": str(e)})
         
         
              
@@ -220,8 +222,8 @@ def medidas(identificador):
         return jsonify({"error": str(e)})
     
 
-@app.route('/rutinas', methods=['GET'])
-def rutinas():
+@app.route('/personalizados', methods=['GET'])
+def personalizados():
     try:
         connection = connect(**config)
         cursor = connection.cursor()
