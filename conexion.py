@@ -34,7 +34,7 @@ def ValidarCredenciales(usuario, contrasena):
     try:
         connection = connect(**config)
         cursor = connection.cursor()
-        cursor.execute(f"SELECT nombre,telefono,cedula FROM registro_usuarios WHERE correo = '{usuario}' AND contrasena = '{contrasena}' AND estado = 'activo'")
+        cursor.execute(f"SELECT nombre,telefono,cedula,imagenuser FROM registro_usuarios WHERE correo = '{usuario}' AND contrasena = '{contrasena}' AND estado = 'activo'")
         datos = cursor.fetchall()
         
         if(datos):
