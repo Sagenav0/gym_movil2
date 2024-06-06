@@ -222,6 +222,27 @@ def medidas(identificador):
         return jsonify({"error": str(e)})
     
 
+@app.route('/rutinas', methods=['GET'])
+def rutinas():
+    try:
+        connection = connect(**config)
+        cursor = connection.cursor()
+        sql=f"SELECT nombre_ejercicio,repeciones,series,img FROM ejercicios WHERE contador_ejercicio = contador_ejercicio"
+        cursor.execute(sql)
+        datos = cursor.fetchall()
+        
+        if(datos):
+            cursor.close()
+            connection.close()
+            return jsonify(datos)
+        else:
+            cursor.close()
+            connection.close()
+            return jsonify({"error":"notFound"})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+
 @app.route('/personalizados', methods=['GET'])
 def personalizados():
     try:
