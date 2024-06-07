@@ -48,6 +48,9 @@ def ValidarCredenciales(usuario, contrasena):
     except Exception as e:
         return jsonify({"error": str(e)})
     
+    
+    
+    
 
 @app.route("/consultaCorreo/<correo>", methods=['get'])
 def ConsultaCorreo(correo):
@@ -67,6 +70,8 @@ def ConsultaCorreo(correo):
             return jsonify({"message":"Correo no encontrado"})
     except Exception as e:
         return jsonify({"error": str(e)})
+    
+    
 
 
     
@@ -94,6 +99,9 @@ def cambiarCorreo():
         return jsonify({"error": str(e)}), 500
 
 
+
+
+
 @app.route('/cambiarContra', methods=['POST'])
 def cambiarContra():
     try:
@@ -111,6 +119,9 @@ def cambiarContra():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
+    
+    
+    
 @app.route('/cambiarTelefono', methods=['POST'])
 def cambiarTelefono():
     try:
@@ -127,6 +138,10 @@ def cambiarTelefono():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
+    
+    
+    
+    
 @app.route('/consultaEditar/<usuario>', methods=['GET'])
 def consultaEditar(usuario):
     try:
@@ -140,6 +155,10 @@ def consultaEditar(usuario):
         return jsonify([dict(zip(column_names, dato)) for dato in datos])
     except Exception as e:
         return jsonify({"error": str(e)})   
+    
+    
+    
+    
     
 @app.route('/consultaDatosgym', methods=['GET'])
 def consultaDatosgym():
@@ -155,6 +174,9 @@ def consultaDatosgym():
     except Exception as e:
         return jsonify({"error": str(e)}) 
     
+    
+    
+    
 @app.route('/imagen_de_perfil_usuario/<imagenuser>',methods=['POST'])
 def actualizar_imagen_de_perfil_usuario():
     try:
@@ -162,11 +184,13 @@ def actualizar_imagen_de_perfil_usuario():
         if (imagenuser):
                 connection = connect(**config)
                 cursor = connection.cursor()
-                cursor.execute(f"INSERT INTO registro_usuarios  = '{codigo_aleatorio}' WHERE correo = '{correo}'")
+                cursor.execute(f"INSERT INTO registro_usuarios  = '{}' WHERE correo = '{correo}'")
                 connection.commit()
                 cursor.close()
     except Exception as e:
         return jsonify({"error": str(e)})
+        
+        
         
         
              
@@ -200,6 +224,11 @@ def consultarAvances():
 
     except Exception as e:
         return jsonify({"error": str(e)})
+    
+    
+    
+    
+    
  
 @app.route('/medidas/<identificador>', methods=['GET'])
 def medidas(identificador):
@@ -221,6 +250,10 @@ def medidas(identificador):
     except Exception as e:
         return jsonify({"error": str(e)})
     
+    
+    
+    
+    
 
 @app.route('/rutinas', methods=['GET'])
 def rutinas():
@@ -241,6 +274,10 @@ def rutinas():
             return jsonify({"error":"notFound"})
     except Exception as e:
         return jsonify({"error": str(e)})
+    
+    
+    
+    
 
 
 @app.route('/personalizados', methods=['GET'])
@@ -263,6 +300,10 @@ def personalizados():
             return jsonify({"error":"notFound"})
     except Exception as e:
         return jsonify({"error": str(e)})
+    
+    
+    
+    
     
 
 @app.route('/enviarCorreo/<correo>', methods=['POST'])
@@ -310,6 +351,11 @@ def enviarCorreo(correo):
         return mensaje
     else:
         return "Método no permitido"
+    
+    
+    
+    
+    
 
 @app.route("/verificarCodigo/<codigo>/<usuario>", methods=['get'])
 def verificarCodigo(codigo, usuario):
@@ -329,6 +375,10 @@ def verificarCodigo(codigo, usuario):
             return jsonify({"message":"codigo no coincide"})
     except Exception as e:
         return jsonify({"error": str(e)})
+    
+    
+    
+    
 
 
 
