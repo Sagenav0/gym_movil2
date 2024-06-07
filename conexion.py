@@ -22,7 +22,7 @@ config = {
     'host': 'localhost',
     'user': 'root',
     'password': '',
-    'database': 'prueba'
+    'database': 'gym_yeff'
 }
 
 @app.route("/")

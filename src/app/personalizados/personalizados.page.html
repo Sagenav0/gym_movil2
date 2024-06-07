@@ -17,16 +17,25 @@
           
           <ion-card-header>
             <p *ngIf="!esDomingo()" id="fecha">Rutina del  {{ formattedFecha }} </p>
-            <ion-card-title id="titulo">{{ item[0]}}</ion-card-title>
+            <ion-card-title id="titulo">{{ item[2]}}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <div id="itemimagen">
               <img [src]="item[6]" alt="#" id="imagen">
             </div>
-              <p class="opciones">Series: {{ item[3]}}</p>
-              <p class="opciones">Repeticiones: {{ item[4]}}</p>
 
-              
+            <div id="contenedor_series_repeticiones">
+              <div id="contenedor_series">
+                <p class="opcion1">Series:</p>
+                <p class="opcion2">{{ item[3]}}</p>
+              </div>
+              <div id="contenedor_repeticiones">
+                <p class="opcion1">Repeticiones:</p>
+                <p class="opcion2">{{ item[4]}}</p>
+              </div>
+            </div>
+
+
               <ion-buttons id="botones">
                 <ion-button (click)="anteriorTarjeta()" id="botonatras">
                   <ion-icon name="arrow-back-outline"></ion-icon>
