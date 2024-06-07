@@ -7,6 +7,7 @@ from email.message import EmailMessage
 import smtplib
 import ssl
 import os
+from werkzeug.utils import secure_filename
 
 
 app = Flask(__name__)
@@ -18,12 +19,23 @@ CORS(app)
 #     'password': 'ControlGym',
 #     'database': 'gym_control'
 # }
-config = {
+""" config = {
     'host': 'localhost',
     'user': 'root',
     'password': '',
     'database': 'gym_yeff'
+} """
+
+config = {
+    'host': 'localhost',
+    'user': 'root',
+    'password': '',
+    'database': 'gym_control'
 }
+
+carpeta_up = os.path.join('src/assets/img')
+app.config['carpeta_up'] = carpeta_up
+
 
 @app.route("/")
 def index():
@@ -178,22 +190,28 @@ def consultaDatosgym():
     
     
     
-@app.route('/imagen_de_perfil_usuario/<imagenuser>/<cedula>',methods=['POST'])
-def actualizar_imagen_de_perfil_usuario(imagenuser, cedula):
+@app.route('/imagen_de_perfil_usuario', methods=['POST'])
+def actualizar_imagen_de_perfil_usuario():
     try:
-        
-        if (imagenuser):
-                connection = connect(**config)
-                cursor = connection.cursor()
-                cursor.execute(f"INSERT INTO `registro_usuarios`( `imagenuser`) VALUES ('{imagenuser}') WHERE cedula = {cedula};")
-                connection.commit()
-                cursor.close()
+        imagenuser = request.files['imagenuser']
+        cedula = request.form['cedula']
+
+        if imagenuser:
+            ahora = datetime.now()
+            tiempo = ahora.strftime("%Y%m%d%H%M%S")
+            nom, extension = os.path.splitext(secure_filename(imagenuser.filename))
+            nombre_foto = f"Foto-{tiempo}{extension}"
+            imagenuser.save(os.path.join(app.config['carpeta_up'], nombre_foto))
+
+            connection = connect(**config)
+            cursor = connection.cursor()
+            cursor.execute("UPDATE registro_usuarios SET imagenuser = %s WHERE cedula = %s", (nombre_foto, cedula))
+            connection.commit()
+            cursor.close()
+
+            return jsonify({"success": True})
     except Exception as e:
         return jsonify({"error": str(e)})
-        
-        
-        
-        
              
     
 @app.route('/consultarAvances', methods= ['POST'])

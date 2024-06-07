@@ -107,9 +107,10 @@ export class ConexionService {
   Datosedit(usuario:string): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}/consultaEditar/${usuario}`);
   }
-  guardarimagenusuario(imagenuser:File, cedula: string): Observable<any[]> {
-    return this.http.post<any>(`${this.url}/imagen_de_perfil_usuario/${imagenuser}/${cedula}`, null);
+  guardarimagenusuario(formData: FormData): Observable<any[]> {
+    return this.http.post<any>(`${this.url}/imagen_de_perfil_usuario`, formData);
   }
+  
 
   cambiarTelefono(dat: any): Observable<any> {
     const headers = new HttpHeaders({

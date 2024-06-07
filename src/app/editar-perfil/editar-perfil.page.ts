@@ -92,16 +92,27 @@ export class EditarPerfilPage implements OnInit {
       this.imagenuser = file;
       this.userService.setImagenUser(file);
       this.imageUrl = this.userService.getImageUrl(); // Actualizar imageUrl
-      
+  
+      const formData = new FormData();
+      formData.append('imagenuser', file);
+      formData.append('cedula', this.cedula);
+  
+      this.conexionService.guardarimagenusuario(formData).subscribe(
+        data => {
+          this.presentToast('La imagen se cambió con éxito');
+          this.closeModal();
+        },
+        error => {
+          this.presentToast('Error al cambiar la imagen');
+          this.closeModal();
+        }
+      );
+  
       const reader = new FileReader();
       reader.onload = () => {
         this.imageUrl = reader.result;
-        if(this.imagenuser){
-          this.conexionService.guardarimagenusuario(this.imagenuser, this.cedula)
-          alert("se guardo la imagen con exito")
-        }
       };
       reader.readAsDataURL(file);
     }
-  }
+  }  
 }
