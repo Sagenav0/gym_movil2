@@ -184,7 +184,7 @@ def actualizar_imagen_de_perfil_usuario():
         if (imagenuser):
                 connection = connect(**config)
                 cursor = connection.cursor()
-                cursor.execute(f"INSERT INTO registro_usuarios  = '{}' WHERE correo = '{correo}'")
+                cursor.execute(f"INSERT INTO `registro_usuarios`( `imagenuser`) VALUES ('{imagenuser}');")
                 connection.commit()
                 cursor.close()
     except Exception as e:
