@@ -92,7 +92,7 @@ export class EditarPerfilPage implements OnInit {
       this.imagenuser = file;
       this.userService.setImagenUser(file);
       this.imageUrl = this.userService.getImageUrl(); // Actualizar imageUrl
-      this.conexionService.guardarimagenusuario(this.imagenuser)
+      this.conexionService.guardarimagenusuario(this.imagenuser, this.cedula)
       const reader = new FileReader();
       reader.onload = () => {
         this.imageUrl = reader.result;

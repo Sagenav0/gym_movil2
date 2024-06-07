@@ -6,6 +6,7 @@ import random
 from email.message import EmailMessage
 import smtplib
 import ssl
+import os
 
 
 app = Flask(__name__)
@@ -177,14 +178,14 @@ def consultaDatosgym():
     
     
     
-@app.route('/imagen_de_perfil_usuario/<imagenuser>',methods=['POST'])
-def actualizar_imagen_de_perfil_usuario():
+@app.route('/imagen_de_perfil_usuario/<imagenuser>/<cedula>',methods=['POST'])
+def actualizar_imagen_de_perfil_usuario(imagenuser, cedula):
     try:
-        imagenuser = request.json.get('imagenuser')
+        
         if (imagenuser):
                 connection = connect(**config)
                 cursor = connection.cursor()
-                cursor.execute(f"INSERT INTO `registro_usuarios`( `imagenuser`) VALUES ('{imagenuser}');")
+                cursor.execute(f"INSERT INTO `registro_usuarios`( `imagenuser`) VALUES ('{imagenuser}') WHERE cedula = {cedula};")
                 connection.commit()
                 cursor.close()
     except Exception as e:
