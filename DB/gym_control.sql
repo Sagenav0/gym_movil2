@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-06-2024 a las 18:41:02
+-- Tiempo de generación: 08-06-2024 a las 05:28:25
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -365,20 +365,21 @@ CREATE TABLE `registro_usuarios` (
   `fecha_registro` date NOT NULL,
   `user_registro` varchar(15) NOT NULL,
   `estado` varchar(8) NOT NULL,
-  `imagenuser` varchar(25) DEFAULT NULL
+  `imagenuser` varchar(100) DEFAULT NULL,
+  `codigo` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `registro_usuarios`
 --
 
-INSERT INTO `registro_usuarios` (`cedula`, `nombre`, `apellido`, `fecha_nac`, `telefono`, `sexo`, `tipo_sangre`, `huella`, `nuemero_emergencia`, `correo`, `contrasena`, `tarjeta_nfc`, `id_membresia`, `fecha_inicio`, `fecha_vencimiento`, `fecha_registro`, `user_registro`, `estado`, `imagenuser`) VALUES
-('10032165441', 'prueba', 'yeffer', '2013-10-16', '3216549878', 'hombre', 'A+', '', 321654789, 'yeferprueba1@gmail.com', 'prueba1', '', 6, '0000-00-00', '2024-04-30', '2024-03-01', 'yefer', 'inactivo', NULL),
-('1003699989', 'Carlos Alberto', 'Posada', '2008-02-14', '3152085189', 'hombre', 'AB', 'NULL', 2147483647, 'lokobrs@gmail.com', '0202020202', '10', 6, '2024-02-24', '2024-04-24', '2024-02-24', 'cristian', 'inactivo', NULL),
-('1007412611', 'Camilo', 'Castillo', '2001-11-24', '3172509264', '', '', '', 0, 'horuxjcc@gmail.com', '', '126196196962', 6, '0000-00-00', '2024-03-12', '2023-11-19', 'Camilo', 'inactivo', NULL),
-('1193592038', 'cristian', 'vanegas', '2003-10-28', '3152085189', '', '', '', 0, 'pequeflow-2003@hotmail.com', '', '01', 6, '0000-00-00', '2024-03-27', '2023-12-03', 'cristian', 'inactivo', NULL),
-('16161', 'camilo', 'castillo', '2001-11-24', '56944194', '', '', '', 0, 'yefer155@gmail.com', 'prueba112', '255626', 6, '2023-10-11', '2023-11-11', '2023-10-11', 'camilo', 'activo', NULL),
-('232312222', 'alfonzo', 'alquaeda', '2008-02-21', '1222222222', 'hombre', 'AB', 'NULL', 2147483647, '12222222@nxjskdacns.com', '232312222', '25', 6, '2024-02-25', '2024-02-27', '2024-02-25', 'cristian', 'inactivo', NULL);
+INSERT INTO `registro_usuarios` (`cedula`, `nombre`, `apellido`, `fecha_nac`, `telefono`, `sexo`, `tipo_sangre`, `huella`, `nuemero_emergencia`, `correo`, `contrasena`, `tarjeta_nfc`, `id_membresia`, `fecha_inicio`, `fecha_vencimiento`, `fecha_registro`, `user_registro`, `estado`, `imagenuser`, `codigo`) VALUES
+('10032165441', 'prueba', 'yeffer', '2013-10-16', '3216549878', 'hombre', 'A+', '', 321654789, 'yeferprueba1@gmail.com', 'prueba1', '', 6, '0000-00-00', '2024-04-30', '2024-03-01', 'yefer', 'activo', 'Foto-20240607215602.jpg', 0),
+('1003699989', 'Carlos Alberto', 'Posada', '2008-02-14', '3152085189', 'hombre', 'AB', 'NULL', 2147483647, 'lokobrs@gmail.com', '0202020202', '10', 6, '2024-02-24', '2024-04-24', '2024-02-24', 'cristian', 'inactivo', NULL, 0),
+('1007412611', 'Camilo', 'Castillo', '2001-11-24', '3172509264', '', '', '', 0, 'horuxjcc@gmail.com', '', '126196196962', 6, '0000-00-00', '2024-03-12', '2023-11-19', 'Camilo', 'inactivo', NULL, 0),
+('1193592038', 'cristian', 'vanegas', '2003-10-28', '3152085189', '', '', '', 0, 'pequeflow-2003@hotmail.com', '', '01', 6, '0000-00-00', '2024-03-27', '2023-12-03', 'cristian', 'inactivo', NULL, 0),
+('16161', 'camilo', 'castillo', '2001-11-24', '56944194', '', '', '', 0, 'yefer155@gmail.com', 'prueba112', '255626', 6, '2023-10-11', '2023-11-11', '2023-10-11', 'camilo', 'inactivo', NULL, 0),
+('232312222', 'alfonzo', 'alquaeda', '2008-02-21', '1222222222', 'hombre', 'AB', 'NULL', 2147483647, '12222222@nxjskdacns.com', '232312222', '25', 6, '2024-02-25', '2024-02-27', '2024-02-25', 'cristian', 'inactivo', NULL, 0);
 
 -- --------------------------------------------------------
 
