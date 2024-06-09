@@ -3,17 +3,53 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="menuPrincipal" ></ion-menu-button>
     </ion-buttons>
-    <ion-title>PERSONALIZADO</ion-title>
-    <ion-icon slot="end" id="iconperfil"  name="person-circle-sharp" [routerLink]="
+    <ion-title>PERSONALIZADOS</ion-title>
+    <ion-icon slot="end" id="iconperfil" name="person-circle-sharp" [routerLink]="
     ['/editar-perfil']
     "></ion-icon>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">personalizados</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+<ion-content id="contenedor" >
+
+  <ion-img src="assets/img/{{imagen}}" alt=""></ion-img>
+  
+  <ng-container *ngFor="let item of listaDeDatos; let index = index">
+      <ion-card *ngIf="currentIndex === index" id="cardejercicios">
+          
+          <ion-card-header>
+            <p  id="fecha">Rutina del  {{ formattedFecha }} </p>
+            <ion-card-title id="titulo">{{ item[2]}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <div id="itemimagen">
+              <img [src]="item[6]" alt="#" id="imagen">
+            </div>
+
+            <div id="contenedor_series_repeticiones">
+              <div id="contenedor_series">
+                <p class="opcion1">Series:</p>
+                <p class="opcion2">{{ item[3]}}</p>
+              </div>
+              <div id="contenedor_repeticiones">
+                <p class="opcion1">Repeticiones:</p>
+                <p class="opcion2">{{ item[4]}}</p>
+              </div>
+            </div>
+
+
+              <ion-buttons id="botones">
+                <ion-button (click)="anteriorTarjeta()" id="botonatras">
+                  <ion-icon name="arrow-back-outline"></ion-icon>
+                </ion-button>
+
+                <ion-button (click)="siguienteTarjeta()" id="botonsiguiente">
+                  <ion-icon name="arrow-forward-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+
+          </ion-card-content>
+      </ion-card>
+  </ng-container>
 </ion-content>

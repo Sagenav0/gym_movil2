@@ -1,0 +1,145 @@
+:root {
+    --ion-card-margin: 1rem;
+    --ion-card-padding: 1rem;
+}
+
+
+#cardejercicios {
+    margin: 20px;
+    background: var(--ion-color-primary);
+    color: var(--ion-color-primary-shade);
+    font-size: 17px;
+    position: relative;
+    padding:1rem;
+    width: 90%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#titulo {
+    text-align: center;
+    font-size: 30px;
+    color: beige;
+    padding: 0;
+    margin: 0;
+}
+
+#fecha {
+    text-align: center;
+    color: beige;
+    margin-top: 10px;
+    
+}
+ion-card-header{
+    width: 100%;
+    height: 20%;
+    padding: 0;
+    top: -4%;
+}
+ion-card-content {
+    width: 80%;
+    height: auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#itemimagen {
+    position: relative;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    top: 5%;
+    padding: 0;
+    margin: 0;
+}
+
+#imagen {
+    width: 90%; 
+    height: 90%; 
+    object-fit: cover;
+    display: block;
+    border: 1px solid beige;
+    border-radius: 10px; 
+}
+
+#contenedor_series_repeticiones {
+    margin-top: 20px;
+//    background: var(--ion-color-primary-tint);
+    height: 90%;
+    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.opcion1 {
+    font-weight: bold;
+    font-size: 20px;
+    color: beige;
+}
+
+.opcion2 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: beige;
+}
+
+#botones {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+    top: 310px;
+}
+#botonatras{
+    position: relative;
+    background-color: beige;
+    width: 50px;
+    bottom: 10px;
+    border-radius: 10px;
+
+
+}
+#botonsiguiente{
+    position: relative;
+    background-color: beige;
+    width: 50px;
+    bottom: 10px;
+    border-radius: 10px;
+
+
+}
+ion-icon{
+    color: black;
+}
+
+@media (min-width: 576px) {
+    :root {
+    --ion-card-width: 80%;
+    }
+}
+
+@media (min-width: 768px) {
+    :root {
+    --ion-card-width: 70%;
+    }
+}
+
+@media (min-width: 992px) {
+    :root {
+    --ion-card-width: 60%;
+}
+
+    #titulo {
+    font-size: 30px;
+}
+
+    #fecha {
+    font-size: 18px;
+}
+}

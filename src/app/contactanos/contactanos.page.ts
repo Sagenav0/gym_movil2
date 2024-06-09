@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { ConexionService } from '../services/conexion.service';
-
 import { from } from 'rxjs';
+
+
 @Component({
   selector: 'app-contactanos',
   templateUrl: './contactanos.page.html',
   styleUrls: ['./contactanos.page.scss'],
 })
 export class ContactanosPage implements OnInit {
+
   listaDeDatos: any[] = [];
+
 
   constructor(private conexionService: ConexionService) { }
 
   ngOnInit() {
     this.obtenerDatosGym();
+
   }
 
   obtenerDatosGym() {

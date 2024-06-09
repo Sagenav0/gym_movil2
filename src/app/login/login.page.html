@@ -1,28 +1,29 @@
+
 <ion-content>
 
-  <div class="formContainer">
-    <ion-card class="cardContainer">
+    <ion-card id="cardlogin">
       <ion-card-header >
-        <ion-card-title id="titleLogin">INICIA SESION</ion-card-title>
+        <ion-card-title >inicia sesión</ion-card-title>
       </ion-card-header>
       <ion-card-content >
         <form (ngSubmit)="login()">
-          <ion-item class="inputItem">
-            <ion-label class="fontLabel" position="floating">Nombre:</ion-label>
-            <ion-input type="text" [(ngModel)]="usuario" name="usuario" required></ion-input>
-          </ion-item>
-          <ion-item class="inputItem">
-            <ion-label class="fontLabel" position="floating">Contraseña:</ion-label>
-            <ion-input type="password" [(ngModel)]="contrasena" name="password" required></ion-input>
-          </ion-item>
-          <div class="loginRegister">
-            <ion-button type="submit">
+          
+            <ion-label id="label1" >Correo:</ion-label>
+            <ion-input type="text" [(ngModel)]="usuario" name="usuario"  id="usuario" required></ion-input>
+         
+          
+            <ion-label id="label2" >Contraseña:</ion-label>
+            <ion-input type="password" [(ngModel)]="contrasena" id="contrasena" name="password" required></ion-input>
+          
+            <ion-button  type="submit">
               Ingresar
             </ion-button>
-          </div>
+
         </form>
+
+        <ion-button [routerLink]="['/olvidaste-contrasena']">¿Olvidaste tu contraseña?</ion-button>
+
       </ion-card-content>
     </ion-card>
-  </div>
 
 </ion-content>

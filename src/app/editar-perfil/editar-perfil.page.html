@@ -2,19 +2,36 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button menu="menuPrincipal"></ion-menu-button>
-  </ion-buttons>
+    </ion-buttons>
     <ion-title>EDITAR PERFIL</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">editar_perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" *ngIf="Datoseditar.length > 0">
+  <ng-container *ngFor="let item of Datoseditar">
+    <form>
+      <ion-icon name="image-outline" (click)="imagen_usuario_selecion()" style="font-size: 32px; cursor: pointer;"></ion-icon>
+      
+      <!-- Input de archivo oculto -->
+      <input type="file" id="imagen_de_perfil" name="imagen_de_perfil" (change)="imagen_del_usuario_perfil($event)" style="display: none;">
+    </form>
 
-  <ion-button [routerLink]="['/cambiar-correo']">correo</ion-button>
-  <ion-button [routerLink]="['/cambiar-contra']">contraseña</ion-button>
+    <p>Nombre:</p>
+    <p>{{item.nombre}}</p>
+    <p>Telefono:</p>
+    <p>{{item.telefono}}</p>
+    <input type="tel" [(ngModel)]="telefononuevo" placeholder="Nuevo teléfono" name="telefono" id="telefono">
+    <p>{{usuario}}</p>
 
+    <!-- Mostrar la imagen seleccionada -->
+    <img *ngIf="imageUrl" [src]="imageUrl" alt="User Image">
+
+
+    <ion-button [routerLink]="['/cambiar-correo']">Correo</ion-button>
+    <p>Contraseña:</p>
+    <ion-button [routerLink]="['/cambiar-contra']">Contraseña</ion-button>
+    <ion-button type="submit" (click)="update_telefono()">Guardar cambios</ion-button>
+  </ng-container>
+
+  <ion-spinner id="spiner" *ngIf="Datoseditar.length < 1"></ion-spinner>
 </ion-content>

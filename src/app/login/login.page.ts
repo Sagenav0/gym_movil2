@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { ConexionService } from 'src/app/services/conexion.service';
+import { ModalController, ToastController } from '@ionic/angular';
+import { ConexionService } from '../services/conexion.service';
 import { UserService } from '../user.service';
-
 
 @Component({
   selector: 'app-login',
@@ -11,7 +10,6 @@ import { UserService } from '../user.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
   usuario: string = '';
   contrasena: string = '';
 
@@ -21,9 +19,8 @@ export class LoginPage implements OnInit {
               private router: Router,
               private userService: UserService) { }
 
-  ngOnInit() {
-  }
-  
+  ngOnInit() {}
+
   async login() {
     if (!this.usuario || !this.contrasena) {
       this.presentToast();
@@ -31,18 +28,16 @@ export class LoginPage implements OnInit {
     }
 
     try {
-      
       const response = await this.conexion.validarCredenciales(this.usuario, this.contrasena).toPromise();
       if (response.error === 'ok') {
-        // Credenciales válidas, redirigir a la siguiente página
         this.userService.setUser(this.usuario);
-        this.router.navigate(['/home']);
+        this.userService.setCedula(response.datos[0][2]);
+        this.userService.Guardarimagen(response.datos[0][3]);
+        this.router.navigate(['/rutinas']);
       } else {
-        // Credenciales inválidas, mostrar mensaje de error
         this.presentToastInvalid();
       }
     } catch (error) {
-      // Error de conexión, mostrar mensaje de error
       console.error(error);
       this.presentToastError();
     }
@@ -71,6 +66,4 @@ export class LoginPage implements OnInit {
     });
     toast.present();
   }
-
-
 }

@@ -1,4 +1,3 @@
-// shared/user.service.ts
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,6 +5,10 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
   private usuario: string = "";
+  private cedula: string = "";
+  private imagenuser: File | null = null;
+  private imageUrl: string | null = null;
+  private imagen:string = ""
 
   constructor() { }
 
@@ -16,4 +19,43 @@ export class UserService {
   getUser(): string {
     return this.usuario;
   }
+
+  setCedula(cedula: string) {
+    this.cedula = cedula;
+  }
+
+  getCedula(): string {
+    return this.cedula;
+  }
+
+  setImagenUser(imagenuser: File) {
+    this.imagenuser = imagenuser;
+    this.updateImageUrl(imagenuser);
+  }
+
+  getImagenUser(): File | null {
+    return this.imagenuser;
+  }
+
+  private updateImageUrl(file: File) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageUrl = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  getImageUrl(): string | null {
+    return this.imageUrl;
+  }
+
+  
+  Guardarimagen(imagen: string) {
+    this.imagen = imagen;
+  }
+
+  MostrarImagen(): string {
+    return this.imagen;
+  }
+
 }

@@ -6,7 +6,8 @@ ion-content{
    
   }
 ion-card{
-    top: 20%;
+    top: 20%; 
+    color: var(--ion-color-primary-shade)
 }
   #cambiar{
     box-shadow: none;
@@ -21,26 +22,26 @@ ion-card{
   #item2{ 
     margin-top: 20%;
   }
-
-  h2.ache1{
+  h2{
     color: var(--ion-color-primary);
     position: absolute;
     left: 5%;
+    ;}
+
+
+  h2#ache1{
     margin-top: 0%;
 }
 
-  h2.ache2{
-    color: var(--ion-color-primary);
-    position: absolute;
-    left: 5%;
+  h2#ache2{
     margin-top: 10%;
 }
 
 
 ion-input{
-    color: var(--ion-color-primary-shade);
+
     background: var(--ion-color-primary-tint);
-    text-align: center;
+    color: var(--ion-color-primary-shade);
     border-radius: 8px;
 }
 

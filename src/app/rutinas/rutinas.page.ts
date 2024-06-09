@@ -1,23 +1,42 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { UserService } from '../user.service';
 import { ConexionService } from '../services/conexion.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rutinas',
   templateUrl: './rutinas.page.html',
   styleUrls: ['./rutinas.page.scss'],
+  providers: [DatePipe]
 })
 export class RutinasPage implements OnInit {
   listaDeDatos: any[] = [];
-  currentIndex: number = 0; // Índice de la tarjeta actual
+  currentIndex: number = 0; 
+  fecha: Date;
+  formattedFecha: string = ''; 
+  conteo: number = 1;
+  imagen: string = "";
+  imagen2 = this.imagen = this.userService.MostrarImagen();
 
-  constructor(private conexionService: ConexionService) {}
+  constructor(
+    private datePipe: DatePipe,
+    private userService: UserService,
+    private conexionService: ConexionService,
+    private router: Router
+  ) {
+    this.fecha = new Date();
+    const formattedDate = this.datePipe.transform(this.fecha, 'EEEE', 'GMT+0', 'es-ES');
+    this.formattedFecha = formattedDate ?? '';
+  }
 
   ngOnInit() {
     this.obtenerRutinas();
+    this.imagen = this.userService.MostrarImagen();
   }
 
   obtenerRutinas() {
-    this.conexionService.Rutina().subscribe(
+    this.conexionService.Rutinas().subscribe(
       (datos: any[]) => {
         this.listaDeDatos = datos;
       },
@@ -27,23 +46,35 @@ export class RutinasPage implements OnInit {
     );
   }
 
-  // Función para cambiar a la siguiente tarjeta
   siguienteTarjeta() {
     if (this.currentIndex < this.listaDeDatos.length - 1) {
       this.currentIndex++;
     } else {
-      // Si llegamos al final, volvemos al inicio
       this.currentIndex = 0;
     }
   }
 
   anteriorTarjeta() {
-    if (this.currentIndex > this.listaDeDatos.length + 1) {
-      this.currentIndex++;
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
     } else {
-      // Si llegamos al final, volvemos al inicio
-      this.currentIndex = 0;
+      this.currentIndex = this.listaDeDatos.length - 1;
     }
   }
 
-};
+  incrementarConteo() {
+    if (this.conteo < this.listaDeDatos.length) {
+      this.conteo++;
+    } else {
+      this.conteo = 1; 
+    }
+  }
+
+  desincrementarConteo() {
+    if (this.conteo > 1) {
+      this.conteo--;
+    } else {
+      this.conteo = this.listaDeDatos.length; 
+    }
+  }
+}

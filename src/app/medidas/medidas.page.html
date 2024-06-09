@@ -15,18 +15,18 @@
     <h2>medidas y peso corporal</h2>
     <div class="img-container"><img src="../../assets/img/medidas1.png" alt=""></div>
     <div class="padre" *ngFor="let progreso of medidas">
-      <p class="cajas" id="pecho">pecho: {{progreso.pecho}}</p>
-      <p class="cajas" id="peso-kg">peso corporal: {{progreso.peso_corporal}}</p>
-      <p class="cajas" id="cintura">cintura: {{progreso.cintura}}</p>
-      <p class="cajas" id="cadera">cadera: {{progreso.cadera}}</p>
-      <p class="cajas" id="bicep-izq">bicep: {{progreso.bicep_izquierdo}} <ion-icon name="arrow-forward-outline" class="fecha-iz"></ion-icon></p>
-      <p class="cajas" id="bicep-der"><ion-icon name="arrow-back-outline" class="fecha-der"></ion-icon>bicep: {{progreso.bicep_derecho}}</p>
-      <p class="cajas" id="antebrazo-izq">antebrazo: {{progreso.antebrazo_izquierdo}} <ion-icon name="arrow-forward-outline" class="fecha-iz"></ion-icon></p>
-      <p class="cajas" id="antebrazo-der"><ion-icon name="arrow-back-outline" class="fecha-der"></ion-icon>antebrazo: {{progreso.antebrazo_derecho}}</p>
-      <p class="cajas" id="muslo-izq">muslo: {{progreso.muslo_izquierdo}}<ion-icon name="arrow-forward-outline" class="fecha-iz"></ion-icon></p>
-      <p class="cajas" id="muslo-der"><ion-icon name="arrow-back-outline" class="fecha-der"></ion-icon>muslo:{{progreso.muslo_derecho}}</p>
-      <p class="cajas" id="pantorrilla-izq"> <ion-icon name="arrow-back-outline" class="fecha-iz"></ion-icon> pantorrilla:{{progreso.pantorrilla_izquierda}}</p>
-      <p class="cajas" id="pantorrilla-der">pantorrilla: {{progreso.pantorrilla_derecha}} <ion-icon name="arrow-forward-outline" class="fecha-der"></ion-icon> </p>
+      <p class="cajas" id="pecho">pecho: {{progreso[0]}}</p>
+      <p class="cajas" id="peso-kg">peso corporal: {{progreso[1]}}</p>
+      <p class="cajas" id="cintura">cintura: {{progreso[2]}}</p>
+      <p class="cajas" id="cadera">cadera: {{progreso[3]}}</p>
+      <p class="cajas" id="bicep-izq">bicep: {{progreso[4]}}<ion-icon name="arrow-forward-outline" class="fecha-iz"></ion-icon></p>
+      <p class="cajas" id="bicep-der"><ion-icon name="arrow-back-outline" class="fecha-der"></ion-icon>bicep: {{progreso[5]}}</p>
+      <p class="cajas" id="antebrazo-izq">antebrazo: {{progreso[6]}} <ion-icon name="arrow-forward-outline" class="fecha-iz"></ion-icon></p>
+      <p class="cajas" id="antebrazo-der"><ion-icon name="arrow-back-outline" class="fecha-der"></ion-icon>antebrazo: {{progreso[7]}}</p>
+      <p class="cajas" id="muslo-izq">muslo: {{progreso[8]}}<ion-icon name="arrow-forward-outline" class="fecha-iz"></ion-icon></p>
+      <p class="cajas" id="muslo-der"><ion-icon name="arrow-back-outline" class="fecha-der"></ion-icon>muslo:{{progreso[9]}}</p>
+      <p class="cajas" id="pantorrilla-izq"> <ion-icon name="arrow-back-outline" class="fecha-iz"></ion-icon> pantorrilla:{{progreso[10]}}</p>
+      <p class="cajas" id="pantorrilla-der">pantorrilla: {{progreso[11]}} <ion-icon name="arrow-forward-outline" class="fecha-der"></ion-icon> </p>
       
     </div>
     <div class="boton-container">

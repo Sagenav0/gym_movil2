@@ -47,7 +47,19 @@ const routes: Routes = [
   {
     path: 'cambiar-correo',
     loadChildren: () => import('./cambiar-correo/cambiar-correo.module').then( m => m.CambiarCorreoPageModule)
+  },  {
+    path: 'olvidaste-contrasena',
+    loadChildren: () => import('./olvidaste-contrasena/olvidaste-contrasena.module').then( m => m.OlvidasteContrasenaPageModule)
   },
+  {
+    path: 'verificar-codigo',
+    loadChildren: () => import('./verificar-codigo/verificar-codigo.module').then( m => m.VerificarCodigoPageModule)
+  },
+  {
+    path: 'cambiar-contra-olvidada',
+    loadChildren: () => import('./cambiar-contra-olvidada/cambiar-contra-olvidada.module').then( m => m.CambiarContraOlvidadaPageModule)
+  },
+
 ];
 
 @NgModule({

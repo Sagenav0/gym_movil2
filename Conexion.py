@@ -1,16 +1,41 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, session
+from datetime import datetime
 from mysql.connector import connect
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
+import random
+from email.message import EmailMessage
+import smtplib
+import ssl
+import os
+from werkzeug.utils import secure_filename
+
 
 app = Flask(__name__)
 CORS(app)
+
+# config = {
+#     'host': '85.31.231.136',
+#     'user': 'controlgym',
+#     'password': 'ControlGym',
+#     'database': 'gym_control'
+# }
+""" config = {
+    'host': 'localhost',
+    'user': 'root',
+    'password': '',
+    'database': 'gym_yeff'
+} """
 
 config = {
     'host': 'localhost',
     'user': 'root',
     'password': '',
-    'database': 'gym'
+    'database': 'gym_control'
 }
+
+carpeta_up = os.path.join('src/assets/img')
+app.config['carpeta_up'] = carpeta_up
+
 
 @app.route("/")
 def index():
@@ -22,19 +47,23 @@ def ValidarCredenciales(usuario, contrasena):
     try:
         connection = connect(**config)
         cursor = connection.cursor()
-        cursor.execute(f"SELECT nombre FROM registro_usuarios WHERE correo = '{usuario}' AND contrasena = '{contrasena}' AND estado = 'activo'")
+        cursor.execute(f"SELECT nombre,telefono,cedula,imagenuser FROM registro_usuarios WHERE correo = '{usuario}' AND contrasena = '{contrasena}' AND estado = 'activo'")
         datos = cursor.fetchall()
         
         if(datos):
             cursor.close()
             connection.close()
-            return jsonify({"error":"ok"})
+            
+            return jsonify({"error":"ok", "datos": datos})
         else:
             cursor.close()
             connection.close()
             return jsonify({"error":"notFound"})
     except Exception as e:
         return jsonify({"error": str(e)})
+    
+    
+    
     
 
 @app.route("/consultaCorreo/<correo>", methods=['get'])
@@ -55,6 +84,8 @@ def ConsultaCorreo(correo):
             return jsonify({"message":"Correo no encontrado"})
     except Exception as e:
         return jsonify({"error": str(e)})
+    
+    
 
 
     
@@ -82,6 +113,9 @@ def cambiarCorreo():
         return jsonify({"error": str(e)}), 500
 
 
+
+
+
 @app.route('/cambiarContra', methods=['POST'])
 def cambiarContra():
     try:
@@ -99,46 +133,276 @@ def cambiarContra():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
-@app.route('/consultaDatosgym', methods=['GET'])
-def consultaDatosgym():
+    
+    
+    
+@app.route('/cambiarTelefono', methods=['POST'])
+def cambiarTelefono():
+    try:
+        data = request.get_json()
+        telefono = data.get('telefono')
+        cedula = data.get('cedula')
+        connection = connect(**config)
+        cursor = connection.cursor()
+        cursor.execute("UPDATE registro_usuarios SET telefono = %s WHERE cedula = %s", (telefono, cedula))
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return jsonify({"error": "ok"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+    
+    
+    
+    
+@app.route('/consultaEditar/<usuario>', methods=['GET'])
+def consultaEditar(usuario):
     try:
         connection = connect(**config)
         cursor = connection.cursor()
-        cursor.execute("SELECT id_contacto, nombre_gym, telefono_gym, correo_gym, direccion_gym, barrio_gym, hubicacion_gym from contacto_gym  WHERE id_contacto = 1")
+        cursor.execute(f"SELECT nombre,telefono,cedula FROM registro_usuarios WHERE correo = '{usuario}' AND estado = 'activo'")
         column_names = [column[0] for column in cursor.description]
         datos = cursor.fetchall()
         cursor.close()
         connection.close()
         return jsonify([dict(zip(column_names, dato)) for dato in datos])
     except Exception as e:
-        return jsonify({"error": str(e)})    
- 
-# @app.route('/rutinas', methods=['get'])
-# def elimina_cajero():
-#     try:
-#         connection = connect(**config)
-#         cursor = connection.cursor()
-#         cursor.execute(f"SELECT nombre_ejercicio,repeciones,series,img FROM ejercicios WHERE contador_ejercicio = contador_ejercicio")
-#         connection.commit()
-#         cursor.close()
-#         connection.close()
-#         return jsonify({"success": True})
-#     except Exception as e:
-#         return jsonify({"error": str(e)})
+        return jsonify({"error": str(e)})   
+    
+    
+    
+    
+    
+@app.route('/consultaDatosgym', methods=['GET'])
+def consultaDatosgym():
+    try:
+        connection = connect(**config)
+        cursor = connection.cursor()
+        cursor.execute("SELECT id_contacto, nombre_gym, telefono_gym, correo_gym, direccion_gym, barrio_gym, ubicacion_gym from contacto_gym  WHERE id_contacto = 1")
+        column_names = [column[0] for column in cursor.description]
+        datos = cursor.fetchall()
+        cursor.close()
+        connection.close()
+        return jsonify([dict(zip(column_names, dato)) for dato in datos])
+    except Exception as e:
+        return jsonify({"error": str(e)}) 
+    
+    
+    
+    
+@app.route('/imagen_de_perfil_usuario', methods=['POST'])
+def actualizar_imagen_de_perfil_usuario():
+    try:
+        imagenuser = request.files['imagenuser']
+        cedula = request.form['cedula']
 
-# @app.route('/medida', methods=['POST'])
-# def modifica_cajero():
-#     try:
-#         data = request.get_json()
-#         connection = connect(**config)
-#         cursor = connection.cursor()
-#         cursor.execute("SELECT medidas.peso_corporal,medidas.pecho,medidas.cintura,medidas.cadera,medidas.bicep_izquierdo,medidas.bicep_derecho,medidas.antebrazo_izquierdo,medidas.antebrazo_derecho,medidas.muslo_izquierdo,medidas.muslo_derecho,medidas.pantorrilla_izquierda,medidas.pantorrilla_derecha FROM medidas,registro_usuarios WHERE registro_usuarios.correo = correo")
-#         connection.commit()
-#         cursor.close()
-#         connection.close()
-#         return jsonify({"success": True})
-#     except Exception as e:
-#         return jsonify({"error": str(e)})     
+        if imagenuser:
+            ahora = datetime.now()
+            tiempo = ahora.strftime("%Y%m%d%H%M%S")
+            nom, extension = os.path.splitext(secure_filename(imagenuser.filename))
+            nombre_foto = f"Foto-{tiempo}{extension}"
+            imagenuser.save(os.path.join(app.config['carpeta_up'], nombre_foto))
+
+            connection = connect(**config)
+            cursor = connection.cursor()
+            cursor.execute("UPDATE registro_usuarios SET imagenuser = %s WHERE cedula = %s", (nombre_foto, cedula))
+            connection.commit()
+            cursor.close()
+
+            return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+             
+    
+@app.route('/consultarAvances', methods= ['POST'])
+@cross_origin()  # Habilita CORS para esta ruta
+def consultarAvances():
+    try:
+        selected_month1 = request.json.get('month1')
+        selected_month2 = request.json.get('month2')
+        identificador = request.json.get('identificador')
+        selected_month1_str = datetime.strptime(selected_month1, '%Y-%m-%d').strftime('%Y-%m-%d')
+        selected_month2_str = datetime.strptime(selected_month2, '%Y-%m-%d').strftime('%Y-%m-%d')
+
+    
+        print(identificador)
+        print(selected_month1)
+        print(selected_month2)
+
+        if selected_month1 is None or selected_month2 is None:
+            return jsonify({"error": "Los meses no pueden ser nulos"}), 400
+
+        connection = connect(**config)
+        cursor = connection.cursor()
+        cursor.execute(f"SELECT peso_corporal, bicep_derecho, bicep_izquierdo, pecho, antebrazo_derecho, antebrazo_izquierdo, cintura, cadera, muslo_derecho, muslo_izquierdo, pantorrilla_derecha, pantorrilla_izquierda FROM medidas WHERE (MONTH(mes_registro) = MONTH('{selected_month1_str}') OR MONTH(mes_registro) = MONTH('{selected_month2_str}')) AND cedula = '{identificador}'")
+        datos = cursor.fetchall()
+
+        print(datos)
+
+        return jsonify({'medidas': datos})
+
+    except Exception as e:
+        return jsonify({"error": str(e)})
+    
+    
+    
+    
+    
+ 
+@app.route('/medidas/<identificador>', methods=['GET'])
+def medidas(identificador):
+    try:
+        connection = connect(**config)
+        cursor = connection.cursor()
+        sql=f"SELECT peso_corporal,pecho,cintura,cadera,bicep_izquierdo,bicep_derecho,antebrazo_izquierdo,antebrazo_derecho,muslo_izquierdo,muslo_derecho,pantorrilla_izquierda,pantorrilla_derecha FROM medidas WHERE cedula = '{identificador}';"
+        cursor.execute(sql)
+        datos = cursor.fetchall()
+        
+        if(datos):
+            cursor.close()
+            connection.close()
+            return jsonify(datos)
+        else:
+            cursor.close()
+            connection.close()
+            return jsonify({"error":"notFound"})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+    
+    
+    
+    
+    
+
+@app.route('/rutinas', methods=['GET'])
+def rutinas():
+    try:
+        connection = connect(**config)
+        cursor = connection.cursor()
+        sql=f"SELECT nombre_ejercicio,repeciones,series,img FROM ejercicios WHERE contador_ejercicio = contador_ejercicio"
+        cursor.execute(sql)
+        datos = cursor.fetchall()
+        
+        if(datos):
+            cursor.close()
+            connection.close()
+            return jsonify(datos)
+        else:
+            cursor.close()
+            connection.close()
+            return jsonify({"error":"notFound"})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+    
+    
+    
+    
+
+
+@app.route('/personalizados/<cedula>', methods=['GET'])
+def personalizados(cedula):
+    try:
+        connection = connect(**config)
+        cursor = connection.cursor()
+        sql=f"SELECT r.cedula, r.id_membresia, e.nombre_ejercicio, e.series, e.repeciones, e.tipo, e.img FROM ejercicios e, registro_usuarios r INNER JOIN membresias m ON r.id_membresia = m.id_membresia WHERE r.id_membresia = '5' AND r.cedula = '{cedula}' AND r.estado = 'activo';"
+        # sql=f"SELECT nombre_ejercicio,repeciones,series,img FROM ejercicios WHERE contador_ejercicio = contador_ejercicio"
+        print(" la sedula si coincide")
+        cursor.execute(sql)
+        datos = cursor.fetchall()
+        
+        if(datos):
+            cursor.close()
+            connection.close()
+            return jsonify(datos)
+        else:
+            cursor.close()
+            connection.close()
+            return jsonify({"error":"notFound"})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+    
+    
+    
+    
+    
+
+@app.route('/enviarCorreo/<correo>', methods=['POST'])
+def enviarCorreo(correo):
+    if request.method == 'POST':
+       
+        codigo_aleatorio = ''.join([str(random.randint(0, 9)) for _ in range(6)])
+        
+        asunto = 'Codigo de verificacion'
+
+       
+        cuerpo = f'Tu codigo es: {codigo_aleatorio}'
+
+        email_emisor = 'cdvanegas830@misena.edu.co' 
+        email_contrasena = 'vanegas2003'
+
+        em = EmailMessage()
+        em['From'] = email_emisor
+        em['To'] = correo
+        em['Subject'] = asunto
+        em.set_content(cuerpo)
+
+        
+        contexto = ssl.create_default_context()
+
+        try:
+         
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=contexto) as smtp:
+                smtp.login(email_emisor, email_contrasena)
+                smtp.sendmail(email_emisor, correo, em.as_string())
+                
+                connection = connect(**config)
+                cursor = connection.cursor()
+                cursor.execute(f"UPDATE registro_usuarios SET codigo = '{codigo_aleatorio}' WHERE correo = '{correo}'")
+                connection.commit()
+                cursor.close()
+                
+                return jsonify({"message": "Correo enviado correctamente"})
+
+                
+        except Exception as e:
+            
+            return jsonify({"error": str(e)})
+
+        return mensaje
+    else:
+        return "Método no permitido"
+    
+    
+    
+    
+    
+
+@app.route("/verificarCodigo/<codigo>/<usuario>", methods=['get'])
+def verificarCodigo(codigo, usuario):
+    try:
+        connection = connect(**config)
+        cursor = connection.cursor()
+        cursor.execute(f"SELECT codigo FROM registro_usuarios WHERE codigo = '{codigo}' AND correo = '{usuario}'")
+        datos = cursor.fetchall()
+        
+        if(datos):
+            cursor.close()
+            connection.close()
+            return jsonify({"message":"codigo coincide"})
+        else:
+            cursor.close()
+            connection.close()
+            return jsonify({"message":"codigo no coincide"})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+    
+    
+    
+    
+
+
+
     
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=4001)
+    app.run(host='0.0.0.0', debug=True, port=9501)
