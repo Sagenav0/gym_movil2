@@ -15,6 +15,7 @@ export class PersonalizadosPage implements OnInit {
   fecha: Date;
   formattedFecha: string = ''; // Asignar un valor predeterminado
   cedula = this.userService.getCedula();
+  imagen: string = "";
 
   constructor(private conexionService: ConexionService, private datePipe: DatePipe,private userService: UserService) {
     // Formatear la fecha a español
@@ -25,6 +26,7 @@ export class PersonalizadosPage implements OnInit {
 
   ngOnInit() {
     this.obtenerPersonalizados();
+    this.imagen = this.userService.MostrarImagen();
   }
 
   obtenerPersonalizados() {

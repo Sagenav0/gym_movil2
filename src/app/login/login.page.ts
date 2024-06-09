@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
-import { ConexionService } from '../services/conexion.service'; // Reemplaza 'tu-ruta-del-servicio' por la ruta correcta
+import { ConexionService } from '../services/conexion.service';
 import { UserService } from '../user.service';
 
 @Component({
@@ -12,17 +12,15 @@ import { UserService } from '../user.service';
 export class LoginPage implements OnInit {
   usuario: string = '';
   contrasena: string = '';
-  cedula: string = '';
-  imagenuser: string | null = null;
+
   constructor(private conexion: ConexionService,
               private toastController: ToastController,
               private modalCtrl: ModalController,
               private router: Router,
               private userService: UserService) { }
 
-  ngOnInit() {
-  }
-  
+  ngOnInit() {}
+
   async login() {
     if (!this.usuario || !this.contrasena) {
       this.presentToast();
@@ -30,22 +28,16 @@ export class LoginPage implements OnInit {
     }
 
     try {
-      
       const response = await this.conexion.validarCredenciales(this.usuario, this.contrasena).toPromise();
       if (response.error === 'ok') {
-        // Credenciales válidas, redirigir a la siguiente página
         this.userService.setUser(this.usuario);
         this.userService.setCedula(response.datos[0][2]);
-        this.userService.setImagenUser(response.datos[0][3]);
-        console.log(this.imagenuser)
-        console.log(this.cedula)
+        this.userService.Guardarimagen(response.datos[0][3]);
         this.router.navigate(['/rutinas']);
       } else {
-        // Credenciales inválidas, mostrar mensaje de error
         this.presentToastInvalid();
       }
     } catch (error) {
-      // Error de conexión, mostrar mensaje de error
       console.error(error);
       this.presentToastError();
     }
@@ -74,6 +66,4 @@ export class LoginPage implements OnInit {
     });
     toast.present();
   }
-
-
 }

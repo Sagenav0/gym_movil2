@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ConexionService } from '../services/conexion.service';
 import { DatePipe } from '@angular/common';
+import { UserService } from '../user.service';
+import { ConexionService } from '../services/conexion.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rutinas',
@@ -13,17 +15,24 @@ export class RutinasPage implements OnInit {
   currentIndex: number = 0; 
   fecha: Date;
   formattedFecha: string = ''; 
-  conteo: number = 1; 
+  conteo: number = 1;
+  imagen: string = "";
+  imagen2 = this.imagen = this.userService.MostrarImagen();
 
-  constructor(private conexionService: ConexionService, private datePipe: DatePipe) {
-    
+  constructor(
+    private datePipe: DatePipe,
+    private userService: UserService,
+    private conexionService: ConexionService,
+    private router: Router
+  ) {
     this.fecha = new Date();
     const formattedDate = this.datePipe.transform(this.fecha, 'EEEE', 'GMT+0', 'es-ES');
-    this.formattedFecha = formattedDate ?? ''; 
+    this.formattedFecha = formattedDate ?? '';
   }
 
   ngOnInit() {
     this.obtenerRutinas();
+    this.imagen = this.userService.MostrarImagen();
   }
 
   obtenerRutinas() {
@@ -37,31 +46,22 @@ export class RutinasPage implements OnInit {
     );
   }
 
-  
   siguienteTarjeta() {
     if (this.currentIndex < this.listaDeDatos.length - 1) {
       this.currentIndex++;
     } else {
-  
       this.currentIndex = 0;
     }
   }
 
-  
   anteriorTarjeta() {
     if (this.currentIndex > 0) {
       this.currentIndex--;
     } else {
-      
       this.currentIndex = this.listaDeDatos.length - 1;
     }
   }
 
-  // esDomingo(): boolean {
-  //   return this.formattedFecha.toLowerCase() === 'domingo';
-  // }
-
-  
   incrementarConteo() {
     if (this.conteo < this.listaDeDatos.length) {
       this.conteo++;
@@ -70,7 +70,6 @@ export class RutinasPage implements OnInit {
     }
   }
 
-  
   desincrementarConteo() {
     if (this.conteo > 1) {
       this.conteo--;

@@ -53,6 +53,7 @@ def ValidarCredenciales(usuario, contrasena):
         if(datos):
             cursor.close()
             connection.close()
+            
             return jsonify({"error":"ok", "datos": datos})
         else:
             cursor.close()

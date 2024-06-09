@@ -8,6 +8,7 @@ export class UserService {
   private cedula: string = "";
   private imagenuser: File | null = null;
   private imageUrl: string | null = null;
+  private imagen:string = ""
 
   constructor() { }
 
@@ -47,4 +48,14 @@ export class UserService {
   getImageUrl(): string | null {
     return this.imageUrl;
   }
+
+  
+  Guardarimagen(imagen: string) {
+    this.imagen = imagen;
+  }
+
+  MostrarImagen(): string {
+    return this.imagen;
+  }
+
 }

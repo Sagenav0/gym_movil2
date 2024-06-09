@@ -12,7 +12,9 @@
 
 
 <ion-content id="contenedor" >
-  <img *ngIf="imageUrl" [src]="src\assets\img/imagennuser" alt="User Image">
+
+  <ion-img src="assets/img/{{imagen}}" alt=""></ion-img>
+  
   <ng-container *ngFor="let item of listaDeDatos; let index = index">
       <ion-card *ngIf="currentIndex === index" id="cardejercicios">
           
