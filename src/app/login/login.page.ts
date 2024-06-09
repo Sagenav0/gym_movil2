@@ -13,7 +13,7 @@ export class LoginPage implements OnInit {
   usuario: string = '';
   contrasena: string = '';
   cedula: string = '';
- 
+  imagenuser: string | null = null;
   constructor(private conexion: ConexionService,
               private toastController: ToastController,
               private modalCtrl: ModalController,
@@ -36,7 +36,8 @@ export class LoginPage implements OnInit {
         // Credenciales válidas, redirigir a la siguiente página
         this.userService.setUser(this.usuario);
         this.userService.setCedula(response.datos[0][2]);
-       
+        this.userService.setImagenUser(response.datos[0][3]);
+        console.log(this.imagenuser)
         console.log(this.cedula)
         this.router.navigate(['/rutinas']);
       } else {
