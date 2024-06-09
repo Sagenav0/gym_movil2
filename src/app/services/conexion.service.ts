@@ -134,8 +134,8 @@ export class ConexionService {
   Medidas(identificador:any):Observable<any>{
     return this.http.get(`${this.url}/medidas/${identificador}`);
   }
-  Personalizados():Observable<any>{
-    return this.http.get(`${this.url}/personalizados`);
+  Personalizados(cedula:string):Observable<any>{
+    return this.http.get(`${this.url}/personalizados/${cedula}`);
   }
   Rutinas():Observable<any>{
     return this.http.get(`${this.url}/rutinas`);

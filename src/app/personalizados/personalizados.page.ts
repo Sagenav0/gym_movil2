@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConexionService } from '../services/conexion.service';
+import { UserService } from '../user.service';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -13,8 +14,9 @@ export class PersonalizadosPage implements OnInit {
   currentIndex: number = 0; // Índice de la tarjeta actual
   fecha: Date;
   formattedFecha: string = ''; // Asignar un valor predeterminado
+  cedula = this.userService.getCedula();
 
-  constructor(private conexionService: ConexionService, private datePipe: DatePipe) {
+  constructor(private conexionService: ConexionService, private datePipe: DatePipe,private userService: UserService) {
     // Formatear la fecha a español
     this.fecha = new Date();
     const formattedDate = this.datePipe.transform(this.fecha, 'EEEE', 'GMT+0', 'es-ES');
@@ -26,7 +28,7 @@ export class PersonalizadosPage implements OnInit {
   }
 
   obtenerPersonalizados() {
-    this.conexionService.Personalizados().subscribe(
+    this.conexionService.Personalizados(this.cedula).subscribe(
       (datos: any[]) => {
         this.listaDeDatos = datos;
       },
@@ -56,7 +58,7 @@ export class PersonalizadosPage implements OnInit {
     }
   }
   
-  esDomingo(): boolean {
-    return this.formattedFecha.toLowerCase() === 'domingo';
-  }
+  // esDomingo(): boolean {
+  //   return this.formattedFecha.toLowerCase() === 'domingo';
+  // }
 }

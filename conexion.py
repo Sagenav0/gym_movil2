@@ -178,7 +178,7 @@ def consultaDatosgym():
     try:
         connection = connect(**config)
         cursor = connection.cursor()
-        cursor.execute("SELECT id_contacto, nombre_gym, telefono_gym, correo_gym, direccion_gym, barrio_gym, hubicacion_gym from contacto_gym  WHERE id_contacto = 1")
+        cursor.execute("SELECT id_contacto, nombre_gym, telefono_gym, correo_gym, direccion_gym, barrio_gym, ubicacion_gym from contacto_gym  WHERE id_contacto = 1")
         column_names = [column[0] for column in cursor.description]
         datos = cursor.fetchall()
         cursor.close()
@@ -299,13 +299,14 @@ def rutinas():
     
 
 
-@app.route('/personalizados', methods=['GET'])
-def personalizados():
+@app.route('/personalizados/<cedula>', methods=['GET'])
+def personalizados(cedula):
     try:
         connection = connect(**config)
         cursor = connection.cursor()
-        sql=f"SELECT r.cedula, r.id_membresia, e.nombre_ejercicio, e.series, e.repeciones, e.tipo, e.img FROM ejercicios e, registro_usuarios r INNER JOIN membresias m ON r.id_membresia = m.id_membresia WHERE r.id_membresia = '5' AND r.estado = 'activo';"
+        sql=f"SELECT r.cedula, r.id_membresia, e.nombre_ejercicio, e.series, e.repeciones, e.tipo, e.img FROM ejercicios e, registro_usuarios r INNER JOIN membresias m ON r.id_membresia = m.id_membresia WHERE r.id_membresia = '5' AND r.cedula = '{cedula}' AND r.estado = 'activo';"
         # sql=f"SELECT nombre_ejercicio,repeciones,series,img FROM ejercicios WHERE contador_ejercicio = contador_ejercicio"
+        print(" la sedula si coincide")
         cursor.execute(sql)
         datos = cursor.fetchall()
         

@@ -10,12 +10,13 @@ import { DatePipe } from '@angular/common';
 })
 export class RutinasPage implements OnInit {
   listaDeDatos: any[] = [];
-  currentIndex: number = 0; // Índice de la tarjeta actual
+  currentIndex: number = 0; 
   fecha: Date;
-  formattedFecha: string = ''; // Asignar un valor predeterminado
+  formattedFecha: string = ''; 
+  conteo: number = 1; 
 
   constructor(private conexionService: ConexionService, private datePipe: DatePipe) {
-    // Formatear la fecha a español
+    
     this.fecha = new Date();
     const formattedDate = this.datePipe.transform(this.fecha, 'EEEE', 'GMT+0', 'es-ES');
     this.formattedFecha = formattedDate ?? ''; 
@@ -36,27 +37,45 @@ export class RutinasPage implements OnInit {
     );
   }
 
-  // Función para cambiar a la siguiente tarjeta
+  
   siguienteTarjeta() {
     if (this.currentIndex < this.listaDeDatos.length - 1) {
       this.currentIndex++;
     } else {
-      // Si llegamos al final, volvemos al inicio
+  
       this.currentIndex = 0;
     }
   }
 
-  // Función para cambiar a la tarjeta anterior
+  
   anteriorTarjeta() {
     if (this.currentIndex > 0) {
       this.currentIndex--;
     } else {
-      // Si estamos al principio, vamos al final
+      
       this.currentIndex = this.listaDeDatos.length - 1;
     }
   }
+
+  // esDomingo(): boolean {
+  //   return this.formattedFecha.toLowerCase() === 'domingo';
+  // }
+
   
-  esDomingo(): boolean {
-    return this.formattedFecha.toLowerCase() === 'domingo';
+  incrementarConteo() {
+    if (this.conteo < this.listaDeDatos.length) {
+      this.conteo++;
+    } else {
+      this.conteo = 1; 
+    }
+  }
+
+  
+  desincrementarConteo() {
+    if (this.conteo > 1) {
+      this.conteo--;
+    } else {
+      this.conteo = this.listaDeDatos.length; 
+    }
   }
 }

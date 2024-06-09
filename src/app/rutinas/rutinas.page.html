@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button menu="menuPrincipal" ></ion-menu-button>
@@ -33,6 +33,59 @@
                 </ion-button>
 
                 <ion-button (click)="siguienteTarjeta()" id="botonsiguiente">
+                  <ion-icon name="arrow-forward-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+
+          </ion-card-content>
+      </ion-card>
+  </ng-container>
+</ion-content> -->
+
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="menuPrincipal" ></ion-menu-button>
+    </ion-buttons>
+    <ion-title>RUTINAS</ion-title>
+    <ion-icon slot="end" id="iconperfil" name="person-circle-sharp" [routerLink]="
+    ['/editar-perfil']
+    "></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content id="contenedor" >
+  <ng-container *ngFor="let item of listaDeDatos; let index = index">
+      <ion-card *ngIf="currentIndex === index" id="cardejercicios">
+          
+          <ion-card-header>
+            <p  id="fecha">Rutina del  {{ formattedFecha }} </p>
+            <ion-card-title id="titulo">{{ item[0]}}</ion-card-title>
+            <p id="conteo">{{ conteo }}</p>
+          </ion-card-header>
+          <ion-card-content>
+            <div id="itemimagen">
+              <img [src]="item[3]" alt="#" id="imagen">
+            </div>
+              <p id="opcion1">Series</p>
+              <div id="seie_barra"></div>
+              
+              <p id="numero_serie">{{ item[2]}}</p>
+              
+              <p id="opcion2">Repeticiones</p>
+              <div id="Repeticion_barra"></div>
+
+            
+              <p id="numero_repeticion"> {{ item[1]}}</p>
+
+              
+              <ion-buttons id="botones">
+                <ion-button (click)="anteriorTarjeta(); desincrementarConteo()" id="botonatras">
+                  <ion-icon name="arrow-back-outline"></ion-icon>
+                </ion-button>
+                <ion-button (click)="siguienteTarjeta(); incrementarConteo()" id="botonsiguiente">
                   <ion-icon name="arrow-forward-outline"></ion-icon>
                 </ion-button>
               </ion-buttons>
