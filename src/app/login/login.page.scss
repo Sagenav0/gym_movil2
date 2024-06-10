@@ -8,6 +8,7 @@ ion-card-title{
     left: 2%;
     top: 7px;
     font-size: 36px;
+    text-align: center;
 }
 
 ion-card-content {
@@ -85,7 +86,7 @@ ion-content{
     width: 100vw;
     height: 100vh;
     --background: none;
-    background-color:var( --ion-color-secondary-contrast);
+    background-color:var( --ion-color-primary-tint);
 }
 
 ion-button{
@@ -100,4 +101,10 @@ ion-button{
     color: var(--ion-color-primary-shade);
   --background:none;
   background-color: var(--ion-color-primary)
+}
+#olvido-contra-boton{
+    width: 60%;
+    position: relative;
+    bottom: 43%;
+    left: 5%;
 }

@@ -1,0 +1,41 @@
+ion-content{
+    --background: none;
+    background-color: var(--ion-color-primary-tint);
+    
+}
+ion-card-header{
+    
+    text-align: center;
+    ion-card-title{
+        color: var(--ion-color-primary);
+    }
+}
+ion-card{
+    color: var(--ion-color-primary);
+    height: 40%;
+    width: 90%;
+    top: 15%;
+    left: 3%;
+    
+}
+ion-card-content{
+    height: 80%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#botones_accion{
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    top: 50%;
+}
+#input_correo{
+
+    --background: var(--ion-color-primary-tint);
+    color: var(--ion-color-primary-shade);
+    left: 15%;
+    width: 70%;
+    top: 18%;
+}

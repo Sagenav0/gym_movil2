@@ -20,6 +20,7 @@ export class VerificarCodigoPage implements OnInit {
               private userService: UserService) { }
 
   ngOnInit() {
+    this.usuario
   }
   
   async presentToast(msg: string) {

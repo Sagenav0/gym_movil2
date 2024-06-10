@@ -1,8 +1,4 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>olvidaste tu contrasena</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content [fullscreen]="true">
   <ion-card>
@@ -11,12 +7,18 @@
     </ion-card-header>
   
     <ion-card-content>
-      <ion-input type="email" [(ngModel)]="correo"></ion-input>
+
+
+      <ion-input id="input_correo" type="email" [(ngModel)]="correo"></ion-input>
+
+
+      <ion-buttons id="botones_accion">
+        <ion-button fill="clear" [routerLink]="['/login']" >Regresar</ion-button>
+        <ion-button fill="clear"  (click)="Recuperar_contrasena()" type="submit">Siguiente</ion-button>
+      </ion-buttons>
     </ion-card-content>
 
-
-    <ion-button fill="clear" [routerLink]="['/login']" >Regresar</ion-button>
-    <ion-button fill="clear"  (click)="Recuperar_contrasena()" type="submit">Siguiente</ion-button>
+    
     
   </ion-card>
 </ion-content>
