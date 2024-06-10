@@ -15,20 +15,34 @@
     align-items: center;
 }
 
+ion-card-header {
+    padding: 0;
+    height: 23%;
+    width: 50%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
 #titulo {
     text-align: center;
     font-size: 30px;
     color: var(--ion-color-primary-contrast);
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 #num_tarjeta {
     text-align: center;
     color: var(--ion-color-primary-contrast);
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 #fecha {
     text-align: center;
     color: var(--ion-color-primary-contrast);
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 ion-card-content {
