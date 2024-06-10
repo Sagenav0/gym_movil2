@@ -3,14 +3,11 @@
     --ion-card-padding: 1rem;
 }
 
-
 #cardejercicios {
-    margin: 20px;
     background: var(--ion-color-primary);
     color: var(--ion-color-primary-shade);
     font-size: 17px;
     position: relative;
-    padding:1rem;
     width: 90%;
     height: 60%;
     display: flex;
@@ -21,98 +18,91 @@
 #titulo {
     text-align: center;
     font-size: 30px;
-    color: beige;
-    padding: 0;
-    margin: 0;
+    color: var(--ion-color-primary-contrast);
+}
+
+#num_tarjeta {
+    text-align: center;
+    color: var(--ion-color-primary-contrast);
 }
 
 #fecha {
     text-align: center;
-    color: beige;
-    margin-top: 10px;
-    
+    color: var(--ion-color-primary-contrast);
 }
-ion-card-header{
-    width: 100%;
-    height: 20%;
-    padding: 0;
-    top: -4%;
-}
+
 ion-card-content {
-    width: 80%;
-    height: auto;
-    padding: 0;
+    width: 90%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 #itemimagen {
+    // background: aquamarine;
     position: relative;
-    width: 300px;
+    width: 100%;
+    //height: 200px;
+    height: 100%;
     display: flex;
     justify-content: center;
-    top: 5%;
-    padding: 0;
-    margin: 0;
+    align-items: center;
+    overflow: hidden;
 }
 
 #imagen {
-    width: 90%; 
-    height: 90%; 
-    object-fit: cover;
+    width: 90%;
+    height: 100%;
     display: block;
     border: 1px solid beige;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
 
 #contenedor_series_repeticiones {
-    margin-top: 20px;
-//    background: var(--ion-color-primary-tint);
+    // background-color: antiquewhite;
+    margin-top: 10%;
     height: 90%;
     width: 90%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .opcion1 {
     font-weight: bold;
     font-size: 20px;
-    color: beige;
+    color: var(--ion-color-primary-contrast);
 }
 
 .opcion2 {
     text-align: center;
     font-weight: bold;
     font-size: 20px;
-    color: beige;
+    color: var(--ion-color-primary-contrast);
 }
 
 #botones {
+    // background-color: blanchedalmond;
     position: absolute;
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 0;
-    top: 310px;
+    height: 30%;
+    top: 67%;
 }
+
 #botonatras{
     position: relative;
     background-color: beige;
     width: 50px;
-    bottom: 10px;
     border-radius: 10px;
-
 
 }
 #botonsiguiente{
     position: relative;
     background-color: beige;
     width: 50px;
-    bottom: 10px;
     border-radius: 10px;
-
-
 }
 ion-icon{
     color: black;
