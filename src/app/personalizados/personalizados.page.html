@@ -17,15 +17,13 @@
 
 
 <ion-content id="contenedor" >
-
-  
   
   <ng-container *ngFor="let item of listaDeDatos; let index = index">
       <ion-card *ngIf="currentIndex === index" id="cardejercicios">
           
           <ion-card-header>
             <p  id="fecha">Rutina del  {{ formattedFecha }} </p>
-            <p id="num_tarjeta">Ejercicio {{ currentIndex + 1 }} de {{ listaDeDatos.length }}</p>
+            <p id="num_tarjeta">Tarjeta {{ currentIndex + 1 }} de {{ listaDeDatos.length }}</p>
             <ion-card-title id="titulo">{{ item[2]}}</ion-card-title>
           </ion-card-header>
           <ion-card-content>

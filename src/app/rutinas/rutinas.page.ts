@@ -57,8 +57,6 @@ export class RutinasPage implements OnInit {
   anteriorTarjeta() {
     if (this.currentIndex > 0) {
       this.currentIndex--;
-    } else {
-      this.currentIndex = this.listaDeDatos.length - 1;
     }
   }
 
@@ -73,8 +71,6 @@ export class RutinasPage implements OnInit {
   desincrementarConteo() {
     if (this.conteo > 1) {
       this.conteo--;
-    } else {
-      this.conteo = this.listaDeDatos.length; 
     }
   }
 }

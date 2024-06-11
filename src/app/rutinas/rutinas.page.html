@@ -15,11 +15,7 @@
 </ion-toolbar>
 </ion-header>
 
-<ion-content id="contenedor" >
- 
-  
-  
-
+<ion-content id="contenedor">
   <ng-container *ngFor="let item of listaDeDatos; let index = index">
     <ion-card *ngIf="currentIndex === index" id="cardejercicios">
       <ion-card-header>
@@ -27,7 +23,7 @@
         <ion-card-title id="titulo">{{ item[0] }}</ion-card-title>
         <p id="conteo">{{ conteo }}</p>
       </ion-card-header>
-      <ion-card-content >
+      <ion-card-content>
         <div id="itemimagen">
           <img [src]="item[3]" alt="#" id="imagen">
         </div>
@@ -38,10 +34,10 @@
         <div id="Repeticion_barra"></div>
         <p id="numero_repeticion">{{ item[1] }}</p>
         <ion-buttons id="botones">
-          <ion-button (click)="anteriorTarjeta(); desincrementarConteo()" id="botonatras">
+          <ion-button (click)="anteriorTarjeta();" (click)="desincrementarConteo();" id="botonatras">
             <ion-icon name="arrow-back-outline"></ion-icon>
           </ion-button>
-          <ion-button (click)="siguienteTarjeta(); incrementarConteo()" id="botonsiguiente">
+          <ion-button (click)="siguienteTarjeta();" (click)="incrementarConteo();" id="botonsiguiente">
             <ion-icon name="arrow-forward-outline"></ion-icon>
           </ion-button>
         </ion-buttons>

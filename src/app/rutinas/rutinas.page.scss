@@ -10,7 +10,7 @@
     position: relative;
     padding:1rem;
     width: 90%;
-    height: 65%;
+    height: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,16 +19,27 @@
 #titulo {
     text-align: center;
     font-size: 30px;
-    color: rgb(0, 0, 0);
+    color: var(--ion-color-primary-shade);
     padding: 0;
     margin: 0;
 }
 
 #fecha {
     text-align: center;
-    color: rgb(0, 0, 0);
+    color: var(--ion-color-primary-shade);
     margin-top: 10px;
     
+}
+ion-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px var(--ion-color-primary-contrast-rgb);
+    position: relative;
+    top: 40%;
+    left: 50%;
+    transform: translate(-52%, -50%);
+    width: 80%; /* Ancho ajustado para dispositivos móviles */
+    max-width: 350px; /* Ancho máximo para pantallas más grandes */
+    text-align: center;
 }
 ion-card-header{
     width: 100%;
@@ -37,12 +48,14 @@ ion-card-header{
     top: -4%;
 }
 ion-card-content {
+
     width: 80%;
     height: auto;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 }
 
 #itemimagen {
@@ -53,16 +66,17 @@ ion-card-content {
     top: 10%;
     padding: 0;
     margin: 0;
+    
 
 }
 
 
 #imagen {
-    width: 90%; 
-    height: 90%; 
+    width: 100%; 
+    height: 100%; 
     object-fit: cover;
     display: block;
-    border: 1px solid rgb(0, 0, 0);
+    border: 1px solid var(--ion-color-primary-shade);
     border-radius: 10px; 
 }
 
@@ -71,26 +85,34 @@ ion-card-content {
     margin: 5px 0;
     font-weight: bold;
     font-size: 20px;
-    color: rgb(0, 0, 0);
-    top: 225px;
+    color: var(--ion-color-primary-shade);
+    top: 245px;
     left: 184px;
-
-}
-#conteo{
-
+    
+    }
+#opcion2 {
     position: absolute;
     margin: 5px 0;
     font-weight: bold;
     font-size: 20px;
-    color: rgb(0, 0, 0);
+    color: var(--ion-color-primary-shade);
+    top: 245px;
+    right: 150px;
+}
+#conteo{
+    position: absolute;
+    margin: 5px 0;
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--ion-color-primary-shade);
     bottom: 32px;
     font-size: 30px;
 
 }
 #seie_barra{
     position: absolute;
-    background-color: black;
-    top: 260px;
+    background-color: var(--ion-color-primary-shade);
+    top: 280px;
     left: 181px;
     width: 56px;
     padding: 1px;
@@ -99,30 +121,21 @@ ion-card-content {
 
 #Repeticion_barra{
     position: absolute;
-    background-color: black;
-    top: 260px;
-    left: -19px;
+    background-color: var(--ion-color-primary-shade);
+    top: 280px;
+    left: -1px;
     width: 107px;
     padding: 1px;
     font-size: 150px;
 }
 
-#opcion2 {
-    position: absolute;
-    margin: 5px 0;
-    font-weight: bold;
-    font-size: 20px;
-    color: rgb(0, 0, 0);
-    top: 225px;
-    right: 150px;
-}
 #numero_repeticion{
     position: absolute;
     margin: 5px 0;
     font-weight: bold;
     font-size: 20px;
-    color: rgb(0, 0, 0);
-    top: 260px;
+    color: var(--ion-color-primary-shade);
+    top: 280px;
     right: 200px;
     
 
@@ -132,8 +145,8 @@ ion-card-content {
     margin: 5px 0;
     font-weight: bold;
     font-size: 20px;
-    color: rgb(0, 0, 0);
-    top: 260px;
+    color: var(--ion-color-primary-shade);
+    top: 275px;
     left: 200px;
 
 }
@@ -144,11 +157,11 @@ ion-card-content {
     justify-content: space-between;
     width: 100%;
     padding: 0;
-    top: 310px;
+    top: 330px;
 }
 #botonatras{
     position: relative;
-    background-color: beige;
+    background-color: var(--ion-color-primary-tint);
     width: 50px;
     bottom: 10px;
     border-radius: 10px;
@@ -157,7 +170,7 @@ ion-card-content {
 }
 #botonsiguiente{
     position: relative;
-    background-color: beige;
+    background-color: var(--ion-color-primary-tint);
     width: 50px;
     bottom: 10px;
     border-radius: 10px;
@@ -165,7 +178,7 @@ ion-card-content {
 
 }
 ion-icon{
-    color: #000000;
+    color: var(--ion-color-primary-shade);
 }
 
 @media (min-width: 576px) {
@@ -192,20 +205,3 @@ ion-icon{
     font-size: 18px;
 }
 }
-
-.container {
-    position: absolute;
-  left: 82%;
-  top: 0;
-  }
-  
-  .objeto1,
-  .objeto2 {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  
-  .objeto2 {
-    z-index: 1; /* Asegura que el objeto2 esté encima del objeto1 */
-  }
