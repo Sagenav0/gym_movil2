@@ -4,17 +4,22 @@
       <ion-menu-button menu="menuPrincipal" ></ion-menu-button>
     </ion-buttons>
     <ion-title>CONTACTANOS</ion-title>
-    <ion-icon slot="end" id="iconperfil"  name="person-circle-sharp" [routerLink]="
-    ['/editar-perfil']
-    "></ion-icon>
+    <div slot="end">
+      <div id="pruebaimagen" *ngIf="imagen">
+        <ion-img src="assets/img/{{imagen}}" alt="" [routerLink]="['/editar-perfil']"></ion-img>
+      </div>
+      <div id="pruebaimagen1" *ngIf="!imagen">
+        <ion-icon id="iconperfil" name="person-circle-sharp" [routerLink]="['/editar-perfil']"></ion-icon>
+      </div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content id="contenedor" [fullscreen]="true">
   <ion-title class="tit">MAS SOBRE NOSOTROS</ion-title>
     
-  <ion-list *ngIf="listaDeDatos.length > 0">
-    <div id="consulgym" *ngFor="let item of listaDeDatos">
+  <ng-container *ngIf=" infogym.length > 0">
+    <div id="consulgym" *ngFor="let item of infogym">
       <ion-label  class="centrado">Nombre Del Gym:</ion-label>
       <ion-label  class="centrado">{{item.nombre_gym}}</ion-label>
      
@@ -31,7 +36,7 @@
       <ion-label  class="centrado">{{item.direccion_gym}}</ion-label>
       
     </div>
-  </ion-list>
-  <ion-spinner id="spiner" *ngIf="listaDeDatos.length === 0"></ion-spinner>
+  </ng-container>
+  <ion-spinner id="spiner" *ngIf="infogym.length === 0"></ion-spinner>
 </ion-content>
 

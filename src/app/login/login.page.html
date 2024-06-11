@@ -14,10 +14,17 @@
           
             <ion-label id="label2" >Contraseña:</ion-label>
             <ion-input type="password" [(ngModel)]="contrasena" id="contrasena" name="password" required></ion-input>
+
+            <div id="chexrecuerdame" >
+              <ion-checkbox [(ngModel)]="rememberMe" name="rememberMe"></ion-checkbox>
+              <ion-label>Recordar Credenciales</ion-label>
+            </div>
           
             <ion-button  type="submit">
               Ingresar
             </ion-button>
+
+
 
         </form>
         <h2 [routerLink]="['/olvidaste-contrasena']" id="olvido-contra-boton">¿Olvidaste tu contraseña?</h2>

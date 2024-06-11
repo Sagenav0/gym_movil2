@@ -12,6 +12,10 @@ export class MedidasPage implements OnInit {
   medidas: any[] = []
   // identificador = this.userService.getCedula();
   identificador = 16161;
+
+  imagen: string = "";
+
+
   constructor(
     private conexion: ConexionService,
     private userService: UserService,
@@ -20,6 +24,7 @@ export class MedidasPage implements OnInit {
   }
   ngOnInit(){
     this.consultaMedidas();
+    this.imagen = this.userService.MostrarImagen();
   }
   
   consultaMedidas(){

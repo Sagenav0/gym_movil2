@@ -16,13 +16,14 @@ export class AvancesPage implements OnInit {
   medidasMes1: any[] = [];
   medidasMes2: any[] = [];
   
+  imagen: string = "";
 
   
   constructor(private conexionService: ConexionService,private userService: UserService,private toastController: ToastController,) { }
 
   ngOnInit() {
     this.identificador
-   
+    this.imagen = this.userService.MostrarImagen();
   }
 
   onSubmit() {

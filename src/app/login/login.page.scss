@@ -82,6 +82,17 @@ form{
     background-color: var(--ion-color-primary-tint);
 
 }
+#chexrecuerdame{
+    position: relative;
+    bottom: -6%;
+    --background: none;
+    right: 20%;
+    color: var(--ion-color-primary);
+    
+}
+ion-checkbox{
+    margin-right: 5px;
+}
 ion-content{
     width: 100vw;
     height: 100vh;
@@ -104,7 +115,7 @@ ion-button{
 }
 #olvido-contra-boton{
     width: 60%;
-    position: relative;
-    bottom: 43%;
-    left: 5%;
+  position: relative;
+  bottom: 12%;
+  left: 3%;
 }

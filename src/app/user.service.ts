@@ -8,7 +8,8 @@ export class UserService {
   private cedula: string = "";
   private imagenuser: File | null = null;
   private imageUrl: string | null = null;
-  private imagen:string = ""
+  private imagen:string = "";
+  private contrasena:string = "";
 
   constructor() { }
 
@@ -26,6 +27,14 @@ export class UserService {
 
   getCedula(): string {
     return this.cedula;
+  }
+
+  setContra(contrasena: string) {
+    this.contrasena = contrasena;
+  }
+
+  getContra(): string {
+    return this.contrasena;
   }
 
   setImagenUser(imagenuser: File) {

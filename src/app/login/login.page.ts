@@ -12,6 +12,8 @@ import { UserService } from '../user.service';
 export class LoginPage implements OnInit {
   usuario: string = '';
   contrasena: string = '';
+  rememberMe: boolean = false;
+
 
   constructor(private conexion: ConexionService,
               private toastController: ToastController,
@@ -19,7 +21,10 @@ export class LoginPage implements OnInit {
               private router: Router,
               private userService: UserService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadSavedCredentials();
+
+  }
 
   async login() {
     if (!this.usuario || !this.contrasena) {
@@ -33,7 +38,13 @@ export class LoginPage implements OnInit {
         this.userService.setUser(this.usuario);
         this.userService.setCedula(response.datos[0][2]);
         this.userService.Guardarimagen(response.datos[0][3]);
+        this.userService.setContra(this.contrasena)
         this.router.navigate(['/rutinas']);
+        if (this.rememberMe) {
+          this.saveCredentials();
+        } else {
+          this.clearCredentials();
+        }
       } else {
         this.presentToastInvalid();
       }
@@ -42,6 +53,30 @@ export class LoginPage implements OnInit {
       this.presentToastError();
     }
   }
+
+
+  saveCredentials() {
+    localStorage.setItem('username', this.usuario);
+    localStorage.setItem('password', this.contrasena);
+  }
+
+  clearCredentials() {
+    localStorage.removeItem('username');
+    localStorage.removeItem('password');
+  }
+
+  loadSavedCredentials() {
+    const savedUsername = localStorage.getItem('username');
+    const savedPassword = localStorage.getItem('password');
+    if (savedUsername && savedPassword) {
+      this.usuario = savedUsername;
+      this.contrasena = savedPassword;
+      this.rememberMe = true;
+    }
+  }
+
+
+
 
   async presentToast() {
     const toast = await this.toastController.create({

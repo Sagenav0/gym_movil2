@@ -4,15 +4,21 @@
       <ion-menu-button menu="menuPrincipal"></ion-menu-button>
     </ion-buttons>
     <ion-title>RUTINAS</ion-title>
-    <ion-icon slot="end" id="iconperfil" name="person-circle-sharp" [routerLink]="['/editar-perfil']"></ion-icon>
-  </ion-toolbar>
+    <div slot="end">
+      <div id="pruebaimagen" *ngIf="imagen">
+        <ion-img src="assets/img/{{imagen}}" alt="" [routerLink]="['/editar-perfil']"></ion-img>
+      </div>
+      <div id="pruebaimagen1" *ngIf="!imagen">
+        <ion-icon id="iconperfil" name="person-circle-sharp" [routerLink]="['/editar-perfil']"></ion-icon>
+      </div>
+    </div>
+</ion-toolbar>
 </ion-header>
 
-<ion-content id="contenedor">
-  {{imagen}}
-  {{imagen2}}
-  <ion-img src="assets/img/{{imagen}}" alt=""></ion-img>
-
+<ion-content id="contenedor" >
+ 
+  
+  
 
   <ng-container *ngFor="let item of listaDeDatos; let index = index">
     <ion-card *ngIf="currentIndex === index" id="cardejercicios">
@@ -21,7 +27,7 @@
         <ion-card-title id="titulo">{{ item[0] }}</ion-card-title>
         <p id="conteo">{{ conteo }}</p>
       </ion-card-header>
-      <ion-card-content>
+      <ion-card-content >
         <div id="itemimagen">
           <img [src]="item[3]" alt="#" id="imagen">
         </div>

@@ -17,7 +17,7 @@ export class RutinasPage implements OnInit {
   formattedFecha: string = ''; 
   conteo: number = 1;
   imagen: string = "";
-  imagen2 = this.imagen = this.userService.MostrarImagen();
+  
 
   constructor(
     private datePipe: DatePipe,

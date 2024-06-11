@@ -4,16 +4,21 @@
       <ion-menu-button menu="menuPrincipal" ></ion-menu-button>
     </ion-buttons>
     <ion-title>PERSONALIZADOS</ion-title>
-    <ion-icon slot="end" id="iconperfil" name="person-circle-sharp" [routerLink]="
-    ['/editar-perfil']
-    "></ion-icon>
+    <div slot="end">
+      <div id="pruebaimagen" *ngIf="imagen">
+        <ion-img src="assets/img/{{imagen}}" alt="" [routerLink]="['/editar-perfil']"></ion-img>
+      </div>
+      <div id="pruebaimagen1" *ngIf="!imagen">
+        <ion-icon id="iconperfil" name="person-circle-sharp" [routerLink]="['/editar-perfil']"></ion-icon>
+      </div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content id="contenedor" >
 
-  <ion-img src="assets/img/{{imagen}}" alt=""></ion-img>
+  
   
   <ng-container *ngFor="let item of listaDeDatos; let index = index">
       <ion-card *ngIf="currentIndex === index" id="cardejercicios">

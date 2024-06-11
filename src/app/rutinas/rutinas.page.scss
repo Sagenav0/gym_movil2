@@ -192,3 +192,20 @@ ion-icon{
     font-size: 18px;
 }
 }
+
+.container {
+    position: absolute;
+  left: 82%;
+  top: 0;
+  }
+  
+  .objeto1,
+  .objeto2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .objeto2 {
+    z-index: 1; /* Asegura que el objeto2 esté encima del objeto1 */
+  }

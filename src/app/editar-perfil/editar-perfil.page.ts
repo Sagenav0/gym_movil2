@@ -14,10 +14,12 @@ export class EditarPerfilPage implements OnInit {
   Datoseditar: any[] = [];
   usuario = this.userService.getUser();
   cedula = this.userService.getCedula();
+  contrasena = this.userService.getContra();
   telefono = "";
   telefononuevo = "";
   imagenuser: File | null = null;
   imageUrl: string | ArrayBuffer | null = null;
+
 
   constructor(
     private conexionService: ConexionService,
@@ -101,6 +103,7 @@ export class EditarPerfilPage implements OnInit {
         data => {
           this.presentToast('La imagen se cambió con éxito');
           this.closeModal();
+          this.router.navigate(['/login']);
         },
         error => {
           this.presentToast('Error al cambiar la imagen');
@@ -111,8 +114,11 @@ export class EditarPerfilPage implements OnInit {
       const reader = new FileReader();
       reader.onload = () => {
         this.imageUrl = reader.result;
+
+       
       };
       reader.readAsDataURL(file);
+      
     }
   }  
 }
