@@ -4,6 +4,14 @@
       <ion-menu-button menu="menuPrincipal"></ion-menu-button>
     </ion-buttons>
     <ion-title>EDITAR PERFIL</ion-title>
+    <div slot="end">
+      <ion-avatar id="pruebaimagen" *ngIf="imagen">
+        <img src="../../assets/img/{{imagen}}" alt="">
+      </ion-avatar>
+      <div id="pruebaimagen1" *ngIf="!imagen">
+        <ion-icon id="iconperfil" name="person-circle-sharp"></ion-icon>
+      </div>
+    </div>
   </ion-toolbar>
 </ion-header>
 

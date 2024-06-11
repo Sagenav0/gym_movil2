@@ -21,7 +21,7 @@ export class ContactanosPage implements OnInit {
   ngOnInit() {
     this.obtenerDatosGym();
     this.imagen = this.userService.MostrarImagen();
-
+    console.log("imagen: "+this.imagen)
   }
 
   obtenerDatosGym() {

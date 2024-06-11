@@ -19,7 +19,7 @@ export class EditarPerfilPage implements OnInit {
   telefononuevo = "";
   imagenuser: File | null = null;
   imageUrl: string | ArrayBuffer | null = null;
-
+  imagen: string = "";
 
   constructor(
     private conexionService: ConexionService,
@@ -33,6 +33,7 @@ export class EditarPerfilPage implements OnInit {
   ngOnInit() {
     this.consultaEdit();
     this.imageUrl = this.userService.getImageUrl();
+    this.imagen = this.userService.MostrarImagen();
   }
 
 

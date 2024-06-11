@@ -5,9 +5,9 @@
   </ion-buttons>
     <ion-title>CAMBIAR CONTRASEÑA</ion-title>
     <div slot="end">
-      <div id="pruebaimagen" *ngIf="imagen">
-        <ion-img src="assets/img/{{imagen}}" alt="" [routerLink]="['/editar-perfil']"></ion-img>
-      </div>
+      <ion-avatar id="pruebaimagen" *ngIf="imagen">
+        <img src="../../assets/img/{{imagen}}" alt="" [routerLink]="['/editar-perfil']">
+      </ion-avatar>
       <div id="pruebaimagen1" *ngIf="!imagen">
         <ion-icon id="iconperfil" name="person-circle-sharp" [routerLink]="['/editar-perfil']"></ion-icon>
       </div>
