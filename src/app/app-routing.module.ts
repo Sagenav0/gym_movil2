@@ -47,7 +47,8 @@ const routes: Routes = [
   {
     path: 'cambiar-correo',
     loadChildren: () => import('./cambiar-correo/cambiar-correo.module').then( m => m.CambiarCorreoPageModule)
-  },  {
+  },
+  {
     path: 'olvidaste-contrasena',
     loadChildren: () => import('./olvidaste-contrasena/olvidaste-contrasena.module').then( m => m.OlvidasteContrasenaPageModule)
   },

@@ -1,15 +1,19 @@
 
-ion-content{
-  display: flex;
-        
-}
+
 #contenedorppal{
   width: 100%;
   height: 100%;
   flex-direction: column;
-  justify-content: center; 
+  justify-content: center;
+  display: flex;
+  position: relative;
+  align-items: center;
 }
-
+#iconofotogrande{
+  height: 100px;
+  width: 100px;
+  border-radius: 30%;
+}
 
 .imagen_del_perfil{
   display: inline-block;
