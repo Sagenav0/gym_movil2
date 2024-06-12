@@ -40,7 +40,7 @@ def index():
 def ValidarCredenciales(usuario, contrasena):
     try:
         cifrada = hashlib.sha512(contrasena.encode('utf-8')).hexdigest()
-
+        print(cifrada)
         connection = connect(**config)
         cursor = connection.cursor()
         cursor.execute(f"SELECT nombre,telefono,cedula,imagenuser FROM registro_usuarios WHERE correo = '{usuario}' AND contrasena = '{cifrada}' AND estado = 'activo'")
