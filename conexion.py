@@ -8,30 +8,18 @@ import smtplib
 import ssl
 import os
 from werkzeug.utils import secure_filename
-
+import hashlib
 
 app = Flask(__name__)
 CORS(app)
 
-# config = {
-#     'host': '85.31.231.136',
-#     'user': 'controlgym',
-#     'password': 'ControlGym',
-#     'database': 'gym_control'
-# }
-""" config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '',
-    'database': 'gym_yeff'
-} """
-
 config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '',
+    'host': '85.31.231.136',
+    'user': 'controlgym',
+    'password': 'ControlGym',
     'database': 'gym_control'
 }
+
 
 carpeta_up = os.path.join('src/assets/img')
 app.config['carpeta_up'] = carpeta_up
@@ -45,11 +33,12 @@ def index():
 @app.route("/validarCredenciales/<usuario>/<contrasena>", methods=['get'])
 def ValidarCredenciales(usuario, contrasena):
     try:
+        cifrada = hashlib.sha512(contrasena.encode('utf-8')).hexdigest()
+
         connection = connect(**config)
         cursor = connection.cursor()
-        cursor.execute(f"SELECT nombre,telefono,cedula,imagenuser FROM registro_usuarios WHERE correo = '{usuario}' AND contrasena = '{contrasena}' AND estado = 'activo'")
+        cursor.execute(f"SELECT nombre,telefono,cedula,imagenuser FROM registro_usuarios WHERE correo = '{usuario}' AND contrasena = '{cifrada}' AND estado = 'activo'")
         datos = cursor.fetchall()
-        
         if(datos):
             cursor.close()
             connection.close()
@@ -121,11 +110,13 @@ def cambiarContra():
     try:
         data = request.get_json()
         contra1 = data.get('contra1')
+        cifrada = hashlib.sha512(contra1.encode('utf-8')).hexdigest()
+
         usuario = data.get('usuario')
 
         connection = connect(**config)
         cursor = connection.cursor()
-        cursor.execute("UPDATE registro_usuarios SET contrasena = %s WHERE correo = %s", (contra1, usuario))
+        cursor.execute("UPDATE registro_usuarios SET contrasena = %s WHERE correo = %s", (cifrada, usuario))
         connection.commit()
         cursor.close()
         connection.close()
