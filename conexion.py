@@ -13,10 +13,16 @@ import hashlib
 app = Flask(__name__)
 CORS(app)
 
+# config = {
+#     'host': '85.31.231.136',
+#     'user': 'controlgym',
+#     'password': 'ControlGym',
+#     'database': 'gym_control'
+# }
 config = {
-    'host': '85.31.231.136',
-    'user': 'controlgym',
-    'password': 'ControlGym',
+    'host': 'localhost',
+    'user': 'root',
+    'password': '',
     'database': 'gym_control'
 }
 
