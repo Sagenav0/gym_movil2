@@ -3,6 +3,19 @@
     --ion-card-padding: 1rem;
 }
 
+ion-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px var(--ion-color-primary-contrast-rgb);
+    position: relative;
+    top: 45%;
+    left: 50%;
+    height: 70%;
+    transform: translate(-52%, -50%);
+    width: 80%; /* Ancho ajustado para dispositivos móviles */
+    max-width: 350px; /* Ancho máximo para pantallas más grandes */
+    text-align: center;
+}
+
 #cardejercicios {
     background: var(--ion-color-primary);
     color: var(--ion-color-primary-shade);
@@ -16,6 +29,13 @@
     align-items: center;
 }
 
+ion-card-header{
+    width: 100%;
+    height: 18%;
+    padding: 0;
+    bottom: 1%;
+}
+
 #titulo {
     text-align: center;
     font-size: 30px;
@@ -24,152 +44,122 @@
     margin: 0;
 }
 
+#num_tarjeta {
+    color: var(--ion-color-primary-shade);
+    padding: 0;
+    margin: 0;
+}
+
 #fecha {
     text-align: center;
     color: var(--ion-color-primary-shade);
-    margin-top: 10px;
-    
-}
-ion-card {
-    border-radius: 10px;
-    box-shadow: 0 4px 8px var(--ion-color-primary-contrast-rgb);
-    position: relative;
-    top: 45%;
-    left: 50%;
-    height: 70%;
-    transform: translate(-52%, -50%);
-    width: 80%; /* Ancho ajustado para dispositivos móviles */
-    max-width: 350px; /* Ancho máximo para pantallas más grandes */
-    text-align: center;
-}
-ion-card-header{
-    width: 100%;
-    height: 14%;
     padding: 0;
-    top: 2%;
-    left: 3%;
+    margin: 0;
 }
+
 ion-card-content{
-    width: 100%;
-      height: 85%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #itemimagen{
     position: relative;
-      width: 300px;
-      height: 200px;
-      display: flex;
-      justify-content: center;
-      top: 10%;
-      padding: 0;
-      margin: 0;
-    }
-
+    width: 300px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    top: 3%;
+}
 
 #imagen {
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover;
+    width: 100%;
+    height: 100%;
     display: block;
     border: 1px solid var(--ion-color-primary-shade);
-    border-radius: 10px; 
+    border-radius: 10px;
 }
 
-#opcion1{
-    position: relative;
-      font-weight: bold;
-      font-size: 20px;
-      color: var(--ion-color-primary-shade);
-      top: 16%;
-      left: 40%;
+#caja_padre_pollitos {
+    margin-top: 10%;
+    height: 18%;
+    width: 100%;
+    top: 5%;
+    display: flex;
+    justify-content: space-between;
 }
-#opcion2{
-    position: relative;
-      font-weight: bold;
-      font-size: 20px;
-      color: var(--ion-color-primary-shade);
-      bottom: 6%;
-      right: 32%;
-}
-#conteo{
-    position: absolute;
-    margin: 5px 0;
+
+#opcion1 {
+    // position: relative;
     font-weight: bold;
     font-size: 20px;
     color: var(--ion-color-primary-shade);
-    bottom: 32px;
-    font-size: 30px;
-
-}
-#seie_barra{
-    position: relative;
-      background-color: var(--ion-color-primary-shade);
-      top: 15%;
-      left: 40%;
-      width: 56px;
-      padding: 1px;
-      font-size: 150px;
 }
 
-#Repeticion_barra{
-    position: relative;
+#seie_barra {
+    // position: relative;
     background-color: var(--ion-color-primary-shade);
-    bottom: 7%;
-    right: 32%;
-    width: 107px;
     padding: 1px;
     font-size: 150px;
-  }
-
-#numero_repeticion{
-    position: relative;
-      font-weight: bold;
-      font-size: 20px;
-      color: var(--ion-color-primary-shade);
-      bottom: 8%;
-      left: -32%;
-}
-#numero_serie{
-    position: relative;
-      margin: 5px 0;
-      font-weight: bold;
-      font-size: 20px;
-      color: var(--ion-color-primary-shade);
-      top: 12%;
-      left: 40%;
 }
 
-#botones{
+#numero_serie {
+    // position: relative;
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--ion-color-primary-shade);
+}
 
+#opcion2 {
+    // position: relative;
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--ion-color-primary-shade);
+}
+
+#repeticion_barra {
+    // position: relative;
+    background-color: var(--ion-color-primary-shade);
+    padding: 1px;
+    font-size: 150px;
+}
+
+#numero_repeticion {
+    // position: relative;
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--ion-color-primary-shade);
+}
+
+#botones {
     display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0;
-  bottom: 5%;
-  position: relative;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+    top: 5%;
+    position: relative;
 }
+
 #botonatras{
     position: relative;
     background-color: var(--ion-color-primary-tint);
     width: 50px;
     bottom: 10px;
     border-radius: 10px;
-
-
 }
+
 #botonsiguiente{
     position: relative;
     background-color: var(--ion-color-primary-tint);
     width: 50px;
     bottom: 10px;
     border-radius: 10px;
-
-
 }
+
 ion-icon{
     color: var(--ion-color-primary-shade);
 }

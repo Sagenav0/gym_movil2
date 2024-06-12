@@ -18,32 +18,41 @@
 <ion-content  [fullscreen]="true" *ngIf="Datoseditar.length > 0">
   <ng-container *ngFor="let item of Datoseditar">
     <div id="contenedorppal" >
-      <div>
+      <div id="caja_foto">
         <ion-icon name="person-circle-sharp" id="iconofotogrande" (click)="imagen_usuario_selecion()" style="font-size: 32px; cursor: pointer;"></ion-icon>
         
         <!-- Input de archivo oculto -->
         <input type="file" id="imagen_de_perfil" name="imagen_de_perfil" (change)="imagen_del_usuario_perfil($event)" style="display: none;">
       </div>
-  
-      <ion-label>Nombre:</ion-label>
-      <ion-label>{{item.nombre}}</ion-label>
-      <ion-label>Telefono:</ion-label>
-      <ion-label>{{item.telefono}}</ion-label>
-      <input type="tel" [(ngModel)]="telefononuevo" placeholder="Nuevo teléfono" name="telefono" id="telefono">
-      <ion-label>{{usuario}}</ion-label>
-  
+
+      <div id="caja_nombre">
+        <ion-label>Nombre:</ion-label>
+        <ion-label>{{item.nombre}}</ion-label>
+      </div>
+
+      <div id="caja_tel">
+        <ion-label>Telefono:</ion-label>
+        <ion-label>{{item.telefono}}</ion-label>
+        <div id="edit_tel">
+          <input type="tel" [(ngModel)]="telefononuevo" placeholder="Nuevo teléfono" name="telefono" id="telefono">
+          <ion-button id="btn-telefono" type="submit" (click)="update_telefono()"><ion-icon name="create-outline"></ion-icon></ion-button>
+        </div>
+      </div>
+
+      <div id="caja_correo">
+        <ion-label>{{usuario}}</ion-label>
+        <ion-button id="btn-correo" [routerLink]="['/cambiar-correo']"><ion-icon name="create-outline"></ion-icon></ion-button>
+      </div>
+
+      <div id="caja_contra">
+        <ion-label>Contraseña:</ion-label>
+        <ion-button id="btn-contrasena" [routerLink]="['/cambiar-contra']"><ion-icon name="create-outline"></ion-icon></ion-button>
+      </div>
+
       <!-- Mostrar la imagen seleccionada -->
-       <div>
+      <div>
         <img *ngIf="imageUrl" [src]="imageUrl" alt="User Image">
-       </div>
-      
-  
-  
-      <ion-button id="btn-correo" [routerLink]="['/cambiar-correo']"><ion-icon name="create-outline"></ion-icon></ion-button>
-      <ion-label>Contraseña:</ion-label>
-      <ion-button id="btn-contrasena" [routerLink]="['/cambiar-contra']"><ion-icon name="create-outline"></ion-icon></ion-button>
-      <ion-button id="btn-telefono" type="submit" (click)="update_telefono()"><ion-icon name="create-outline"></ion-icon></ion-button>
-    
+      </div>
 
     </div>
     </ng-container>

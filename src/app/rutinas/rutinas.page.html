@@ -20,24 +20,35 @@
     <ion-card *ngIf="currentIndex === index" id="cardejercicios">
       <ion-card-header>
         <p id="fecha">Rutina del {{ formattedFecha }}</p>
+        <p id="num_tarjeta">Tarjeta {{ currentIndex + 1 }} de {{ listaDeDatos.length }}</p> <!-- Nuevo elemento -->
         <ion-card-title id="titulo">{{ item[0] }}</ion-card-title>
-        <p id="conteo">{{ conteo }}</p>
       </ion-card-header>
       <ion-card-content>
         <div id="itemimagen">
           <img [src]="item[3]" alt="#" id="imagen">
         </div>
-        <p id="opcion1">Series</p>
-        <div id="seie_barra"></div>
-        <p id="numero_serie">{{ item[2] }}</p>
-        <p id="opcion2">Repeticiones</p>
-        <div id="Repeticion_barra"></div>
-        <p id="numero_repeticion">{{ item[1] }}</p>
+
+        <div id="caja_padre_pollitos">
+
+          <div id="caja_repeticiones">
+            <p id="opcion2">Repeticiones</p>
+            <div id="repeticion_barra"></div>
+            <p id="numero_repeticion">{{ item[1] }}</p>
+          </div>
+
+          <div id="caja_series">
+            <p id="opcion1">Series</p>
+            <div id="seie_barra"></div>
+            <p id="numero_serie">{{ item[2] }}</p>
+          </div>
+
+        </div>
+
         <ion-buttons id="botones">
-          <ion-button (click)="anteriorTarjeta();" (click)="desincrementarConteo();" id="botonatras">
+          <ion-button (click)="anteriorTarjeta();" id="botonatras">
             <ion-icon name="arrow-back-outline"></ion-icon>
           </ion-button>
-          <ion-button (click)="siguienteTarjeta();" (click)="incrementarConteo();" id="botonsiguiente">
+          <ion-button (click)="siguienteTarjeta();" id="botonsiguiente">
             <ion-icon name="arrow-forward-outline"></ion-icon>
           </ion-button>
         </ion-buttons>
@@ -45,3 +56,4 @@
     </ion-card>
   </ng-container>
 </ion-content>
+
