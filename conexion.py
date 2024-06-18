@@ -337,7 +337,7 @@ def enviarCorreo(correo):
         <html>
             <body>
                 <div style="text-align: center;">
-                    <h1>Este es tu código</h1>
+                    <h1>Tu código de verificación es:</h1>
                     <h2 style="color:#CEB41F; font-size: 48px;">{codigo_aleatorio}</h2>
                     <p>Por favor, usa este código para validar que este es tu correo.</p>
                 </div>
