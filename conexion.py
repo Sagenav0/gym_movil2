@@ -350,46 +350,54 @@ def personalizados(cedula):
 @app.route('/enviarCorreo/<correo>', methods=['POST'])
 def enviarCorreo(correo):
     if request.method == 'POST':
-       
+        # Generar código aleatorio de 6 dígitos
         codigo_aleatorio = ''.join([str(random.randint(0, 9)) for _ in range(6)])
         
-        asunto = 'Codigo de verificacion'
-
-       
-        cuerpo = f'Tu codigo es: {codigo_aleatorio}'
+        asunto = 'Código de verificación'
+        
+        # Cuerpo del correo en HTML
+        cuerpo_html = f"""
+        <html>
+            <body>
+                <div style="text-align: center;">
+                    <h1>Tu código de verificación es:</h1>
+                    <h2 style="color:#CEB41F; font-size: 48px;">{codigo_aleatorio}</h2>
+                    <p>Por favor, usa este código para validar que este es tu correo.</p>
+                </div>
+            </body>
+        </html>
+        """
 
         email_emisor = 'cdvanegas830@misena.edu.co' 
         email_contrasena = 'vanegas2003'
 
+        # Crear el mensaje de correo electrónico
         em = EmailMessage()
         em['From'] = email_emisor
         em['To'] = correo
         em['Subject'] = asunto
-        em.set_content(cuerpo)
+        em.set_content(cuerpo_html, subtype='html')
 
-        
         contexto = ssl.create_default_context()
 
         try:
-         
+            # Enviar el correo electrónico
             with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=contexto) as smtp:
                 smtp.login(email_emisor, email_contrasena)
                 smtp.sendmail(email_emisor, correo, em.as_string())
-                
+
+                # Actualizar el código en la base de datos
                 connection = connect(**config)
                 cursor = connection.cursor()
                 cursor.execute(f"UPDATE registro_usuarios SET codigo = '{codigo_aleatorio}' WHERE correo = '{correo}'")
                 connection.commit()
                 cursor.close()
-                
-                return jsonify({"message": "Correo enviado correctamente"})
 
-                
+                return jsonify({"message": "Correo enviado correctamente"})
         except Exception as e:
-            
             return jsonify({"error": str(e)})
 
-        return mensaje
+        return jsonify({"message": "Correo enviado correctamente"})
     else:
         return "Método no permitido"
     
