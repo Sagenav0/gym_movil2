@@ -20,7 +20,8 @@ export class EditarPerfilPage implements OnInit {
   imagenuser: File | null = null;
   imageUrl: string | ArrayBuffer | null = null;
   imagen: string = "";
-
+  id_men: number =0;
+  
   constructor(
     private conexionService: ConexionService,
     private userService: UserService,
@@ -34,6 +35,7 @@ export class EditarPerfilPage implements OnInit {
     this.consultaEdit();
     this.imageUrl = this.userService.getImageUrl();
     this.imagen = this.userService.MostrarImagen();
+    this.id_men = this.userService.getmembresia();
   }
 
 

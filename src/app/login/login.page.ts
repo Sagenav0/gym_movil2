@@ -13,7 +13,7 @@ export class LoginPage implements OnInit {
   usuario: string = '';
   contrasena: string = '';
   rememberMe: boolean = false;
-
+  idMembresia: number = 0;
 
   constructor(private conexion: ConexionService,
               private toastController: ToastController,
@@ -23,8 +23,37 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.loadSavedCredentials();
+  
 
   }
+
+  async verificarCorreoLogin() {
+    if (!this.usuario) {
+      console.log('Por favor ingrese un correo.');
+      return;
+    }
+
+    try {
+      const response = await this.conexion.validarCorreoLogin(this.usuario).toPromise();
+
+      if (response.error === "ok") {
+        this.idMembresia = response.id_mem;
+        
+        this.userService.setIdMembresia(this.idMembresia);
+        console.log("valor prueba",this.idMembresia)
+        this.userService.setmembresia(response.id_mem[0]);
+        
+      } else {
+        
+        console.log('El correo no existe en la base de datos.');
+        this.presentToastUser();
+      }
+    } catch (error) {
+      console.error('Error al verificar correo:', error);
+    }
+  }
+
+
 
   async login() {
     if (!this.usuario || !this.contrasena) {
@@ -38,6 +67,7 @@ export class LoginPage implements OnInit {
         this.userService.setUser(this.usuario);
         this.userService.setCedula(response.datos[0][2]);
         this.userService.Guardarimagen(response.datos[0][3]);
+        this.userService.setmembresia(response.datos[0][4]);
         this.userService.setContra(this.contrasena)
         this.router.navigate(['/rutinas']);
         if (this.rememberMe) {
@@ -77,6 +107,14 @@ export class LoginPage implements OnInit {
 
 
 
+
+  async presentToastUser() {
+    const toast = await this.toastController.create({
+      message: 'Debe ingresar un usuario valido.',
+      duration: 1000
+    });
+    toast.present();
+  }
 
   async presentToast() {
     const toast = await this.toastController.create({

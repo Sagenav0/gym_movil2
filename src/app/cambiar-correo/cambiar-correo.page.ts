@@ -18,7 +18,7 @@ export class CambiarCorreoPage implements OnInit {
   usuario = this.userService.getUser()
   emailPattern = /^[A-Za-z_\-][A-Za-z_\-0-9]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
   imagen: string = "";
-
+  id_men: number =0;
 
   constructor(private conexion: ConexionService,
               private toastController: ToastController,
@@ -28,6 +28,7 @@ export class CambiarCorreoPage implements OnInit {
 
   ngOnInit() {
     this.imagen = this.userService.MostrarImagen();
+    this.id_men = this.userService.getmembresia();
   }
 
   async closeModal() {

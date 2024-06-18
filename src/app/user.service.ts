@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,17 @@ export class UserService {
   private imageUrl: string | null = null;
   private imagen:string = "";
   private contrasena:string = "";
+  private membresia: number = 0;
+  private idMembresiaSource = new BehaviorSubject<number>(0);
+
+  idMembresia$ = this.idMembresiaSource.asObservable();
 
   constructor() { }
 
+  setIdMembresia(id: number) {
+    this.idMembresiaSource.next(id);
+  }
+  
   setUser(usuario: string) {
     this.usuario = usuario;
   }
@@ -35,6 +44,14 @@ export class UserService {
 
   getContra(): string {
     return this.contrasena;
+  }
+
+  setmembresia( membresia: number) {
+    this.membresia =  membresia;
+  }
+
+  getmembresia(): number {
+    return this.membresia;
   }
 
   setImagenUser(imagenuser: File) {

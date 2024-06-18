@@ -17,7 +17,7 @@ export class CambiarContraPage implements OnInit {
   contra2:string=''
   usuario = this.userService.getUser()
   imagen: string = "";
-
+  id_men: number =0;
 
   constructor(private conexion: ConexionService,
               private toastController: ToastController,
@@ -27,6 +27,7 @@ export class CambiarContraPage implements OnInit {
 
   ngOnInit() {
     this.imagen = this.userService.MostrarImagen();
+    this.id_men = this.userService.getmembresia();
   }
 
   verificarContrasena() {

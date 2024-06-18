@@ -1,6 +1,5 @@
-
 <ng-container *ngIf="mostrarMenu">
-  <ion-menu side="start" menuId="menuPrincipal"  contentId="main-content" swipeGesture="false">
+  <ion-menu side="start" menuId="menuPrincipalcp" contentId="main-content" swipeGesture="false" >
   <ion-header>
     <ion-toolbar>
       <ion-title  id="titulomenu" >MENU</ion-title>
@@ -15,17 +14,19 @@
         <ion-item [routerLink]="['/rutinas']"><ion-icon name="home" slot="start"></ion-icon>INICIO</ion-item>
       </ion-menu-toggle> -->
 
-      <ion-menu-toggle>
+      <ion-menu-toggle (*ngIf)="id_men == 5">
         <ion-item [routerLink]="['/avances']"><ion-icon name="analytics" slot="start"></ion-icon>AVANCES</ion-item>
       </ion-menu-toggle>
 
       <ion-menu-toggle>
         <ion-item [routerLink]="['/medidas']"><ion-icon name="scale" slot="start"></ion-icon>MEDIDAS</ion-item>
       </ion-menu-toggle>
-
-      <ion-menu-toggle>
+      
+        <ion-menu-toggle (*ngIf)="id_men == 5" >
         <ion-item [routerLink]="['/personalizados']"><ion-icon name="id-card-sharp" slot="start"></ion-icon>PERSONALIZADO</ion-item>
       </ion-menu-toggle>
+      
+      
 
       <ion-menu-toggle>
         <ion-item [routerLink]="['/rutinas']"><ion-icon name="barbell" slot="start"></ion-icon>RUTINAS</ion-item>
@@ -48,5 +49,41 @@
 
 
 </ion-menu>
-</ng-container>
 
+
+<ion-menu side="start" menuId="menuPrincipal" contentId="main-content" swipeGesture="false" >
+  <ion-header>
+    <ion-toolbar>
+      <ion-title  id="titulomenu" >MENU</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+
+    <ion-list > 
+
+      <ion-menu-toggle>
+        <ion-item [routerLink]="['/medidas']"><ion-icon name="scale" slot="start"></ion-icon>MEDIDAS</ion-item>
+      </ion-menu-toggle>
+      
+      <ion-menu-toggle>
+        <ion-item [routerLink]="['/rutinas']"><ion-icon name="barbell" slot="start"></ion-icon>RUTINAS</ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle>
+        <ion-item [routerLink]="['/contactanos']"><ion-icon name="call-sharp" slot="start"></ion-icon>CONTACTANOS</ion-item>
+      </ion-menu-toggle>
+      
+      
+
+    </ion-list>
+    <ion-menu-toggle>
+      <ion-buttons class="btncerrar">
+      <ion-button position="floating" [routerLink]="['/login']" > Cerrar Sessión <ion-icon name="exit-outline" id="icono-salir"></ion-icon> </ion-button>
+    </ion-buttons>
+    </ion-menu-toggle>
+  </ion-content>
+
+
+
+</ion-menu>
+</ng-container>

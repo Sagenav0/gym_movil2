@@ -35,6 +35,29 @@ app.config['carpeta_up'] = carpeta_up
 def index():
     return "Hello World!"
 
+@app.route('/verificar_correo_login/<usuario>', methods=['GET'])
+@cross_origin()
+def verificar_correo_logeo(usuario):
+    if not usuario:
+        return jsonify({'error': 'Correo no proporcionado'}), 400
+
+    try:
+        connection = connect(**config)
+        cursor = connection.cursor()
+        cursor.execute(f"SELECT id_membresia FROM registro_usuarios WHERE EXISTS (SELECT 1 FROM registro_usuarios WHERE correo = '{usuario}')" )
+        id_mem = cursor.fetchone()
+
+        if id_mem:
+            return jsonify({"error":"ok", "id_mem": id_mem})
+        else:
+            return jsonify({'error': "el correo no existe"})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    finally:
+        connection.close()
+
 
 @app.route("/validarCredenciales/<usuario>/<contrasena>", methods=['get'])
 def ValidarCredenciales(usuario, contrasena):
@@ -43,7 +66,7 @@ def ValidarCredenciales(usuario, contrasena):
         print(cifrada)
         connection = connect(**config)
         cursor = connection.cursor()
-        cursor.execute(f"SELECT nombre,telefono,cedula,imagenuser FROM registro_usuarios WHERE correo = '{usuario}' AND contrasena = '{cifrada}' AND estado = 'activo'")
+        cursor.execute(f"SELECT nombre,telefono,cedula,imagenuser,id_membresia FROM registro_usuarios WHERE correo = '{usuario}' AND contrasena = '{cifrada}' AND estado = 'activo'")
         datos = cursor.fetchall()
         if(datos):
             cursor.close()

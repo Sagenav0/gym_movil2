@@ -12,6 +12,7 @@ export class AvancesPage implements OnInit {
   mes1!: string;
   mes2!: string;
   identificador = this.userService.getCedula();
+  id_men: number =0;
 
   medidasMes1: any[] = [];
   medidasMes2: any[] = [];
@@ -24,6 +25,7 @@ export class AvancesPage implements OnInit {
   ngOnInit() {
     this.identificador
     this.imagen = this.userService.MostrarImagen();
+    this.id_men = this.userService.getmembresia();
   }
 
   onSubmit() {

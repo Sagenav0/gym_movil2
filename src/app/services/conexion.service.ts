@@ -35,6 +35,10 @@ export class ConexionService {
   //     );
   // }
 
+  validarCorreoLogin(usuario: string) {
+    return this.http.get<any>(`${this.url}/verificar_correo_login/${usuario}`);
+  }
+
   validarCredenciales(usuario: string, contrasena: string ): Observable<any> {
     return this.http.get(`${this.url}/validarCredenciales/${usuario}/${contrasena}`);
     }

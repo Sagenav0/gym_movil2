@@ -1,7 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar >
     <ion-buttons slot="start">
+      <div *ngIf="id_men == 5 else prb">
+        <ion-menu-button menu="menuPrincipalcp"></ion-menu-button>
+      </div>
+      <ng-template #prb>
         <ion-menu-button menu="menuPrincipal"></ion-menu-button>
+      </ng-template>
     </ion-buttons>
     <ion-title>AVANCES</ion-title>
     <div slot="end">

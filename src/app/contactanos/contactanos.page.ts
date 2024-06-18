@@ -14,14 +14,14 @@ export class ContactanosPage implements OnInit {
   infogym: any[] = [];
 
   imagen: string = "";
-
+  id_men: number =0;
 
   constructor(private conexionService: ConexionService,private userService: UserService) { }
 
   ngOnInit() {
     this.obtenerDatosGym();
     this.imagen = this.userService.MostrarImagen();
-    console.log("imagen: "+this.imagen)
+    this.id_men = this.userService.getmembresia();
   }
 
   obtenerDatosGym() {

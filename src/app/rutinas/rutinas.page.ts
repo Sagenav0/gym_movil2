@@ -17,7 +17,7 @@ export class RutinasPage implements OnInit {
   formattedFecha: string = ''; 
   conteo: number = 1;
   imagen: string = "";
-  
+  id_men: number =0;
 
   constructor(
     private datePipe: DatePipe,
@@ -28,11 +28,15 @@ export class RutinasPage implements OnInit {
     this.fecha = new Date();
     const formattedDate = this.datePipe.transform(this.fecha, 'EEEE', 'GMT+0', 'es-ES');
     this.formattedFecha = formattedDate ?? '';
+    
   }
 
   ngOnInit() {
     this.obtenerRutinas();
     this.imagen = this.userService.MostrarImagen();
+    this.id_men = this.userService.getmembresia();
+    console.log("numero de id "+this.id_men)
+    // this.modificar_display_del_menu();
   }
 
   obtenerRutinas() {
@@ -73,4 +77,20 @@ export class RutinasPage implements OnInit {
       this.conteo--;
     }
   }
+
+  // modificar_display_del_menu() {
+  //   let membresia = this.id_men;
+  //   const menuPrincipalcp = document.getElementById('menuPrincipalcp');
+  //   const menuPrincipal = document.getElementById('menuPrincipal');
+  
+  //   if (membresia === 5) {
+  //     if (menuPrincipalcp) menuPrincipalcp.style.display = 'flex';
+  //     if (menuPrincipal) menuPrincipal.style.display = 'none';
+  //     console.log("cambio el displey y muestra el menu"+membresia)
+  //   } else {
+  //     if (menuPrincipalcp) menuPrincipalcp.style.display = 'none';
+  //     if (menuPrincipal) menuPrincipal.style.display = 'block';
+  //     console.log("aqui no entra mano"+membresia)
+  //   }
+  // }
 }

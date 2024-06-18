@@ -9,11 +9,11 @@
         <form (ngSubmit)="login()">
           
             <ion-label id="label1" >Correo:</ion-label>
-            <ion-input type="text" [(ngModel)]="usuario" name="usuario"  id="usuario" required></ion-input>
+            <ion-input type="text" [(ngModel)]="usuario" name="usuario"  id="usuario"  required></ion-input>
          
           
             <ion-label id="label2" >Contraseña:</ion-label>
-            <ion-input type="password" [(ngModel)]="contrasena" id="contrasena" name="password" required></ion-input>
+            <ion-input type="password" [(ngModel)]="contrasena" id="contrasena" name="password" (click)="verificarCorreoLogin()" required></ion-input>
 
             <div id="chexrecuerdame" >
               <ion-checkbox [(ngModel)]="rememberMe" name="rememberMe"></ion-checkbox>
