@@ -1,6 +1,169 @@
+// :root {
+//     --ion-card-margin: 1rem;
+//     --ion-card-padding: 1rem;
+// }
+
+// #cardejercicios {
+//     background: var(--ion-color-primary);
+//     color: var(--ion-color-primary-shade);
+//     font-size: 17px;
+//     position: relative;
+//     width: 90%;
+//     height: 60%;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+// }
+
+// ion-card-header {
+//     padding: 0;
+//     height: 23%;
+//     width: 50%;
+//     margin-top: 1%;
+//     margin-bottom: 2%;
+// }
+
+// #titulo {
+//     text-align: center;
+//     font-size: 30px;
+//     color: var(--ion-color-primary-contrast);
+//     margin-top: 1%;
+//     margin-bottom: 1%;
+// }
+
+// #num_tarjeta {
+//     text-align: center;
+//     color: var(--ion-color-primary-contrast);
+//     margin-top: 1%;
+//     margin-bottom: 1%;
+// }
+
+// #fecha {
+//     text-align: center;
+//     color: var(--ion-color-primary-contrast);
+//     margin-top: 1%;
+//     margin-bottom: 1%;
+// }
+
+// ion-card-content {
+//     width: 90%;
+//     height: 90%;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+// }
+
+// #itemimagen {
+//     // background: aquamarine;
+//     position: relative;
+//     width: 100%;
+//     //height: 200px;
+//     height: 100%;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     overflow: hidden;
+// }
+
+// #imagen {
+//     width: 90%;
+//     height: 100%;
+//     display: block;
+//     border: 1px solid beige;
+//     border-radius: 10px;
+// }
+
+// #contenedor_series_repeticiones {
+//     // background-color: antiquewhite;
+//     margin-top: 10%;
+//     height: 90%;
+//     width: 90%;
+//     display: flex;
+//     justify-content: space-between;
+// }
+
+// .opcion1 {
+//     font-weight: bold;
+//     font-size: 20px;
+//     color: var(--ion-color-primary-contrast);
+// }
+
+// .opcion2 {
+//     text-align: center;
+//     font-weight: bold;
+//     font-size: 20px;
+//     color: var(--ion-color-primary-contrast);
+// }
+
+// #botones {
+//     // background-color: blanchedalmond;
+//     position: absolute;
+//     display: flex;
+//     justify-content: space-between;
+//     width: 100%;
+//     height: 30%;
+//     top: 67%;
+// }
+
+// #botonatras{
+//     position: relative;
+//     background-color: beige;
+//     width: 50px;
+//     border-radius: 10px;
+
+// }
+// #botonsiguiente{
+//     position: relative;
+//     background-color: beige;
+//     width: 50px;
+//     border-radius: 10px;
+// }
+// ion-icon{
+//     color: black;
+// }
+
+// @media (min-width: 576px) {
+//     :root {
+//     --ion-card-width: 80%;
+//     }
+// }
+
+// @media (min-width: 768px) {
+//     :root {
+//     --ion-card-width: 70%;
+//     }
+// }
+
+// @media (min-width: 992px) {
+//     :root {
+//     --ion-card-width: 60%;
+// }
+
+//     #titulo {
+//     font-size: 30px;
+// }
+
+//     #fecha {
+//     font-size: 18px;
+// }
+// }
+
 :root {
     --ion-card-margin: 1rem;
     --ion-card-padding: 1rem;
+}
+
+ion-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px var(--ion-color-primary-contrast-rgb);
+    position: relative;
+    top: 45%;
+    left: 50%;
+    height: 70%;
+    transform: translate(-52%, -50%);
+    width: 80%; /* Ancho ajustado para dispositivos móviles */
+    max-width: 350px; /* Ancho máximo para pantallas más grandes */
+    text-align: center;
 }
 
 #cardejercicios {
@@ -8,44 +171,43 @@
     color: var(--ion-color-primary-shade);
     font-size: 17px;
     position: relative;
+    padding: 1rem;
     width: 90%;
-    height: 60%;
+    height: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-ion-card-header {
+ion-card-header{
+    width: 100%;
+    height: 18%;
     padding: 0;
-    height: 23%;
-    width: 50%;
-    margin-top: 1%;
-    margin-bottom: 2%;
+    bottom: 1%;
 }
 
 #titulo {
     text-align: center;
     font-size: 30px;
-    color: var(--ion-color-primary-contrast);
-    margin-top: 1%;
-    margin-bottom: 1%;
+    color: var(--ion-color-primary-shade);
+    padding: 0;
+    margin: 0;
 }
 
 #num_tarjeta {
-    text-align: center;
-    color: var(--ion-color-primary-contrast);
-    margin-top: 1%;
-    margin-bottom: 1%;
+    color: var(--ion-color-primary-shade);
+    padding: 0;
+    margin: 0;
 }
 
 #fecha {
     text-align: center;
-    color: var(--ion-color-primary-contrast);
-    margin-top: 1%;
-    margin-bottom: 1%;
+    color: var(--ion-color-primary-shade);
+    padding: 0;
+    margin: 0;
 }
 
-ion-card-content {
+ion-card-content{
     width: 90%;
     height: 90%;
     display: flex;
@@ -53,73 +215,82 @@ ion-card-content {
     align-items: center;
 }
 
-#itemimagen {
-    // background: aquamarine;
+#itemimagen{
     position: relative;
-    width: 100%;
-    //height: 200px;
-    height: 100%;
+    width: 300px;
+    height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    top: 3%;
 }
 
 #imagen {
-    width: 90%;
+    width: 100%;
     height: 100%;
     display: block;
-    border: 1px solid beige;
+    border: 1px solid var(--ion-color-primary-shade);
     border-radius: 10px;
 }
 
 #contenedor_series_repeticiones {
-    // background-color: antiquewhite;
     margin-top: 10%;
-    height: 90%;
-    width: 90%;
+    height: 18%;
+    width: 100%;
+    top: 5%;
     display: flex;
     justify-content: space-between;
 }
 
 .opcion1 {
+    // position: relative;
     font-weight: bold;
     font-size: 20px;
-    color: var(--ion-color-primary-contrast);
+    color: var(--ion-color-primary-shade);
+}
+
+#barra {
+    // position: relative;
+    background-color: var(--ion-color-primary-shade);
+    padding: 1px;
+    font-size: 150px;
 }
 
 .opcion2 {
-    text-align: center;
+    // position: relative;
     font-weight: bold;
     font-size: 20px;
-    color: var(--ion-color-primary-contrast);
+    color: var(--ion-color-primary-shade);
 }
 
 #botones {
-    // background-color: blanchedalmond;
-    position: absolute;
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 30%;
-    top: 67%;
+    padding: 0;
+    top: 5%;
+    position: relative;
 }
 
 #botonatras{
     position: relative;
-    background-color: beige;
+    background-color: var(--ion-color-primary-tint);
     width: 50px;
+    bottom: 10px;
     border-radius: 10px;
-
 }
+
 #botonsiguiente{
     position: relative;
-    background-color: beige;
+    background-color: var(--ion-color-primary-tint);
     width: 50px;
+    bottom: 10px;
     border-radius: 10px;
 }
+
 ion-icon{
-    color: black;
+    color: var(--ion-color-primary-shade);
 }
 
 @media (min-width: 576px) {
@@ -142,8 +313,7 @@ ion-icon{
     #titulo {
     font-size: 30px;
 }
-
-    #fecha {
+#fecha {
     font-size: 18px;
 }
 }

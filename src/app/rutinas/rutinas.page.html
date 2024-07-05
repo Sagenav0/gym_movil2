@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
         <ion-menu-button menu="menuPrincipal" id="menuPrincipal"></ion-menu-button>
@@ -20,7 +20,7 @@
     <ion-card *ngIf="currentIndex === index" id="cardejercicios">
       <ion-card-header>
         <p id="fecha">Rutina del {{ formattedFecha }}</p>
-        <p id="num_tarjeta">Tarjeta {{ currentIndex + 1 }} de {{ listaDeDatos.length }}</p> <!-- Nuevo elemento -->
+        <p id="num_tarjeta">Tarjeta {{ currentIndex + 1 }} de {{ listaDeDatos.length }}</p>
         <ion-card-title id="titulo">{{ item[0] }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
@@ -56,4 +56,63 @@
     </ion-card>
   </ng-container>
 </ion-content>
+ -->
 
+ <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <div *ngIf="id_men === 5 else prb">
+        <ion-menu-button menu="menuPrincipalcp" id="menuPrincipalcp"></ion-menu-button>
+      </div>
+      <ng-template #prb >
+        <ion-menu-button menu="menuPrincipal" id="menuPrincipal"></ion-menu-button>
+      </ng-template>
+    </ion-buttons>
+    <ion-title>RUTINAS</ion-title>
+    <div slot="end">
+      <ion-avatar id="pruebaimagen" *ngIf="imagen">
+        <img src="../../assets/img/{{imagen}}" alt="" [routerLink]="['/editar-perfil']">
+      </ion-avatar>
+      <div id="pruebaimagen1" *ngIf="!imagen">
+        <ion-icon id="iconperfil" name="person-circle-sharp" [routerLink]="['/editar-perfil']"></ion-icon>
+      </div>
+    </div>
+</ion-toolbar>
+</ion-header>
+
+<ion-content id="contenedor">
+  <ng-container *ngFor="let item of listaDeDatos; let index = index">
+    <ion-card *ngIf="currentIndex === index" id="cardejercicios">
+      <ion-card-header>
+        <p id="fecha">Rutina del {{ formattedFecha }}</p>
+        <p id="num_tarjeta">Tarjeta {{ currentIndex + 1 }} de {{ listaDeDatos.length }}</p> <!-- Nuevo elemento -->
+        <ion-card-title id="titulo">{{ item[0] }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div id="itemimagen">
+          <img [src]="item[3]" alt="#" id="imagen">
+        </div>
+        <div id="contenedor_series_repeticiones">
+          <div id="contenedor_repeticiones">
+            <p class="opcion1">Repeticiones</p>
+            <div id="barra"></div>
+            <p class="opcion2">{{ item[1] }}</p>
+          </div>
+          <div id="contenedor_series">
+            <p class="opcion1">Series</p>
+            <div id="barra"></div>
+            <p class="opcion2">{{ item[2] }}</p>
+          </div>
+        </div>
+        <ion-buttons id="botones">
+          <ion-button (click)="anteriorTarjeta();" id="botonatras">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </ion-button>
+          <ion-button (click)="siguienteTarjeta();" id="botonsiguiente">
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+</ion-content>

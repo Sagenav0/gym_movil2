@@ -1,4 +1,4 @@
-:root {
+oot {
     --ion-card-margin: 1rem;
     --ion-card-padding: 1rem;
 }
@@ -84,7 +84,7 @@ ion-card-content{
     border-radius: 10px;
 }
 
-#caja_padre_pollitos {
+#contenedor_series_repeticiones {
     margin-top: 10%;
     height: 18%;
     width: 100%;
@@ -93,42 +93,21 @@ ion-card-content{
     justify-content: space-between;
 }
 
-#opcion1 {
+.opcion1 {
     // position: relative;
     font-weight: bold;
     font-size: 20px;
     color: var(--ion-color-primary-shade);
 }
 
-#seie_barra {
+#barra {
     // position: relative;
     background-color: var(--ion-color-primary-shade);
     padding: 1px;
     font-size: 150px;
 }
 
-#numero_serie {
-    // position: relative;
-    font-weight: bold;
-    font-size: 20px;
-    color: var(--ion-color-primary-shade);
-}
-
-#opcion2 {
-    // position: relative;
-    font-weight: bold;
-    font-size: 20px;
-    color: var(--ion-color-primary-shade);
-}
-
-#repeticion_barra {
-    // position: relative;
-    background-color: var(--ion-color-primary-shade);
-    padding: 1px;
-    font-size: 150px;
-}
-
-#numero_repeticion {
+.opcion2 {
     // position: relative;
     font-weight: bold;
     font-size: 20px;
