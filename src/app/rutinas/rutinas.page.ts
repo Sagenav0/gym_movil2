@@ -38,7 +38,7 @@ export class RutinasPage implements OnInit {
     console.log("numero de id "+this.id_men)
     // this.modificar_display_del_menu();
   }
-
+  
   obtenerRutinas() {
     this.conexionService.Rutinas().subscribe(
       (datos: any[]) => {
