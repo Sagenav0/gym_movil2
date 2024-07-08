@@ -295,12 +295,30 @@ def medidas(identificador):
     
     
 
-@app.route('/rutinas', methods=['GET'])
-def rutinas():
+@app.route('/rutinas/<formattedFecha>', methods=['GET'])
+def rutinas(formattedFecha):
     try:
         connection = connect(**config)
         cursor = connection.cursor()
-        sql=f"SELECT nombre_ejercicio,repeciones,series,img FROM ejercicios WHERE contador_ejercicio = contador_ejercicio"
+        sql=f"SELECT 
+    cr.id_rutina,
+    cr.descripcion AS rutina_descripcion,
+    rc.cliente,
+    rc.dia,
+    e.nombre_ejercicio,
+    e.repeciones,
+    e.series,
+    e.img
+FROM 
+    rutina_cliente rc
+INNER JOIN 
+    creador_rutina cr ON rc.id_rutina = cr.id_rutina
+INNER JOIN 
+    ejercicio_rutina er ON cr.id_rutina = er.id_rutina
+INNER JOIN 
+    ejercicios e ON er.ejercicio = e.contador_ejercicio
+WHERE 
+    rc.dia = '{formattedFecha}';"
         cursor.execute(sql)
         datos = cursor.fetchall()
         

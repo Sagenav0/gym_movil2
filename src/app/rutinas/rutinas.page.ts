@@ -18,7 +18,7 @@ export class RutinasPage implements OnInit {
   conteo: number = 1;
   imagen: string = "";
   id_men: number =0;
-
+  
   constructor(
     private datePipe: DatePipe,
     private userService: UserService,
@@ -40,7 +40,7 @@ export class RutinasPage implements OnInit {
   }
   
   obtenerRutinas() {
-    this.conexionService.Rutinas().subscribe(
+    this.conexionService.Rutinas(this.formattedFecha).subscribe(
       (datos: any[]) => {
         this.listaDeDatos = datos;
       },
